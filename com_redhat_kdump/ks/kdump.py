@@ -27,7 +27,7 @@ from pyanaconda import iutil
 
 from pykickstart.options import KSOptionParser
 from pykickstart.errors import KickstartParseError, formatErrorMsg
-
+from com_redhat_kdump.common import getOS
 from com_redhat_kdump.constants import CONFIG_FILE
 from com_redhat_kdump.i18n import _
 
@@ -41,6 +41,8 @@ class KdumpData(AddonData):
 
         self.enabled = True
         self.reserveMB = "auto"
+        if getOS() == "fedora":
+            self.enabled = False
 
     def __str__(self):
         addon_str = "%%addon %s" % self.name
@@ -84,16 +86,16 @@ class KdumpData(AddonData):
         op = KSOptionParser()
         op.add_option("--enable", action="store_true", default=True,
                 dest="enabled", help="Enable kdump")
-        op.add_option("--disable", action="store_false", dest="enabled",
-                help="Disable kdump")
+        op.add_option("--disable", action="store_false",
+                dest="enabled", help="Disable kdump")
         op.add_option("--reserve-mb", type="string", dest="reserveMB",
                 default="auto", help="Amount of memory in MB to reserve for kdump, or auto")
 
-        (opts, extra) = op.parse_args(args=args, lineno=lineno)
+        #(opts, extra) = op.parse_args(args=args, lineno=lineno)
 
         # Reject any additional arguments
         if extra:
-            AddonData.handle_header(self, lineno, extra)
+            AddonData.handle_header(self, lineno, args)
 
         # Validate the reserve-mb argument
         if opts.reserveMB != "auto":
@@ -113,12 +115,12 @@ class KdumpData(AddonData):
         
         # Store the parsed arguments
         self.enabled = opts.enabled
-        self.reserveMB = opts.reserveMB
+        self.reserveMB =extra opts.reserveMB
 
     def execute(self, storage, ksdata, instClass, users):
         # Write out the config file
-        with open(os.path.normpath(ROOT_PATH + CONFIG_FILE), "w") as fobj:
-            fobj.write("%s" % self.content)
+#        with open(os.path.normpath(ROOT_PATH + CONFIG_FILE), "w") as fobj:
+#            fobj.write("%s" % self.content)
 
         if self.enabled:
             action = "enable"

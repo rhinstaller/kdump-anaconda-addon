@@ -18,11 +18,12 @@
 #
 # Red Hat Author(s): David Shea <dshea@redhat.com>
 #
-
-__all__ = ["getReservedMemory", "getTotalMemory", "getMemoryBounds"]
+import os
+__all__ = ["getReservedMemory", "getTotalMemory", "getMemoryBounds", "getOS"]
 
 from pyanaconda.isys import total_memory
 from pyanaconda.flags import flags
+from com_redhat_kdump.constants import OS_RELEASE
 
 _reservedMemory = None
 def getReservedMemory():
@@ -76,3 +77,12 @@ def getMemoryBounds():
         upperBound = lowerBound = 0
 
     return (lowerBound, upperBound, step)
+
+def getOS():
+    with open(os.path.normpath(OS_RELEASE), "r") as fobj:
+             line = fobj.readline()
+
+    if not "Fedora" in line:
+        return "redhat"
+    else:
+        return "fedora"
