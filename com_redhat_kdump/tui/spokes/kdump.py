@@ -25,7 +25,7 @@ import re
 
 from pyanaconda.ui.tui.spokes import EditTUISpoke
 from pyanaconda.ui.tui.spokes import EditTUISpokeEntry as Entry
-
+from com_redhat_kdump.common import getOS, getMemoryBounds
 from com_redhat_kdump.i18n import N_, _
 from com_redhat_kdump.constants import CONFIG_FILE
 
@@ -33,6 +33,7 @@ __all__ = ["KdumpSpoke"]
 
 # Allow either "auto" or a string of digits optionally followed by 'M'
 RESERVE_VALID = re.compile(r'^((auto)|(\d+M?))$')
+FEDORA_RESERVE_VALID = re.compile(r'^(\d+M?)$')
 
 class KdumpSpoke(EditTUISpoke):
     title = N_("Kdump")
@@ -44,17 +45,22 @@ class KdumpSpoke(EditTUISpoke):
         ]
 
     def __init__(self, app, data, storage, payload, instclass):
+        if getOS() == "fedora":
+            KdumpSpoke.edit_fields = [
+                Entry("Enable kdump", "enabled", EditTUISpoke.CHECK, True),
+                Entry("Reserve amount", "reserveMB", FEDORA_RESERVE_VALID, lambda self,args: args.enabled)
+                ]
         EditTUISpoke.__init__(self, app, data, storage, payload, instclass)
 
         self.args = self.data.addons.com_redhat_kdump
 
         # Read the config file into data.content so that it will be written
         # to the system even though it is not editable
-        try:
-            with open(CONFIG_FILE, "r") as fobj:
-                self.data.addons.com_redhat_kdump.content = fobj.read()
-        except IOError:
-            pass
+#        try:
+#            with open(CONFIG_FILE, "r") as fobj:
+#                self.data.addons.com_redhat_kdump.content = fobj.read()
+#        except IOError:
+#            pass
 
     def apply(self):
         pass
