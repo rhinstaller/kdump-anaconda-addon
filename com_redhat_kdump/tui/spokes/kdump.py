@@ -68,7 +68,11 @@ class KdumpSpoke(EditTUISpoke):
     def isOutofRange(self):
         if self.args.reserveMB == "auto":
             return False
-        if self.args.reserveMB > self.upper or self.args.reserveMB < self.lower:
+        if self.args.reserveMB[-1] == 'M':
+            reserveMB = int(self.args.reserveMB[:-1])
+        else:
+            reserveMB = int(self.args.reserveMB)
+        if reserveMB > self.upper or reserveMB < self.lower:
             return True
         else:
             return False
