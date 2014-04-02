@@ -53,7 +53,7 @@ class KdumpSpoke(EditTUISpoke):
         EditTUISpoke.__init__(self, app, data, storage, payload, instclass)
 
         self.args = self.data.addons.com_redhat_kdump
-
+        self.lower, self.upper ,step = getMemoryBounds()
         # Read the config file into data.content so that it will be written
         # to the system even though it is not editable
 #        try:
@@ -65,6 +65,14 @@ class KdumpSpoke(EditTUISpoke):
     def apply(self):
         pass
 
+    def isOutofRange(self):
+        if self.args.reserveMB == "auto":
+            return False
+        if self.args.reserveMB > self.upper or self.args.reserveMB < self.lower:
+            return True
+        else:
+            return False
+
     @property
     def completed(self):
         return True
@@ -75,5 +83,12 @@ class KdumpSpoke(EditTUISpoke):
             state = _("Kdump is enabled")
         else:
             state = _("Kdump is disabled")
-
+        if self.isOutofRange() and self.args.enabled:
+            if getOS() == "fedora":
+                self.args.reserveMB="%dM" % self.lower
+                state = _("Reserved Memory out of range, changing to ")
+                state += self.args.reserveMB
+            else:
+                self.args.reserveMB="auto"
+                state = _("Reserved Memory out of range, changing to \"auto\"")
         return state
