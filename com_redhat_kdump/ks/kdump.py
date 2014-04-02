@@ -83,6 +83,7 @@ class KdumpData(AddonData):
 
         if self.enabled:
             storage.bootloader.boot_args.add('crashkernel=%s' % self.reserveMB)
+            ksdata.packages.packageList.append("kexec-tools")
 
     def handle_header(self, lineno, args):
         op = KSOptionParser()
