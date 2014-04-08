@@ -27,13 +27,8 @@ from pyanaconda.ui.tui.spokes import EditTUISpoke
 from pyanaconda.ui.tui.spokes import EditTUISpokeEntry as Entry
 from com_redhat_kdump.common import getOS, getMemoryBounds
 from com_redhat_kdump.i18n import N_, _
-from com_redhat_kdump.constants import CONFIG_FILE
 
 __all__ = ["KdumpSpoke"]
-
-# Allow either "auto" or a string of digits optionally followed by 'M'
-#RESERVE_VALID = re.compile(r'^((auto)|(\d+M?))$')
-#FEDORA_RESERVE_VALID = re.compile(r'^(\d+M?)$')
 
 class _re:
     def __init__(self, patten, low, up):
@@ -53,6 +48,7 @@ class _re:
         return False
 
 lower, upper ,step = getMemoryBounds()
+# Allow either "auto" or a string of digits optionally followed by 'M'
 RESERVE_VALID = _re(r'^((auto)|(\d+M?))$', lower, upper)
 FEDORA_RESERVE_VALID = _re(r'^(\d+M?)$', lower, upper)
 
@@ -74,28 +70,9 @@ class KdumpSpoke(EditTUISpoke):
 
         EditTUISpoke.__init__(self, app, data, storage, payload, instclass)
         self.args = self.data.addons.com_redhat_kdump
-        # Read the config file into data.content so that it will be written
-        # to the system even though it is not editable
-#        try:
-#            with open(CONFIG_FILE, "r") as fobj:
-#                self.data.addons.com_redhat_kdump.content = fobj.read()
-#        except IOError:
-#            pass
 
     def apply(self):
         pass
-
-    def isOutofRange(self):
-        if self.args.reserveMB == "auto":
-            return False
-        if self.args.reserveMB[-1] == 'M':
-            reserveMB = int(self.args.reserveMB[:-1])
-        else:
-            reserveMB = int(self.args.reserveMB)
-        if reserveMB > upper or reserveMB < lower:
-            return True
-        else:
-            return False
 
     @property
     def completed(self):
@@ -107,12 +84,4 @@ class KdumpSpoke(EditTUISpoke):
             state = _("Kdump is enabled")
         else:
             state = _("Kdump is disabled")
-        if self.isOutofRange() and self.args.enabled:
-            if getOS() == "fedora":
-                self.args.reserveMB="%dM" % lower
-                state = _("Reserved Memory out of range, changing to ")
-                state += self.args.reserveMB
-            else:
-                self.args.reserveMB="auto"
-                state = _("Reserved Memory out of range, changing to \"auto\"")
         return state

@@ -28,7 +28,6 @@ from pyanaconda.ui.gui.spokes import NormalSpoke
 from pyanaconda.ui.gui.utils import fancy_set_sensitive
 
 from com_redhat_kdump.i18n import _, N_
-from com_redhat_kdump.constants import CONFIG_FILE
 from com_redhat_kdump.common import getReservedMemory, getTotalMemory, getMemoryBounds, getOS
 
 __all__ = ["KdumpSpoke"]
@@ -60,27 +59,18 @@ class KdumpSpoke(NormalSpoke):
             self._autoButton = self.builder.get_object("autoButton")
             self._manualButton = self.builder.get_object("manualButton")
 
-        self._currentlyReservedLabel = self.builder.get_object("currentlyReservedLabel")
-        self._currentlyReservedMB = self.builder.get_object("currentlyReservedMB")
         self._toBeReservedLabel = self.builder.get_object("toBeReservedLabel")
         self._toBeReservedSpin = self.builder.get_object("toBeReservedSpin")
         self._totalMemLabel = self.builder.get_object("totalMemLabel")
         self._totalMemMB = self.builder.get_object("totalMemMB")
         self._usableMemLabel = self.builder.get_object("usableMemLabel")
         self._usableMemMB = self.builder.get_object("usableMemMB")
-        #self._config_buffer = self.builder.get_object("advancedConfigBuffer")
-
+       
         # Set an initial value and adjustment on the spin button
         lower, upper, step = getMemoryBounds()
         adjustment = Gtk.Adjustment(lower, lower, upper, step, step, 0)
         self._toBeReservedSpin.set_adjustment(adjustment)
         self._toBeReservedSpin.set_value(lower)
-        # Initialize the advanced config area with the contents of /etc/kdump.conf
-        #try:
-        #    with open(CONFIG_FILE, "r") as fobj:
-        #        self._config_buffer.set_text(fobj.read())
-        #except IOError:
-        #    self._config_buffer.set_text("")
 
     def refresh(self):
         # If a reserve amount is requested, set it in the spin button
@@ -94,7 +84,6 @@ class KdumpSpoke(NormalSpoke):
 
         # Set the various labels. Use the spin button signal handler to set the
         # usable memory label once the other two have been set.
-        self._currentlyReservedMB.set_text("%d" % getReservedMemory())
         self._totalMemMB.set_text("%d" % getTotalMemory())
         self._toBeReservedSpin.emit("value-changed")
 
@@ -118,10 +107,6 @@ class KdumpSpoke(NormalSpoke):
         # Force a toggled signal on the button in case it's state has not changed
         self._enableButton.emit("toggled")
 
-        # Fill the advanced configuration area with the current state
-        #start, end = self._config_buffer.get_bounds()
-        #self.data.addons.com_redhat_kdump.content = self._config_buffer.get_text(start, end, True)
-
     def apply(self):
         # Copy the GUI state into the AddonData object
         self.data.addons.com_redhat_kdump.enabled = self._enableButton.get_active()
@@ -133,8 +118,6 @@ class KdumpSpoke(NormalSpoke):
 
         self.data.addons.com_redhat_kdump.reserveMB = reserveMem
 
-        #start, end = self._config_buffer.get_bounds()
-        #self.data.addons.com_redhat_kdump.content = self._config_buffer.get_text(start, end, True)
 
     @property
     def ready(self):
@@ -167,8 +150,6 @@ class KdumpSpoke(NormalSpoke):
         # button and currently reserved widgets to sensitive and then fake a
         # toggle event on the radio button to set the state on the reserve
         # amount spin button and total/usable mem display.
-        self._currentlyReservedLabel.set_sensitive(status)
-        self._currentlyReservedMB.set_sensitive(status)
         if KdumpSpoke.OS == "redhat":
             self._autoButton.set_sensitive(status)
             self._manualButton.set_sensitive(status)

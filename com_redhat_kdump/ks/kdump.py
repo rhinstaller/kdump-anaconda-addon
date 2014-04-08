@@ -28,7 +28,6 @@ from pyanaconda import iutil
 from pykickstart.options import KSOptionParser
 from pykickstart.errors import KickstartParseError, formatErrorMsg
 from com_redhat_kdump.common import getOS, getMemoryBounds
-from com_redhat_kdump.constants import CONFIG_FILE
 from com_redhat_kdump.i18n import _
 
 __all__ = ["KdumpData"]
@@ -121,10 +120,6 @@ class KdumpData(AddonData):
         self.reserveMB =opts.reserveMB
 
     def execute(self, storage, ksdata, instClass, users):
-        # Write out the config file
-#        with open(os.path.normpath(ROOT_PATH + CONFIG_FILE), "w") as fobj:
-#            fobj.write("%s" % self.content)
-
         if self.enabled:
             action = "enable"
         else:

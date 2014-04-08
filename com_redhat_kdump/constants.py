@@ -20,5 +20,4 @@
 #
 
 # The location of the kdump config file
-CONFIG_FILE = "/etc/kdump.conf"
 OS_RELEASE = "/etc/os-release"
