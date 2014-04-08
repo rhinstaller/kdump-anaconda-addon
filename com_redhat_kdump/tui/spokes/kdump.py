@@ -32,8 +32,29 @@ from com_redhat_kdump.constants import CONFIG_FILE
 __all__ = ["KdumpSpoke"]
 
 # Allow either "auto" or a string of digits optionally followed by 'M'
-RESERVE_VALID = re.compile(r'^((auto)|(\d+M?))$')
-FEDORA_RESERVE_VALID = re.compile(r'^(\d+M?)$')
+#RESERVE_VALID = re.compile(r'^((auto)|(\d+M?))$')
+#FEDORA_RESERVE_VALID = re.compile(r'^(\d+M?)$')
+
+class _re:
+    def __init__(self, patten, low, up):
+        self.re = re.compile(patten)
+        self.low = low
+        self.up = up
+
+    def match(self, key):
+        if self.re.match(key):
+            if key == "auto":
+                return True
+            if key[-1] == 'M':
+                key = key[:-1]
+            key = int(key)
+            if key <= self.up and key >= self.low :
+                return True
+        return False
+
+lower, upper ,step = getMemoryBounds()
+RESERVE_VALID = _re(r'^((auto)|(\d+M?))$', lower, upper)
+FEDORA_RESERVE_VALID = _re(r'^(\d+M?)$', lower, upper)
 
 class KdumpSpoke(EditTUISpoke):
     title = N_("Kdump")
@@ -50,10 +71,9 @@ class KdumpSpoke(EditTUISpoke):
                 Entry("Enable kdump", "enabled", EditTUISpoke.CHECK, True),
                 Entry("Reserve amount", "reserveMB", FEDORA_RESERVE_VALID, lambda self,args: args.enabled)
                 ]
-        EditTUISpoke.__init__(self, app, data, storage, payload, instclass)
 
+        EditTUISpoke.__init__(self, app, data, storage, payload, instclass)
         self.args = self.data.addons.com_redhat_kdump
-        self.lower, self.upper ,step = getMemoryBounds()
         # Read the config file into data.content so that it will be written
         # to the system even though it is not editable
 #        try:
@@ -72,7 +92,7 @@ class KdumpSpoke(EditTUISpoke):
             reserveMB = int(self.args.reserveMB[:-1])
         else:
             reserveMB = int(self.args.reserveMB)
-        if reserveMB > self.upper or reserveMB < self.lower:
+        if reserveMB > upper or reserveMB < lower:
             return True
         else:
             return False
@@ -89,7 +109,7 @@ class KdumpSpoke(EditTUISpoke):
             state = _("Kdump is disabled")
         if self.isOutofRange() and self.args.enabled:
             if getOS() == "fedora":
-                self.args.reserveMB="%dM" % self.lower
+                self.args.reserveMB="%dM" % lower
                 state = _("Reserved Memory out of range, changing to ")
                 state += self.args.reserveMB
             else:
