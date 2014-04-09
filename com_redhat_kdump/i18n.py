@@ -23,5 +23,5 @@ __all__ = ["_", "N_"]
 
 import gettext
 
-_ = lambda x: gettext.ldgettext("kexec-tools", x)
+_ = lambda x: gettext.ldgettext("kdump", x)
 N_ = lambda x: x
