@@ -39,6 +39,7 @@ class KdumpSpoke(NormalSpoke):
     builderObjects = ["KdumpWindow", "advancedConfigBuffer"]
     mainWidgetName = "KdumpWindow"
     uiFile = "kdump.glade"
+    translationDomain = "kexec-tools"
 
     icon = "computer-fail-symbolic"
     title = N_("_KDUMP")
