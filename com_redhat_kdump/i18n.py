@@ -23,5 +23,5 @@ __all__ = ["_", "N_"]
 
 import gettext
 
-_ = lambda x: gettext.ldgettext("kdump", x)
+_ = lambda x: gettext.ldgettext("kdump-anaconda-addon", x)
 N_ = lambda x: x

@@ -4,7 +4,7 @@
 # $Id: Makefile,v 1.1.1.1 2007/03/08 02:27:37 ccheng Exp $
 
 # What is this package?
-NLSPACKAGE	= kdump
+NLSPACKAGE	= kdump-anaconda-addon
 POTFILE		= $(NLSPACKAGE).pot
 INSTALL		= /usr/bin/install -c
 INSTALL_DATA	= $(INSTALL) -m 644
