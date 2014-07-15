@@ -21,8 +21,9 @@
 import os
 __all__ = ["getReservedMemory", "getTotalMemory", "getMemoryBounds", "getOS"]
 
+import blivet.arch
+
 from pyanaconda.isys import total_memory
-from pyanaconda.flags import flags
 from com_redhat_kdump.constants import OS_RELEASE
 
 _reservedMemory = None
@@ -62,7 +63,7 @@ def getMemoryBounds():
 
     totalMemory = getTotalMemory()
 
-    if flags.targetarch == 'ppc64':
+    if blivet.arch.getArch() == 'ppc64':
         lowerBound = 256
         minUsable = 1024
         step = 1
