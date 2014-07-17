@@ -22,7 +22,6 @@
 import os
 
 from pyanaconda.addons import AddonData
-from pyanaconda.constants import ROOT_PATH
 from pyanaconda import iutil
 
 from pykickstart.options import KSOptionParser
@@ -114,7 +113,7 @@ class KdumpData(AddonData):
                     raise KickstartParseError(formatErrorMsg(lineno, msg=msg))
                 else:
                     raise KickstartParseError(msg)
-        
+
         # Store the parsed arguments
         self.enabled = opts.enabled
         self.reserveMB =opts.reserveMB
@@ -125,4 +124,4 @@ class KdumpData(AddonData):
         else:
             action = "disable"
 
-        iutil.execWithRedirect("systemctl", [action, "kdump.service"], root=ROOT_PATH)
+        iutil.execWithRedirect("systemctl", [action, "kdump.service"], root=iutil.getSysroot())
