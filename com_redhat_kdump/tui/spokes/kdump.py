@@ -23,6 +23,7 @@
 
 import re
 
+from pyanaconda.ui.categories.system import SystemCategory
 from pyanaconda.ui.tui.spokes import EditTUISpoke
 from pyanaconda.ui.tui.spokes import EditTUISpokeEntry as Entry
 
@@ -36,7 +37,7 @@ RESERVE_VALID = re.compile(r'^((auto)|(\d+M?))$')
 
 class KdumpSpoke(EditTUISpoke):
     title = N_("Kdump")
-    category = "system"
+    category = SystemCategory
 
     edit_fields = [
         Entry("Enable kdump", "enabled", EditTUISpoke.CHECK, True),
