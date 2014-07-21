@@ -19,8 +19,6 @@
 # Red Hat Author(s): David Shea <dshea@redhat.com>
 #
 
-import os
-
 from pyanaconda.addons import AddonData
 from pyanaconda import iutil
 
@@ -56,7 +54,7 @@ class KdumpData(AddonData):
             addon_str += " --reserve-mb='%s'" % self.reserveMB
 
         addon_str += "\n%s\n%%end\n" % self.content.strip()
-    
+
         return addon_str
 
     def setup(self, storage, ksdata, instClass):

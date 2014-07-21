@@ -28,7 +28,7 @@ from pyanaconda.ui.gui.spokes import NormalSpoke
 from pyanaconda.ui.gui.utils import fancy_set_sensitive
 
 from com_redhat_kdump.i18n import _, N_
-from com_redhat_kdump.common import getReservedMemory, getTotalMemory, getMemoryBounds, getOS
+from com_redhat_kdump.common import getTotalMemory, getMemoryBounds, getOS
 
 __all__ = ["KdumpSpoke"]
 
@@ -44,6 +44,7 @@ class KdumpSpoke(NormalSpoke):
     title = N_("_KDUMP")
     category = SystemCategory
     OS = "redhat"
+
     def __init__(self, data, storage, payload, instclass):
         KdumpSpoke.OS = getOS()
         if KdumpSpoke.OS == "fedora":
@@ -66,7 +67,7 @@ class KdumpSpoke(NormalSpoke):
         self._totalMemMB = self.builder.get_object("totalMemMB")
         self._usableMemLabel = self.builder.get_object("usableMemLabel")
         self._usableMemMB = self.builder.get_object("usableMemMB")
-       
+
         # Set an initial value and adjustment on the spin button
         lower, upper, step = getMemoryBounds()
         adjustment = Gtk.Adjustment(lower, lower, upper, step, step, 0)
@@ -119,7 +120,6 @@ class KdumpSpoke(NormalSpoke):
 
         self.data.addons.com_redhat_kdump.reserveMB = reserveMem
 
-
     @property
     def ready(self):
         return True
@@ -143,7 +143,6 @@ class KdumpSpoke(NormalSpoke):
         return state
 
     # SIGNAL HANDLERS
-
     def on_enable_kdump_toggled(self, checkbutton, user_data=None):
         status = checkbutton.get_active()
 
