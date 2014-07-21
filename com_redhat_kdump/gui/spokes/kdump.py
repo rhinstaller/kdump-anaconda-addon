@@ -23,6 +23,7 @@
 
 from gi.repository import Gtk
 
+from pyanaconda.flags import flags
 from pyanaconda.ui.categories.system import SystemCategory
 from pyanaconda.ui.gui.spokes import NormalSpoke
 from pyanaconda.ui.gui.utils import fancy_set_sensitive
@@ -44,6 +45,11 @@ class KdumpSpoke(NormalSpoke):
     title = N_("_KDUMP")
     category = SystemCategory
     OS = "redhat"
+
+    @classmethod
+    def should_run(cls, environment, data):
+        # the KdumpSpoke should run only if requested
+        return flags.cmdline.getbool("kdump", default=False)
 
     def __init__(self, data, storage, payload, instclass):
         KdumpSpoke.OS = getOS()
