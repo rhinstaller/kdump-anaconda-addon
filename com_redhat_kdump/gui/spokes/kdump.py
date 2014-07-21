@@ -37,7 +37,7 @@ class KdumpSpoke(NormalSpoke):
 
     builderObjects = ["KdumpWindow", "advancedConfigBuffer"]
     mainWidgetName = "KdumpWindow"
-    uiFile = "kdump.glade"
+    uiFile = "RHEL.glade"
     translationDomain = "kdump-anaconda-addon"
 
     icon = "computer-fail-symbolic"
