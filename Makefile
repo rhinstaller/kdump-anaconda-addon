@@ -34,6 +34,7 @@ uninstall:
 	rm -rfv $(DESTDIR)$(ADDONDIR)
 
 dist:
+	make -C po update-po
 	rm -rf $(NAME)
 	mkdir -p $(NAME)
 	@if test -d ".git"; \
