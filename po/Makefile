@@ -14,7 +14,6 @@ INSTALL_DIR	= /usr/bin/install -d
 
 # destination directory
 INSTALL_NLS_DIR = $(DESTDIR)/usr/share/locale
-
 # PO catalog handling
 MSGMERGE	= msgmerge -v
 XGETTEXT	= xgettext --default-domain=$(NLSPACKAGE) \
@@ -22,7 +21,7 @@ XGETTEXT	= xgettext --default-domain=$(NLSPACKAGE) \
 MSGFMT		= msgfmt --statistics --verbose
 
 # What do we need to do
-POFILES		= $(wildcard *.po)
+POFILES		= $(wildcard ./*.po)
 MOFILES		= $(patsubst %.po,%.mo,$(POFILES))
 PYSRC		= $(wildcard ../com_redhat_kdump/*.py ../com_redhat_kdump/*/*.py ../com_redhat_kdump/*/*/*.py)
 GLADEFILES = $(wildcard ../com_redhat_kdump/gui/spokes/*.glade)
@@ -44,17 +43,14 @@ glade-po: $(GLADEFILES)
 		intltool-extract --type=gettext/glade -l $$f ;\
 	done
 
-update-po: Makefile refresh-po
+update-po: Makefile refresh-po potfile
 
-refresh-po: Makefile
+refresh-po: Makefile 
 	for cat in $(POFILES); do \
-		lang=`basename $$cat .po`; \
-		if $(MSGMERGE) $$lang.po $(POTFILE) > $$lang.pot ; then \
-			mv -f $$lang.pot $$lang.po ; \
-			echo "$(MSGMERGE) of $$lang succeeded" ; \
+		if $(MSGMERGE) $$cat $(POTFILE)  --out=$$cat ; then \
+			echo "$(MSGMERGE) of $$cat succeeded" ; \
 		else \
-			echo "$(MSGMERGE) of $$lang failed" ; \
-			rm -f $$lang.pot ; \
+			echo "$(MSGMERGE) of $$cat failed" ; \
 		fi \
 	done
 
