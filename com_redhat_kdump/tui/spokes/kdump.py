@@ -23,6 +23,7 @@
 
 import re
 
+from pyanaconda.flags import flags
 from pyanaconda.ui.categories.system import SystemCategory
 from pyanaconda.ui.tui.spokes import EditTUISpoke
 from pyanaconda.ui.tui.spokes import EditTUISpokeEntry as Entry
@@ -61,6 +62,11 @@ class KdumpSpoke(EditTUISpoke):
         Entry("Enable kdump", "enabled", EditTUISpoke.CHECK, True),
         Entry("Reserve amount", "reserveMB", RESERVE_VALID, lambda self,args: args.enabled)
         ]
+
+    @classmethod
+    def should_run(cls, environment, data):
+        # the KdumpSpoke should run only if requested
+        return flags.cmdline.getbool("kdump", default=False)
 
     def __init__(self, app, data, storage, payload, instclass):
         if getOS() == "fedora":

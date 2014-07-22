@@ -19,10 +19,9 @@
 # Red Hat Author(s): David Shea <dshea@redhat.com>
 #
 
-import os
-
 from pyanaconda.addons import AddonData
 from pyanaconda import iutil
+from pyanaconda.flags import flags
 
 from pykickstart.options import KSOptionParser
 from pykickstart.errors import KickstartParseError, formatErrorMsg
@@ -56,10 +55,14 @@ class KdumpData(AddonData):
             addon_str += " --reserve-mb='%s'" % self.reserveMB
 
         addon_str += "\n%s\n%%end\n" % self.content.strip()
-    
+
         return addon_str
 
     def setup(self, storage, ksdata, instClass):
+        # the kdump addon should run only if requested
+        if not flags.cmdline.getbool("kdump", default=False):
+            return
+
         # Clear any existing crashkernel bootloader arguments
         if ksdata.bootloader.appendLine:
             ksdata.bootloader.appendLine = ' '.join(
@@ -119,6 +122,10 @@ class KdumpData(AddonData):
         self.reserveMB =opts.reserveMB
 
     def execute(self, storage, ksdata, instClass, users):
+        # the KdumpSpoke should run only if requested
+        if not flags.cmdline.getbool("kdump", default=False):
+            return
+
         if self.enabled:
             action = "enable"
         else:
