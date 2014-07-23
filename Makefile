@@ -1,14 +1,16 @@
+-include version.sh
+
 NAME = kdump-anaconda-addon
 
-VERSION = 0.1
-
+VERSION = $(shell [ -d .git ] && git describe --abbrev=0 --tags 2>/dev/null || echo $(KDUMP_ADDON_VERSION))
 ADDON = com_redhat_kdump
 TESTS = test
 
 FILES = $(ADDON) \
 	po \
 	Makefile \
-	README
+	README \
+	version.sh
 
 EXCLUDES = \
 	*~ \
@@ -20,12 +22,12 @@ all:
 	@echo "       make install"
 	@echo "       make uninstall"
 
-DISTNAME = $(NAME)-$(shell date +"%Y%m%d")
+DISTNAME = $(NAME)-$(VERSION)
 ADDONDIR = /usr/share/anaconda/addons/
 DISTBALL = $(DISTNAME).tar.gz
 NUM_PROCS = $$(getconf _NPROCESSORS_ONLN)
 
-install:
+install: version.sh
 	mkdir -p $(DESTDIR)$(ADDONDIR)
 	cp -rv $(ADDON) $(DESTDIR)$(ADDONDIR)
 	$(MAKE) install-po-files
@@ -33,7 +35,7 @@ install:
 uninstall:
 	rm -rfv $(DESTDIR)$(ADDONDIR)
 
-dist:
+dist: version.sh
 	make -C po update-po
 	rm -rf $(NAME)
 	mkdir -p $(NAME)
@@ -80,3 +82,12 @@ runpylint:
 
 unittest:
 	PYTHONPATH=. nosetests --processes=-1 -vw tests/
+
+version.sh:
+	@echo "KDUMP_ADDON_VERSION=$(VERSION)" > version.sh
+
+clean:
+	rm -f *.gz
+	rm -f version.sh
+
+.PHONY: install clean test all version.sh
