@@ -2,7 +2,7 @@
 
 NAME = kdump-anaconda-addon
 
-VERSION = $(shell [ -d .git ] && git describe --abbrev=0 --tags 2>/dev/null || echo $(KDUMP_ADDON_VERSION))
+VERSION = $(shell [ -d .git ] && git describe --tags 2>/dev/null || echo $(KDUMP_ADDON_VERSION))
 ADDON = com_redhat_kdump
 TESTS = test
 
