@@ -1,8 +1,6 @@
 This is an anaconda addon for configuring kdump. To use, copy the
 com_redhat_kdump directory into /usr/share/anaconda/addons on your
-installation media. /etc/kdump.conf will also be needed in the installation
-environment to provide the default contents of /etc/kdump.conf on the
-installed system.
+installation media.
 
 The syntax of the addon's kickstart section is:
 
