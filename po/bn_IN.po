@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-09 15:07+0800\n"
+"POT-Creation-Date: 2014-07-23 14:43+0800\n"
 "PO-Revision-Date: 2013-12-03 12:14-0500\n"
 "Last-Translator: sray <sray@redhat.com>\n"
 "Language-Team: Bengali INDIA <anubad@lists.ankur.org.in>\n"
@@ -21,34 +21,34 @@ msgstr ""
 "X-Generator: Zanata 3.1.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../com_redhat_kdump/ks/kdump.py:112
+#: ../com_redhat_kdump/ks/kdump.py:114
 #, python-format
 msgid "Invalid value %s for --reserve-mb"
 msgstr ""
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:56
+#: ../com_redhat_kdump/tui/spokes/kdump.py:58
 msgid "Kdump"
 msgstr "Kdump"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:84
-#: ../com_redhat_kdump/gui/spokes/kdump.py:138
+#: ../com_redhat_kdump/tui/spokes/kdump.py:91
+#: ../com_redhat_kdump/gui/spokes/kdump.py:145
 msgid "Kdump is enabled"
 msgstr ""
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:86
-#: ../com_redhat_kdump/gui/spokes/kdump.py:140
+#: ../com_redhat_kdump/tui/spokes/kdump.py:93
+#: ../com_redhat_kdump/gui/spokes/kdump.py:147
 msgid "Kdump is disabled"
 msgstr ""
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:43
+#: ../com_redhat_kdump/gui/spokes/kdump.py:45
 msgid "_KDUMP"
 msgstr ""
 
-#: tmp/fedora.glade.h:1 tmp/kdump.glade.h:1
+#: tmp/fedora.glade.h:1 tmp/RHEL.glade.h:1
 msgid "KDUMP"
 msgstr ""
 
-#: tmp/fedora.glade.h:2 tmp/kdump.glade.h:2
+#: tmp/fedora.glade.h:2 tmp/RHEL.glade.h:2
 msgid ""
 "Kdump is a kernel crash dumping mechanism. In the event of a system crash, "
 "kdump will capture information from your system that can be invaluable in "
@@ -60,32 +60,32 @@ msgstr ""
 "প্রমাণিত হতে পারে। উল্লেখ্য, kdump-র ক্ষেত্রে সিস্টেম মেমরির একাংশ বরাদ্দ করা "
 "আবশ্যক। এই অংশটি অন্যান্য ব্যবহারকারীদের নাগালের বাইরে থাকবে।"
 
-#: tmp/fedora.glade.h:3 tmp/kdump.glade.h:7
+#: tmp/fedora.glade.h:3 tmp/RHEL.glade.h:7
 #, fuzzy
-msgid "Memory To Be Reserved (MB):"
+msgid "Memory To Be _Reserved (MB):"
 msgstr "যত মেমরি সংরক্ষণ করতে হবে (_R) (MB):"
 
-#: tmp/fedora.glade.h:4 tmp/kdump.glade.h:8
+#: tmp/fedora.glade.h:4 tmp/RHEL.glade.h:8
 msgid "Total System Memory (MB):"
 msgstr "সিস্টেমে উপস্থিত সর্বমোট মেমরি(মেগাবাইট):"
 
-#: tmp/fedora.glade.h:5 tmp/kdump.glade.h:9
+#: tmp/fedora.glade.h:5 tmp/RHEL.glade.h:9
 msgid "Usable System Memory (MB):"
 msgstr "সিস্টেমের ব্যবহারযোগ্য মেমরি (মেগাবাইট):"
 
-#: tmp/fedora.glade.h:6 tmp/kdump.glade.h:3
+#: tmp/fedora.glade.h:6 tmp/RHEL.glade.h:3
 msgid "_Enable kdump?"
 msgstr "kdump সক্রিয় করা হবে কি?(_E)"
 
-#: tmp/kdump.glade.h:4
+#: tmp/RHEL.glade.h:4
 msgid "Kdump Memory Reservation:"
 msgstr "Kdump মেমরি সংরক্ষণ:"
 
-#: tmp/kdump.glade.h:5
+#: tmp/RHEL.glade.h:5
 msgid "_Automatic"
 msgstr "স্বয়ংক্রিয় (_A)"
 
-#: tmp/kdump.glade.h:6
+#: tmp/RHEL.glade.h:6
 msgid "_Manual"
 msgstr "ম্যানুয়াল (_M)"
 
