@@ -3,6 +3,7 @@
 if [ -z "$1" ] || [ -z "$2" ]; then
 	echo "Usage:"
 	echo "	packbootiso.sh <boot.iso> <kdump_addon_tarball>"
+	echo "  # make sure you have mkisofs and mksquashfs tools installed"
 	exit 1
 fi 
 
