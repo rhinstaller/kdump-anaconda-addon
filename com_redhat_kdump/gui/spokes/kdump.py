@@ -24,7 +24,7 @@
 from gi.repository import Gtk
 
 from pyanaconda.flags import flags
-from pyanaconda.ui.categories.system import SystemCategory
+from pyanaconda.ui.gui.categories.system import SystemCategory
 from pyanaconda.ui.gui.spokes import NormalSpoke
 from pyanaconda.ui.gui.utils import fancy_set_sensitive
 
