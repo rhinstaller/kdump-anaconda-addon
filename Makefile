@@ -87,7 +87,9 @@ version.sh:
 	@echo "KDUMP_ADDON_VERSION=$(VERSION)" > version.sh
 
 clean:
+	$(MAKE) clean -C po
 	rm -f *.gz
 	rm -f version.sh
+	rm -f test/updates.img
 
 .PHONY: install clean test all version.sh
