@@ -36,9 +36,9 @@ class KdumpData(AddonData):
     def __init__(self, name):
         AddonData.__init__(self, name)
 
-        self.enabled = False
+        self.enabled = True
+        self.reserveMB = "auto"
         lower, upper, step = getMemoryBounds()
-        self.reserveMB = "%d" % lower
 
     def __str__(self):
         addon_str = "%%addon %s" % self.name

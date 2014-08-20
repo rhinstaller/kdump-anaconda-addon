@@ -57,6 +57,9 @@ class KdumpSpoke(NormalSpoke):
     def initialize(self):
         NormalSpoke.initialize(self)
         self._enableButton = self.builder.get_object("enableKdumpCheck")
+        self._reservationTypeLabel = self.builder.get_object("reservationTypeLabel")
+        self._autoButton = self.builder.get_object("autoButton")
+        self._manualButton = self.builder.get_object("manualButton")
         self._toBeReservedLabel = self.builder.get_object("toBeReservedLabel")
         self._toBeReservedSpin = self.builder.get_object("toBeReservedSpin")
         self._totalMemLabel = self.builder.get_object("totalMemLabel")
@@ -89,6 +92,13 @@ class KdumpSpoke(NormalSpoke):
         # the sensitivities on the related widgets. Set the radio button first,
         # since the radio buttons' bailiwick is a subset of that of the
         # enable/disable checkbox.
+        if self.data.addons.com_redhat_kdump.reserveMB == "auto":
+            self._autoButton.set_active(True)
+            self._manualButton.set_active(False)
+        else:
+            self._autoButton.set_active(False)
+            self._manualButton.set_active(True)
+
         if self.data.addons.com_redhat_kdump.enabled:
             self._enableButton.set_active(True)
         else:
@@ -100,7 +110,10 @@ class KdumpSpoke(NormalSpoke):
     def apply(self):
         # Copy the GUI state into the AddonData object
         self.data.addons.com_redhat_kdump.enabled = self._enableButton.get_active()
-        reserveMem = "%dM" % self._toBeReservedSpin.get_value_as_int()
+        if self._autoButton.get_active():
+            reserveMem = "auto"
+        else:
+            reserveMem = "%dM" % self._toBeReservedSpin.get_value_as_int()
         self.data.addons.com_redhat_kdump.reserveMB = reserveMem
 
     @property
@@ -138,6 +151,12 @@ class KdumpSpoke(NormalSpoke):
         self._totalMemMB.set_sensitive(status)
         self._usableMemLabel.set_sensitive(status)
         self._usableMemMB.set_sensitive(status)
+        self._autoButton.set_sensitive(status)
+        self._manualButton.set_sensitive(status)
+
+	if status:
+                self._autoButton.emit("toggled")
+
 
     def on_reservation_toggled(self, radiobutton, user_data=None):
         status = self._manualButton.get_active()

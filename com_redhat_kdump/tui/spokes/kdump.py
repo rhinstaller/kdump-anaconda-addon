@@ -51,7 +51,7 @@ class _re:
 
 lower, upper ,step = getMemoryBounds()
 # Allow either "auto" or a string of digits optionally followed by 'M'
-RESERVE_VALID = _re(r'^(\d+M?)$', lower, upper)
+RESERVE_VALID = _re(r'^((auto)|(\d+M?))$', lower, upper)
 
 class KdumpSpoke(EditTUISpoke):
     title = N_("Kdump")
