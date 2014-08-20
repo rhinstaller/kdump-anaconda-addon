@@ -5,3 +5,4 @@ mkdir -p usr/share/anaconda/addons
 cp -r ../com_redhat_kdump ./usr/share/anaconda/addons/
 make -C ../po install DESTDIR=../test
 ( find ./usr | cpio -oc | gzip -c9 ) > updates.img
+rm -rf ./usr
