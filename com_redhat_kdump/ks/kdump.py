@@ -57,7 +57,7 @@ class KdumpData(AddonData):
 
     def setup(self, storage, ksdata, instClass):
         # the kdump addon should run only if requested
-        if not flags.cmdline.getbool("kdump_addon", default=False):
+        if not flags.cmdline.getbool("kdump_addon", default=True):
             return
 
         # Clear any existing crashkernel bootloader arguments
@@ -120,7 +120,7 @@ class KdumpData(AddonData):
 
     def execute(self, storage, ksdata, instClass, users):
         # the KdumpSpoke should run only if requested
-        if not flags.cmdline.getbool("kdump_addon", default=False):
+        if not flags.cmdline.getbool("kdump_addon", default=True):
             return
 
         if self.enabled:

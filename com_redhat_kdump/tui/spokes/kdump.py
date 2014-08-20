@@ -65,7 +65,7 @@ class KdumpSpoke(EditTUISpoke):
     @classmethod
     def should_run(cls, environment, data):
         # the KdumpSpoke should run only if requested
-        return flags.cmdline.getbool("kdump_addon", default=False)
+        return flags.cmdline.getbool("kdump_addon", default=True)
 
     def __init__(self, app, data, storage, payload, instclass):
         EditTUISpoke.__init__(self, app, data, storage, payload, instclass)

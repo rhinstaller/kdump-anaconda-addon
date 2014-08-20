@@ -48,7 +48,7 @@ class KdumpSpoke(NormalSpoke):
     @classmethod
     def should_run(cls, environment, data):
         # the KdumpSpoke should run only if requested
-        return flags.cmdline.getbool("kdump_addon", default=False)
+        return flags.cmdline.getbool("kdump_addon", default=True)
 
     def __init__(self, data, storage, payload, instclass):
         NormalSpoke.__init__(self, data, storage, payload, instclass)
