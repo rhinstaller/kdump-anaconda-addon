@@ -29,7 +29,7 @@ from pyanaconda.ui.gui.spokes import NormalSpoke
 from pyanaconda.ui.gui.utils import fancy_set_sensitive
 
 from com_redhat_kdump.i18n import _, N_
-from com_redhat_kdump.common import getTotalMemory, getMemoryBounds, getOS
+from com_redhat_kdump.common import getTotalMemory, getMemoryBounds
 
 __all__ = ["KdumpSpoke"]
 
@@ -38,13 +38,12 @@ class KdumpSpoke(NormalSpoke):
 
     builderObjects = ["KdumpWindow", "advancedConfigBuffer"]
     mainWidgetName = "KdumpWindow"
-    uiFile = "RHEL.glade"
+    uiFile = "kdump.glade"
     translationDomain = "kdump-anaconda-addon"
 
     icon = "computer-fail-symbolic"
     title = N_("_KDUMP")
     category = SystemCategory
-    OS = "redhat"
 
     @classmethod
     def should_run(cls, environment, data):
@@ -52,21 +51,12 @@ class KdumpSpoke(NormalSpoke):
         return flags.cmdline.getbool("kdump_addon", default=False)
 
     def __init__(self, data, storage, payload, instclass):
-        KdumpSpoke.OS = getOS()
-        if KdumpSpoke.OS == "fedora":
-            KdumpSpoke.uiFile = "fedora.glade"
         NormalSpoke.__init__(self, data, storage, payload, instclass)
         self._reserveMem = 0
 
     def initialize(self):
         NormalSpoke.initialize(self)
         self._enableButton = self.builder.get_object("enableKdumpCheck")
-        KdumpSpoke.OS = getOS()
-        if KdumpSpoke.OS == "redhat":
-            self._reservationTypeLabel = self.builder.get_object("reservationTypeLabel")
-            self._autoButton = self.builder.get_object("autoButton")
-            self._manualButton = self.builder.get_object("manualButton")
-
         self._toBeReservedLabel = self.builder.get_object("toBeReservedLabel")
         self._toBeReservedSpin = self.builder.get_object("toBeReservedSpin")
         self._totalMemLabel = self.builder.get_object("totalMemLabel")
@@ -99,14 +89,6 @@ class KdumpSpoke(NormalSpoke):
         # the sensitivities on the related widgets. Set the radio button first,
         # since the radio buttons' bailiwick is a subset of that of the
         # enable/disable checkbox.
-        if KdumpSpoke.OS == "redhat":
-            if self.data.addons.com_redhat_kdump.reserveMB == "auto":
-                self._autoButton.set_active(True)
-                self._manualButton.set_active(False)
-            else:
-                self._autoButton.set_active(False)
-                self._manualButton.set_active(True)
-
         if self.data.addons.com_redhat_kdump.enabled:
             self._enableButton.set_active(True)
         else:
@@ -118,12 +100,7 @@ class KdumpSpoke(NormalSpoke):
     def apply(self):
         # Copy the GUI state into the AddonData object
         self.data.addons.com_redhat_kdump.enabled = self._enableButton.get_active()
-
-        if KdumpSpoke.OS == "redhat" and self._autoButton.get_active():
-            reserveMem = "auto"
-        else:
-            reserveMem = "%dM" % self._toBeReservedSpin.get_value_as_int()
-
+        reserveMem = "%dM" % self._toBeReservedSpin.get_value_as_int()
         self.data.addons.com_redhat_kdump.reserveMB = reserveMem
 
     @property
@@ -156,25 +133,11 @@ class KdumpSpoke(NormalSpoke):
         # button and currently reserved widgets to sensitive and then fake a
         # toggle event on the radio button to set the state on the reserve
         # amount spin button and total/usable mem display.
-        if KdumpSpoke.OS == "redhat":
-            self._autoButton.set_sensitive(status)
-            self._manualButton.set_sensitive(status)
-            self._reservationTypeLabel.set_sensitive(status)
-
-        if not status:
-            fancy_set_sensitive(self._toBeReservedSpin, status)
-            self._totalMemLabel.set_sensitive(status)
-            self._totalMemMB.set_sensitive(status)
-            self._usableMemLabel.set_sensitive(status)
-            self._usableMemMB.set_sensitive(status)
-        elif KdumpSpoke.OS == "redhat":
-            self._autoButton.emit("toggled")
-        else:
-            fancy_set_sensitive(self._toBeReservedSpin, True)
-            self._totalMemLabel.set_sensitive(True)
-            self._totalMemMB.set_sensitive(True)
-            self._usableMemLabel.set_sensitive(True)
-            self._usableMemMB.set_sensitive(True)
+        fancy_set_sensitive(self._toBeReservedSpin, status)
+        self._totalMemLabel.set_sensitive(status)
+        self._totalMemMB.set_sensitive(status)
+        self._usableMemLabel.set_sensitive(status)
+        self._usableMemMB.set_sensitive(status)
 
     def on_reservation_toggled(self, radiobutton, user_data=None):
         status = self._manualButton.get_active()

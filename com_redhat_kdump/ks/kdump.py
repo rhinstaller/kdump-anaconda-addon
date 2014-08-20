@@ -25,7 +25,7 @@ from pyanaconda.flags import flags
 
 from pykickstart.options import KSOptionParser
 from pykickstart.errors import KickstartParseError, formatErrorMsg
-from com_redhat_kdump.common import getOS, getMemoryBounds
+from com_redhat_kdump.common import getMemoryBounds
 from com_redhat_kdump.i18n import _
 
 __all__ = ["KdumpData"]
@@ -36,12 +36,9 @@ class KdumpData(AddonData):
     def __init__(self, name):
         AddonData.__init__(self, name)
 
-        self.enabled = True
-        self.reserveMB = "auto"
-        if getOS() == "fedora":
-            self.enabled = False
-            lower, upper, step = getMemoryBounds()
-            self.reserveMB = "%d" % lower
+        self.enabled = False
+        lower, upper, step = getMemoryBounds()
+        self.reserveMB = "%d" % lower
 
     def __str__(self):
         addon_str = "%%addon %s" % self.name

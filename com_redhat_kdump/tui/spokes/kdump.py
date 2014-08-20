@@ -27,7 +27,7 @@ from pyanaconda.flags import flags
 from pyanaconda.ui.categories.system import SystemCategory
 from pyanaconda.ui.tui.spokes import EditTUISpoke
 from pyanaconda.ui.tui.spokes import EditTUISpokeEntry as Entry
-from com_redhat_kdump.common import getOS, getMemoryBounds
+from com_redhat_kdump.common import getMemoryBounds
 from com_redhat_kdump.i18n import N_, _
 
 __all__ = ["KdumpSpoke"]
@@ -51,8 +51,7 @@ class _re:
 
 lower, upper ,step = getMemoryBounds()
 # Allow either "auto" or a string of digits optionally followed by 'M'
-RESERVE_VALID = _re(r'^((auto)|(\d+M?))$', lower, upper)
-FEDORA_RESERVE_VALID = _re(r'^(\d+M?)$', lower, upper)
+RESERVE_VALID = _re(r'^(\d+M?)$', lower, upper)
 
 class KdumpSpoke(EditTUISpoke):
     title = N_("Kdump")
@@ -69,12 +68,6 @@ class KdumpSpoke(EditTUISpoke):
         return flags.cmdline.getbool("kdump_addon", default=False)
 
     def __init__(self, app, data, storage, payload, instclass):
-        if getOS() == "fedora":
-            KdumpSpoke.edit_fields = [
-                Entry("Enable kdump", "enabled", EditTUISpoke.CHECK, True),
-                Entry("Reserve amount", "reserveMB", FEDORA_RESERVE_VALID, lambda self,args: args.enabled)
-                ]
-
         EditTUISpoke.__init__(self, app, data, storage, payload, instclass)
         self.args = self.data.addons.com_redhat_kdump
 

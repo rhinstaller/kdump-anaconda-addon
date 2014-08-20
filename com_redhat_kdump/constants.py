@@ -19,5 +19,4 @@
 # Red Hat Author(s): David Shea <dshea@redhat.com>
 #
 
-# The location of the kdump config file
-OS_RELEASE = "/etc/os-release"
+# The constants 
