@@ -59,7 +59,7 @@ class KdumpSpoke(EditTUISpoke):
 
     edit_fields = [
         Entry("Enable kdump", "enabled", EditTUISpoke.CHECK, True),
-        Entry("Reserve amount", "reserveMB", RESERVE_VALID, lambda self,args: args.enabled)
+        Entry("Reserve amount(MB)", "reserveMB", RESERVE_VALID, lambda self,args: args.enabled)
         ]
 
     @classmethod
