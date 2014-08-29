@@ -36,7 +36,6 @@ uninstall:
 	rm -rfv $(DESTDIR)$(ADDONDIR)
 
 dist: version.sh
-	make -C po update-po
 	rm -rf $(NAME)
 	mkdir -p $(NAME)
 	@if test -d ".git"; \

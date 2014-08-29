@@ -26,7 +26,7 @@ MOFILES		= $(patsubst %.po,%.mo,$(POFILES))
 PYSRC		= $(wildcard ../com_redhat_kdump/*.py ../com_redhat_kdump/*/*.py ../com_redhat_kdump/*/*/*.py)
 GLADEFILES = $(wildcard ../com_redhat_kdump/gui/spokes/*.glade)
 
-all::  update-po $(MOFILES)
+all: $(MOFILES)
 
 potfile: $(PYSRC) glade-po
 	$(XGETTEXT) -L Python --keyword=_ --keyword=N_ $(PYSRC) tmp/*.h
@@ -43,9 +43,7 @@ glade-po: $(GLADEFILES)
 		intltool-extract --type=gettext/glade -l $$f ;\
 	done
 
-update-po: Makefile refresh-po potfile
-
-refresh-po: Makefile 
+update-po: potfile
 	for cat in $(POFILES); do \
 		if $(MSGMERGE) $$cat $(POTFILE)  --out=$$cat ; then \
 			echo "$(MSGMERGE) of $$cat succeeded" ; \
