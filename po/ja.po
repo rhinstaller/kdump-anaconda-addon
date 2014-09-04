@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-23 14:43+0800\n"
+"POT-Creation-Date: 2014-09-04 13:59+0800\n"
 "PO-Revision-Date: 2012-12-18 09:59-0500\n"
 "Last-Translator: noriko <noriko@fedoraproject.org>\n"
 "Language-Team: Japanese <jp@li.org>\n"
@@ -22,22 +22,22 @@ msgstr ""
 "X-Generator: Zanata 2.0.2\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: ../com_redhat_kdump/ks/kdump.py:114
+#: ../com_redhat_kdump/ks/kdump.py:111
 #, python-format
 msgid "Invalid value %s for --reserve-mb"
 msgstr ""
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:58
+#: ../com_redhat_kdump/tui/spokes/kdump.py:57
 msgid "Kdump"
 msgstr "Kdump"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:91
-#: ../com_redhat_kdump/gui/spokes/kdump.py:145
+#: ../com_redhat_kdump/tui/spokes/kdump.py:84
+#: ../com_redhat_kdump/gui/spokes/kdump.py:122
 msgid "Kdump is enabled"
 msgstr ""
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:93
-#: ../com_redhat_kdump/gui/spokes/kdump.py:147
+#: ../com_redhat_kdump/tui/spokes/kdump.py:86
+#: ../com_redhat_kdump/gui/spokes/kdump.py:124
 msgid "Kdump is disabled"
 msgstr ""
 
@@ -45,11 +45,11 @@ msgstr ""
 msgid "_KDUMP"
 msgstr ""
 
-#: tmp/fedora.glade.h:1 tmp/RHEL.glade.h:1
+#: tmp/kdump.glade.h:1
 msgid "KDUMP"
 msgstr ""
 
-#: tmp/fedora.glade.h:2 tmp/RHEL.glade.h:2
+#: tmp/kdump.glade.h:2
 msgid ""
 "Kdump is a kernel crash dumping mechanism. In the event of a system crash, "
 "kdump will capture information from your system that can be invaluable in "
@@ -61,34 +61,31 @@ msgstr ""
 "のある情報をキャプチャします。kdump には kdump 以外では使用できない部分をシス"
 "テムメモリー内に予約しておく必要があるため注意して下さい。"
 
-#: tmp/fedora.glade.h:3 tmp/RHEL.glade.h:7
+#: tmp/kdump.glade.h:3
 #, fuzzy
 msgid "Memory To Be _Reserved (MB):"
 msgstr "予約されるメモリー (MB):"
 
-#: tmp/fedora.glade.h:4 tmp/RHEL.glade.h:8
+#: tmp/kdump.glade.h:4
 msgid "Total System Memory (MB):"
 msgstr "合計システムメモリー (MB):"
 
-#: tmp/fedora.glade.h:5 tmp/RHEL.glade.h:9
+#: tmp/kdump.glade.h:5
 msgid "Usable System Memory (MB):"
 msgstr "使用可能なシステムメモリー (MB):"
 
-#: tmp/fedora.glade.h:6 tmp/RHEL.glade.h:3
+#: tmp/kdump.glade.h:6
 msgid "_Enable kdump?"
 msgstr "kdump を有効にしますか (_E)?"
 
-#: tmp/RHEL.glade.h:4
-msgid "Kdump Memory Reservation:"
-msgstr "Kdump メモリー予約:"
+#~ msgid "Kdump Memory Reservation:"
+#~ msgstr "Kdump メモリー予約:"
 
-#: tmp/RHEL.glade.h:5
-msgid "_Automatic"
-msgstr "自動 (_A)"
+#~ msgid "_Automatic"
+#~ msgstr "自動 (_A)"
 
-#: tmp/RHEL.glade.h:6
-msgid "_Manual"
-msgstr "手動 (_M)"
+#~ msgid "_Manual"
+#~ msgstr "手動 (_M)"
 
 #~ msgid "%s"
 #~ msgstr "%s"
