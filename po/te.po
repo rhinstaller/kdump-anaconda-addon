@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-23 14:43+0800\n"
+"POT-Creation-Date: 2014-09-04 14:01+0800\n"
 "PO-Revision-Date: 2012-12-18 09:17-0500\n"
 "Last-Translator: kkrothap <kkrothap@fedoraproject.org>\n"
 "Language-Team: Telugu <en@li.org>\n"
@@ -19,22 +19,22 @@ msgstr ""
 "X-Generator: Zanata 2.0.2\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: ../com_redhat_kdump/ks/kdump.py:114
+#: ../com_redhat_kdump/ks/kdump.py:111
 #, python-format
 msgid "Invalid value %s for --reserve-mb"
 msgstr ""
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:58
+#: ../com_redhat_kdump/tui/spokes/kdump.py:56
 msgid "Kdump"
 msgstr "Kdump"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:91
-#: ../com_redhat_kdump/gui/spokes/kdump.py:145
+#: ../com_redhat_kdump/tui/spokes/kdump.py:83
+#: ../com_redhat_kdump/gui/spokes/kdump.py:135
 msgid "Kdump is enabled"
 msgstr ""
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:93
-#: ../com_redhat_kdump/gui/spokes/kdump.py:147
+#: ../com_redhat_kdump/tui/spokes/kdump.py:85
+#: ../com_redhat_kdump/gui/spokes/kdump.py:137
 msgid "Kdump is disabled"
 msgstr ""
 
@@ -42,11 +42,11 @@ msgstr ""
 msgid "_KDUMP"
 msgstr ""
 
-#: tmp/fedora.glade.h:1 tmp/RHEL.glade.h:1
+#: tmp/kdump.glade.h:1
 msgid "KDUMP"
 msgstr ""
 
-#: tmp/fedora.glade.h:2 tmp/RHEL.glade.h:2
+#: tmp/kdump.glade.h:2
 msgid ""
 "Kdump is a kernel crash dumping mechanism. In the event of a system crash, "
 "kdump will capture information from your system that can be invaluable in "
@@ -56,34 +56,34 @@ msgstr ""
 "కెడంప్ కెర్నల్ క్రాష్ డంపింగ్ మిషన్.మీ సిస్టమ్ క్రాషైనప్పుడు కెడంప్ సిస్టమ్ నుండి సమాచారాన్ని సేకరింస్తుంది,ఇది "
 "క్రాషవడానికి గల కారణాలను నిర్దారించడానికి వీలుకానిది అయిఉండొచ్చు."
 
-#: tmp/fedora.glade.h:3 tmp/RHEL.glade.h:7
+#: tmp/kdump.glade.h:3
+msgid "_Enable kdump?"
+msgstr "కెడంప్ సిద్దపరచు(_E)?"
+
+#: tmp/kdump.glade.h:4
+msgid "Kdump Memory Reservation:"
+msgstr "కెడంప్ మెమొర రిజర్వేషన్:"
+
+#: tmp/kdump.glade.h:5
+msgid "_Automatic"
+msgstr "స్వయంచాలక (_A)"
+
+#: tmp/kdump.glade.h:6
+msgid "_Manual"
+msgstr "మానవీయ (_M)"
+
+#: tmp/kdump.glade.h:7
 #, fuzzy
 msgid "Memory To Be _Reserved (MB):"
 msgstr "రిజర్వు చేయవలసిన మెమొరీ (MB) (_R):"
 
-#: tmp/fedora.glade.h:4 tmp/RHEL.glade.h:8
+#: tmp/kdump.glade.h:8
 msgid "Total System Memory (MB):"
 msgstr "మొత్తం సిస్టమ్ మెమొరి(MB):"
 
-#: tmp/fedora.glade.h:5 tmp/RHEL.glade.h:9
+#: tmp/kdump.glade.h:9
 msgid "Usable System Memory (MB):"
 msgstr "ఉపయోగకరమైన సిస్టమ్ మెమొరి(MB):"
-
-#: tmp/fedora.glade.h:6 tmp/RHEL.glade.h:3
-msgid "_Enable kdump?"
-msgstr "కెడంప్ సిద్దపరచు(_E)?"
-
-#: tmp/RHEL.glade.h:4
-msgid "Kdump Memory Reservation:"
-msgstr "కెడంప్ మెమొర రిజర్వేషన్:"
-
-#: tmp/RHEL.glade.h:5
-msgid "_Automatic"
-msgstr "స్వయంచాలక (_A)"
-
-#: tmp/RHEL.glade.h:6
-msgid "_Manual"
-msgstr "మానవీయ (_M)"
 
 #~ msgid "%s"
 #~ msgstr "%s"
