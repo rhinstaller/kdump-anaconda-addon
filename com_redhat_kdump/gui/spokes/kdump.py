@@ -72,13 +72,12 @@ class KdumpSpoke(NormalSpoke):
 
     def refresh(self):
         # If a reserve amount is requested, set it in the spin button
-        if self.data.addons.com_redhat_kdump.reserveMB != "auto":
-            # Strip the trailing 'M'
-            reserveMB = self.data.addons.com_redhat_kdump.reserveMB
-            if reserveMB and reserveMB[-1] == 'M':
-                reserveMB = reserveMB[:-1]
-            if reserveMB:
-                self._toBeReservedSpin.set_value(int(reserveMB))
+        # Strip the trailing 'M'
+        reserveMB = self.data.addons.com_redhat_kdump.reserveMB
+        if reserveMB and reserveMB[-1] == 'M':
+            reserveMB = reserveMB[:-1]
+        if reserveMB:
+            self._toBeReservedSpin.set_value(int(reserveMB))
 
         # Set the various labels. Use the spin button signal handler to set the
         # usable memory label once the other two have been set.
@@ -133,17 +132,6 @@ class KdumpSpoke(NormalSpoke):
         # button and currently reserved widgets to sensitive and then fake a
         # toggle event on the radio button to set the state on the reserve
         # amount spin button and total/usable mem display.
-        fancy_set_sensitive(self._toBeReservedSpin, status)
-        self._totalMemLabel.set_sensitive(status)
-        self._totalMemMB.set_sensitive(status)
-        self._usableMemLabel.set_sensitive(status)
-        self._usableMemMB.set_sensitive(status)
-
-    def on_reservation_toggled(self, radiobutton, user_data=None):
-        status = self._manualButton.get_active()
-
-        # If setting to auto, disable the manual config spinner and
-        # the total/usable memory labels
         fancy_set_sensitive(self._toBeReservedSpin, status)
         self._totalMemLabel.set_sensitive(status)
         self._totalMemMB.set_sensitive(status)

@@ -24,7 +24,7 @@ Above command will repack kdump addon into original boot.iso as boot-1.iso
 
 The syntax of the addon's kickstart section is:
 
-%addon com_redhat_kdump (--enable|--disable) --reserve-mb=("auto"|<amount>)
+%addon com_redhat_kdump (--enable|--disable) --reserve-mb=<amount>
 %end
 
 Note that support for arguments on the %addon line was added in

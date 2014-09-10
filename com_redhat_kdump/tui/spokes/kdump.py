@@ -40,8 +40,6 @@ class _re:
 
     def match(self, key):
         if self.re.match(key):
-            if key == "auto":
-                return True
             if key[-1] == 'M':
                 key = key[:-1]
             key = int(key)
@@ -50,7 +48,7 @@ class _re:
         return False
 
 lower, upper ,step = getMemoryBounds()
-# Allow either "auto" or a string of digits optionally followed by 'M'
+# Allow a string of digits optionally followed by 'M'
 RESERVE_VALID = _re(r'^(\d+M?)$', lower, upper)
 
 class KdumpSpoke(EditTUISpoke):

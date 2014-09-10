@@ -68,8 +68,8 @@ class KdumpData(AddonData):
 
         # Copy our reserved amount to the bootloader arguments
         if self.enabled:
-            # Ensure that the amount is "auto" or an amount in MB
-            if self.reserveMB != "auto" and self.reserveMB[-1] != 'M':
+            # Ensure that the amount is an amount in MB
+            if self.reserveMB[-1] != 'M':
                 self.reserveMB += 'M'
             ksdata.bootloader.appendLine += ' crashkernel=%s' % self.reserveMB
 
@@ -90,7 +90,7 @@ class KdumpData(AddonData):
         op.add_option("--disable", action="store_false",
                 dest="enabled", help="Disable kdump")
         op.add_option("--reserve-mb", type="string", dest="reserveMB",
-                default="auto", help="Amount of memory in MB to reserve for kdump, or auto")
+                default="128", help="Amount of memory in MB to reserve for kdump.")
 
         (opts, extra) = op.parse_args(args=args, lineno=lineno)
 
@@ -99,20 +99,19 @@ class KdumpData(AddonData):
             AddonData.handle_header(self, lineno, extra)
 
         # Validate the reserve-mb argument
-        if opts.reserveMB != "auto":
-            # Allow a final 'M' for consistency with the crashkernel kernel
-            # parameter. Strip it if found.
-            if opts.reserveMB and opts.reserveMB[-1] == 'M':
-                opts.reserveMB = opts.reserveMB[:-1]
+        # Allow a final 'M' for consistency with the crashkernel kernel
+        # parameter. Strip it if found.
+        if opts.reserveMB and opts.reserveMB[-1] == 'M':
+            opts.reserveMB = opts.reserveMB[:-1]
 
-            try:
-                _test = int(opts.reserveMB)
-            except ValueError:
-                msg = _("Invalid value %s for --reserve-mb") % opts.reserveMB
-                if lineno != None:
-                    raise KickstartParseError(formatErrorMsg(lineno, msg=msg))
-                else:
-                    raise KickstartParseError(msg)
+        try:
+            _test = int(opts.reserveMB)
+        except ValueError:
+            msg = _("Invalid value %s for --reserve-mb") % opts.reserveMB
+            if lineno != None:
+                raise KickstartParseError(formatErrorMsg(lineno, msg=msg))
+            else:
+                raise KickstartParseError(msg)
 
         # Store the parsed arguments
         self.enabled = opts.enabled
