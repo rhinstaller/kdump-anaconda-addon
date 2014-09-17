@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-04 13:59+0800\n"
+"POT-Creation-Date: 2014-09-17 17:34+0800\n"
 "PO-Revision-Date: 2007-03-08 07:29-0500\n"
 "Last-Translator: Milan Kerslager <kerslage@linux.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -17,26 +17,26 @@ msgstr ""
 "X-Generator: Zanata 2.0.2\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
 
-#: ../com_redhat_kdump/ks/kdump.py:111
+#: ../com_redhat_kdump/ks/kdump.py:119
 #, python-format
 msgid "Invalid value %s for --reserve-mb"
 msgstr ""
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:57
+#: ../com_redhat_kdump/tui/spokes/kdump.py:56
 msgid "Kdump"
 msgstr "Kdump"
 
 #: ../com_redhat_kdump/tui/spokes/kdump.py:84
-#: ../com_redhat_kdump/gui/spokes/kdump.py:122
+#: ../com_redhat_kdump/gui/spokes/kdump.py:130
 msgid "Kdump is enabled"
 msgstr ""
 
 #: ../com_redhat_kdump/tui/spokes/kdump.py:86
-#: ../com_redhat_kdump/gui/spokes/kdump.py:124
+#: ../com_redhat_kdump/gui/spokes/kdump.py:132
 msgid "Kdump is disabled"
 msgstr ""
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:45
+#: ../com_redhat_kdump/gui/spokes/kdump.py:46
 msgid "_KDUMP"
 msgstr ""
 
@@ -72,7 +72,11 @@ msgid "Usable System Memory (MB):"
 msgstr "Paměť pro _systém (MB):"
 
 #: tmp/kdump.glade.h:6
-msgid "_Enable kdump?"
+msgid "_Enable kdump"
+msgstr ""
+
+#: tmp/kdump.glade.h:7
+msgid "_Enable dump mode fadump"
 msgstr ""
 
 #, fuzzy
