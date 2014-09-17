@@ -7,6 +7,9 @@ The syntax of the addon's kickstart section is:
 %addon com_redhat_kdump (--enable|--disable) --reserve-mb=("auto"|<amount>)
 %end
 
+For ppc64 machine, if firmware assisted dump mode is supported, you can add
+extra kickstart option --enablefadump
+
 Note that support for arguments on the %addon line was added in
 anaconda-21.23. See anaconda commit 3a512e4f9e15977f0ce2d0bbe39e841b881398f3,
 https://bugzilla.redhat.com/show_bug.cgi?id=1065674

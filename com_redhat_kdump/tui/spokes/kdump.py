@@ -21,6 +21,7 @@
 
 """Kdump anaconda TUI configuration"""
 
+import os.path
 import re
 
 from pyanaconda.flags import flags
@@ -28,6 +29,7 @@ from pyanaconda.ui.tui.spokes import EditTUISpoke
 from pyanaconda.ui.tui.spokes import EditTUISpokeEntry as Entry
 from com_redhat_kdump.common import getMemoryBounds
 from com_redhat_kdump.i18n import N_, _
+from com_redhat_kdump.constants import FADUMP_CAPABLE_FILE
 
 __all__ = ["KdumpSpoke"]
 
@@ -58,6 +60,7 @@ class KdumpSpoke(EditTUISpoke):
 
     edit_fields = [
         Entry("Enable kdump", "enabled", EditTUISpoke.CHECK, True),
+        Entry("Enable dump mode fadump", "enablefadump", EditTUISpoke.CHECK, os.path.exists(FADUMP_CAPABLE_FILE) and (lambda self,args: args.enabled)),
         Entry("Reserve amount(MB)", "reserveMB", RESERVE_VALID, lambda self,args: args.enabled)
         ]
 

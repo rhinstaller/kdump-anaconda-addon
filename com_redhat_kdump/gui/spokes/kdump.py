@@ -21,6 +21,7 @@
 
 """Kdump anaconda GUI configuration"""
 
+import os.path
 from gi.repository import Gtk
 
 from pyanaconda.flags import flags
@@ -30,6 +31,7 @@ from pyanaconda.ui.gui.utils import fancy_set_sensitive
 
 from com_redhat_kdump.i18n import _, N_
 from com_redhat_kdump.common import getTotalMemory, getMemoryBounds
+from com_redhat_kdump.constants import FADUMP_CAPABLE_FILE
 
 __all__ = ["KdumpSpoke"]
 
@@ -57,6 +59,11 @@ class KdumpSpoke(NormalSpoke):
     def initialize(self):
         NormalSpoke.initialize(self)
         self._enableButton = self.builder.get_object("enableKdumpCheck")
+        self._fadumpButton = self.builder.get_object("fadumpCheck")
+        if os.path.exists(FADUMP_CAPABLE_FILE):
+            self._fadumpButton.show()
+        else:
+            self._fadumpButton.hide()
         self._reservationTypeLabel = self.builder.get_object("reservationTypeLabel")
         self._autoButton = self.builder.get_object("autoButton")
         self._manualButton = self.builder.get_object("manualButton")
@@ -104,6 +111,8 @@ class KdumpSpoke(NormalSpoke):
         else:
             self._enableButton.set_active(False)
 
+        _fadump = self.data.addons.com_redhat_kdump.enablefadump
+        self._fadumpButton.set_active(_fadump)
         # Force a toggled signal on the button in case it's state has not changed
         self._enableButton.emit("toggled")
 
@@ -115,6 +124,7 @@ class KdumpSpoke(NormalSpoke):
         else:
             reserveMem = "%dM" % self._toBeReservedSpin.get_value_as_int()
         self.data.addons.com_redhat_kdump.reserveMB = reserveMem
+        self.data.addons.com_redhat_kdump.enablefadump = self._fadumpButton.get_active()
 
     @property
     def ready(self):
@@ -141,7 +151,6 @@ class KdumpSpoke(NormalSpoke):
     # SIGNAL HANDLERS
     def on_enable_kdump_toggled(self, checkbutton, user_data=None):
         status = checkbutton.get_active()
-
         # If disabling, set everything to insensitve. Otherwise, only set the radio
         # button and currently reserved widgets to sensitive and then fake a
         # toggle event on the radio button to set the state on the reserve
@@ -153,6 +162,9 @@ class KdumpSpoke(NormalSpoke):
         self._usableMemMB.set_sensitive(status)
         self._autoButton.set_sensitive(status)
         self._manualButton.set_sensitive(status)
+        self._fadumpButton.set_sensitive(status)
+        if not status:
+            self._fadumpButton.set_active(False)
 
 	if status:
                 self._autoButton.emit("toggled")
@@ -168,6 +180,12 @@ class KdumpSpoke(NormalSpoke):
         self._totalMemMB.set_sensitive(status)
         self._usableMemLabel.set_sensitive(status)
         self._usableMemMB.set_sensitive(status)
+
+    def on_enable_fadump_toggled(self, checkbutton, user_data=None):
+        if self._enableButton.get_active():
+            self.enablefadump = self._fadumpButton.get_active()
+        else:
+            self._fadumpButton.set_active(False)
 
     def on_reserved_value_changed(self, spinbutton, user_data=None):
         reserveMem = spinbutton.get_value_as_int()
