@@ -20,3 +20,4 @@
 #
 
 # The constants 
+FADUMP_CAPABLE_FILE = "/proc/device-tree/rtas/ibm,configure-kernel-dump"
