@@ -67,7 +67,7 @@
                         <property name="can_focus">False</property>
                         <child>
                           <object class="GtkCheckButton" id="enableKdumpCheck">
-                            <property name="label" translatable="yes">_Enable kdump?</property>
+                            <property name="label" translatable="yes">_Enable kdump</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
