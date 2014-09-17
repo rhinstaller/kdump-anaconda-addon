@@ -19,6 +19,7 @@
 # Red Hat Author(s): David Shea <dshea@redhat.com>
 #
 
+import os.path
 from pyanaconda.addons import AddonData
 from pyanaconda import iutil
 from pyanaconda.flags import flags
@@ -39,6 +40,7 @@ class KdumpData(AddonData):
         self.enabled = False
         lower, upper, step = getMemoryBounds()
         self.reserveMB = "%d" % lower
+        self.enablefadump = False
 
     def __str__(self):
         addon_str = "%%addon %s" % self.name
@@ -52,6 +54,9 @@ class KdumpData(AddonData):
             addon_str += " --reserve-mb='%s'" % self.reserveMB
 
         addon_str += "\n%s\n%%end\n" % self.content.strip()
+
+        if self.enablefadump:
+            addon_str += " --enablefadump"
 
         return addon_str
 
@@ -82,11 +87,15 @@ class KdumpData(AddonData):
         if self.enabled:
             storage.bootloader.boot_args.add('crashkernel=%s' % self.reserveMB)
             ksdata.packages.packageList.append("kexec-tools")
+	    if self.enablefadump and os.path.exists("/proc/device-tree/rtas/ibm,configure-kernel-dump"):
+                storage.bootloader.boot_args.add('fadump=on')
 
     def handle_header(self, lineno, args):
         op = KSOptionParser()
         op.add_option("--enable", action="store_true", default=True,
                 dest="enabled", help="Enable kdump")
+        op.add_option("--enablefadump", action="store_true", default=False,
+                dest="enablefadump", help="Enable dump mode fadump")
         op.add_option("--disable", action="store_false",
                 dest="enabled", help="Disable kdump")
         op.add_option("--reserve-mb", type="string", dest="reserveMB",
@@ -116,6 +125,7 @@ class KdumpData(AddonData):
         # Store the parsed arguments
         self.enabled = opts.enabled
         self.reserveMB =opts.reserveMB
+        self.enablefadump = opts.enablefadump
 
     def execute(self, storage, ksdata, instClass, users):
         # the KdumpSpoke should run only if requested

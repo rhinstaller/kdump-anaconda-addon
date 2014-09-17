@@ -21,6 +21,7 @@
 
 """Kdump anaconda TUI configuration"""
 
+import os.path
 import re
 
 from pyanaconda.flags import flags
@@ -57,6 +58,7 @@ class KdumpSpoke(EditTUISpoke):
 
     edit_fields = [
         Entry("Enable kdump", "enabled", EditTUISpoke.CHECK, True),
+        Entry("Enable dump mode fadump", "enablefadump", EditTUISpoke.CHECK, os.path.exists("/proc/device-tree/rtas/ibm,configure-kernel-dump") and (lambda self,args: args.enabled)),
         Entry("Reserve amount(MB)", "reserveMB", RESERVE_VALID, lambda self,args: args.enabled)
         ]
 
