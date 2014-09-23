@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-04 14:01+0800\n"
+"POT-Creation-Date: 2014-09-23 10:17+0800\n"
 "PO-Revision-Date: 2012-12-13 06:42-0500\n"
 "Last-Translator: rajesh <rajesh@fedoraproject.org>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
@@ -20,26 +20,26 @@ msgstr ""
 "X-Generator: Zanata 2.0.2\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: ../com_redhat_kdump/ks/kdump.py:111
+#: ../com_redhat_kdump/ks/kdump.py:121
 #, python-format
 msgid "Invalid value %s for --reserve-mb"
 msgstr ""
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:56
+#: ../com_redhat_kdump/tui/spokes/kdump.py:58
 msgid "Kdump"
 msgstr "Kdump"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:83
-#: ../com_redhat_kdump/gui/spokes/kdump.py:135
+#: ../com_redhat_kdump/tui/spokes/kdump.py:86
+#: ../com_redhat_kdump/gui/spokes/kdump.py:145
 msgid "Kdump is enabled"
 msgstr ""
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:85
-#: ../com_redhat_kdump/gui/spokes/kdump.py:137
+#: ../com_redhat_kdump/tui/spokes/kdump.py:88
+#: ../com_redhat_kdump/gui/spokes/kdump.py:147
 msgid "Kdump is disabled"
 msgstr ""
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:45
+#: ../com_redhat_kdump/gui/spokes/kdump.py:47
 msgid "_KDUMP"
 msgstr ""
 
@@ -59,31 +59,37 @@ msgstr ""
 "हिस्सा जरूरी है जो कि अन्य प्रयोग के लिये अनुपलब्ध रहेगा."
 
 #: tmp/kdump.glade.h:3
-msgid "_Enable kdump?"
+#, fuzzy
+msgid "_Enable kdump"
 msgstr "kdump सक्रिय करें? (_E)"
 
 #: tmp/kdump.glade.h:4
+#, fuzzy
+msgid "_Enable dump mode fadump"
+msgstr "kdump सक्रिय करें? (_E)"
+
+#: tmp/kdump.glade.h:5
 msgid "Kdump Memory Reservation:"
 msgstr "Kdump स्मृति आरक्षण:"
 
-#: tmp/kdump.glade.h:5
+#: tmp/kdump.glade.h:6
 msgid "_Automatic"
 msgstr "स्वचालित (_A)"
 
-#: tmp/kdump.glade.h:6
+#: tmp/kdump.glade.h:7
 msgid "_Manual"
 msgstr "दस्ती (_M)"
 
-#: tmp/kdump.glade.h:7
+#: tmp/kdump.glade.h:8
 #, fuzzy
 msgid "Memory To Be _Reserved (MB):"
 msgstr "स्मृति वापस करने के लिए (_R) (MB):"
 
-#: tmp/kdump.glade.h:8
+#: tmp/kdump.glade.h:9
 msgid "Total System Memory (MB):"
 msgstr "कुल तंत्र स्मृति (MB):"
 
-#: tmp/kdump.glade.h:9
+#: tmp/kdump.glade.h:10
 msgid "Usable System Memory (MB):"
 msgstr "प्रयोज्य तंत्र स्मृति (MB):"
 

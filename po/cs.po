@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-04 14:01+0800\n"
+"POT-Creation-Date: 2014-09-23 10:17+0800\n"
 "PO-Revision-Date: 2007-03-08 07:29-0500\n"
 "Last-Translator: Milan Kerslager <kerslage@linux.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -17,26 +17,26 @@ msgstr ""
 "X-Generator: Zanata 2.0.2\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
 
-#: ../com_redhat_kdump/ks/kdump.py:111
+#: ../com_redhat_kdump/ks/kdump.py:121
 #, python-format
 msgid "Invalid value %s for --reserve-mb"
 msgstr ""
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:56
+#: ../com_redhat_kdump/tui/spokes/kdump.py:58
 msgid "Kdump"
 msgstr "Kdump"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:83
-#: ../com_redhat_kdump/gui/spokes/kdump.py:135
+#: ../com_redhat_kdump/tui/spokes/kdump.py:86
+#: ../com_redhat_kdump/gui/spokes/kdump.py:145
 msgid "Kdump is enabled"
 msgstr ""
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:85
-#: ../com_redhat_kdump/gui/spokes/kdump.py:137
+#: ../com_redhat_kdump/tui/spokes/kdump.py:88
+#: ../com_redhat_kdump/gui/spokes/kdump.py:147
 msgid "Kdump is disabled"
 msgstr ""
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:45
+#: ../com_redhat_kdump/gui/spokes/kdump.py:47
 msgid "_KDUMP"
 msgstr ""
 
@@ -58,32 +58,36 @@ msgstr ""
 "nelze při normálním běhu systému využít."
 
 #: tmp/kdump.glade.h:3
-msgid "_Enable kdump?"
+msgid "_Enable kdump"
 msgstr ""
 
 #: tmp/kdump.glade.h:4
+msgid "_Enable dump mode fadump"
+msgstr ""
+
+#: tmp/kdump.glade.h:5
 #, fuzzy
 msgid "Kdump Memory Reservation:"
 msgstr "Paměť pro _kdump (MB):"
 
-#: tmp/kdump.glade.h:5
+#: tmp/kdump.glade.h:6
 msgid "_Automatic"
 msgstr ""
 
-#: tmp/kdump.glade.h:6
+#: tmp/kdump.glade.h:7
 msgid "_Manual"
 msgstr ""
 
-#: tmp/kdump.glade.h:7
+#: tmp/kdump.glade.h:8
 msgid "Memory To Be _Reserved (MB):"
 msgstr ""
 
-#: tmp/kdump.glade.h:8
+#: tmp/kdump.glade.h:9
 #, fuzzy
 msgid "Total System Memory (MB):"
 msgstr "_Celkem paměťi (MB):"
 
-#: tmp/kdump.glade.h:9
+#: tmp/kdump.glade.h:10
 #, fuzzy
 msgid "Usable System Memory (MB):"
 msgstr "Paměť pro _systém (MB):"
