@@ -3,48 +3,48 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Amitakhya Phukan <aphukan@redhat.com>, 2007.
-# ngoswami <ngoswami@fedoraproject.org>, 2012. #zanata
+# Nilamdyuti Goswami <ngoswami@redhat.com>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-17 17:34+0800\n"
-"PO-Revision-Date: 2012-12-11 03:18-0500\n"
-"Last-Translator: ngoswami <ngoswami@fedoraproject.org>\n"
-"Language-Team: Assamese\n"
+"POT-Creation-Date: 2014-11-12 16:19+0800\n"
+"PO-Revision-Date: 2014-11-04 03:08-0500\n"
+"Last-Translator: Nilamdyuti Goswami <ngoswami@redhat.com>\n"
+"Language-Team: Assamese <kde-i18n-doc@kde.org>\n"
 "Language: as\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Zanata 2.0.2\n"
+"X-Generator: Zanata 3.5.1\n"
 "Plural-Forms: nplurals=2; plural=(n!=1)\n"
 
-#: ../com_redhat_kdump/ks/kdump.py:119
+#: ../com_redhat_kdump/ks/kdump.py:120
 #, python-format
 msgid "Invalid value %s for --reserve-mb"
-msgstr ""
+msgstr "--reserve-mb ৰ বাবে অবৈধ মান %s"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:56
+#: ../com_redhat_kdump/tui/spokes/kdump.py:57
 msgid "Kdump"
 msgstr "Kdump"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:84
-#: ../com_redhat_kdump/gui/spokes/kdump.py:130
+#: ../com_redhat_kdump/tui/spokes/kdump.py:85
+#: ../com_redhat_kdump/gui/spokes/kdump.py:131
 msgid "Kdump is enabled"
-msgstr ""
+msgstr "Kdump সামৰ্থবান"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:86
-#: ../com_redhat_kdump/gui/spokes/kdump.py:132
+#: ../com_redhat_kdump/tui/spokes/kdump.py:87
+#: ../com_redhat_kdump/gui/spokes/kdump.py:133
 msgid "Kdump is disabled"
-msgstr ""
+msgstr "Kdump অসামৰ্থবান"
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:46
+#: ../com_redhat_kdump/gui/spokes/kdump.py:47
 msgid "_KDUMP"
-msgstr ""
+msgstr "KDUMP (_K)"
 
 #: tmp/kdump.glade.h:1
 msgid "KDUMP"
-msgstr ""
+msgstr "KDUMP"
 
 #: tmp/kdump.glade.h:2
 msgid ""
@@ -58,7 +58,6 @@ msgstr ""
 "যে kdump ক চিস্টেমৰ মেমৰি এটা অংশ সংৰক্ষণ কৰিব যি অন্য কাৰ্য্যৰ বাবে পোৱা নাযাব।"
 
 #: tmp/kdump.glade.h:3
-#, fuzzy
 msgid "Memory To Be _Reserved (MB):"
 msgstr "সংৰক্ষণ কৰিবলে মেমৰি (MB) (_R):"
 
@@ -71,14 +70,12 @@ msgid "Usable System Memory (MB):"
 msgstr "ব্যৱহাৰযোগ্য চিস্টেমৰ মেমৰি (MB):"
 
 #: tmp/kdump.glade.h:6
-#, fuzzy
 msgid "_Enable kdump"
-msgstr "kdump সামৰ্থবান কৰিব নে (_E)?"
+msgstr "kdump সামৰ্থবান কৰক (_E)"
 
 #: tmp/kdump.glade.h:7
-#, fuzzy
 msgid "_Enable dump mode fadump"
-msgstr "kdump সামৰ্থবান কৰিব নে (_E)?"
+msgstr "ডাম্প অৱস্থা fadump সামৰ্থবান কৰক (_E)"
 
 #~ msgid "Kdump Memory Reservation:"
 #~ msgstr "Kdump ৰ মেমৰি সংৰক্ষণ:"
@@ -88,39 +85,3 @@ msgstr "kdump সামৰ্থবান কৰিব নে (_E)?"
 
 #~ msgid "_Manual"
 #~ msgstr "হস্তচালিত (_M)"
-
-#~ msgid "%s"
-#~ msgstr "%s"
-
-#~ msgid "Memory Currently Reserved (MB):"
-#~ msgstr "বৰ্তমানে সংৰক্ষিত মেমৰি (MB):"
-
-#~ msgid ""
-#~ "\n"
-#~ "Advanced kdump configuration"
-#~ msgstr ""
-#~ "\n"
-#~ "উন্নত kdump সংৰূপ"
-
-#~ msgid ""
-#~ "Sorry, your system does not have enough memory for kdump to be viable!"
-#~ msgstr "ক্ষমা কৰিব, kdump ফলপ্ৰসু হোৱাৰ বাবে আপোনাৰ চিস্টেমৰ পৰ্যাপ্ত মেমৰি নাই!"
-
-#~ msgid "Sorry, Xen kernels do not support kdump at this time!"
-#~ msgstr "ক্ষমা কৰিব, Xen কাৰ্ণেলসমূহে এই সময়ত kdump সমৰ্থন নকৰে!"
-
-#~ msgid "Sorry, the %s architecture does not support kdump at this time!"
-#~ msgstr "ক্ষমা কৰিব, %s স্থাপত্যই এই সময়ত kdump ৰ সমৰ্থন নকৰে!"
-
-#~ msgid ""
-#~ "Changing Kdump settings requires rebooting the system to reallocate "
-#~ "memory accordingly. Would you like to continue with this change and "
-#~ "reboot the system after firstboot is complete?"
-#~ msgstr ""
-#~ "Kdump ৰ পছন্দৰ সলনি কৰিলে চিস্টেম পুনাৰম্ভ কৰাৰ প্ৰয়োজন যাতে মেমৰি আবন্টন কৰিব "
-#~ "পাৰি। আপুনি এই সলনিৰ সৈতে আগবাঢ়ি firstboot সম্পূৰ্ণ হোৱাৰ পিছত চিস্টেম পুনাৰম্ভ "
-#~ "কৰিব খোজে নে?"
-
-#~ msgid "Error! No bootloader config file found, aborting configuration!"
-#~ msgstr ""
-#~ "ত্ৰুটি! বুটল'ডাৰৰ কোনো বিন্যাস ফাইল পোৱা নগ'ল, বিন্যাস কৰা বাতিল কৰা হৈছে!"

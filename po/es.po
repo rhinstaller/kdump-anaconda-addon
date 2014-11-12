@@ -6,12 +6,13 @@
 #
 # Gladys Guerrero <gguerrer@redhat.com>, 2010.
 # gguerrer <gguerrer@redhat.com>, 2013. #zanata
+# gguerrer <gguerrer@redhat.com>, 2014. #zanata
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-17 17:34+0800\n"
-"PO-Revision-Date: 2013-12-01 07:35-0500\n"
+"POT-Creation-Date: 2014-11-12 16:19+0800\n"
+"PO-Revision-Date: 2014-11-04 12:56-0500\n"
 "Last-Translator: gguerrer <gguerrer@redhat.com>\n"
 "Language-Team: Spanish <en@li.org>\n"
 "Language: es\n"
@@ -19,35 +20,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Spanish\n"
-"X-Generator: Zanata 3.1.2\n"
+"X-Generator: Zanata 3.5.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: ../com_redhat_kdump/ks/kdump.py:119
+#: ../com_redhat_kdump/ks/kdump.py:120
 #, python-format
 msgid "Invalid value %s for --reserve-mb"
-msgstr ""
+msgstr "Valor no válido %s para --reserve-mb"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:56
+#: ../com_redhat_kdump/tui/spokes/kdump.py:57
 msgid "Kdump"
 msgstr "Kdump"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:84
-#: ../com_redhat_kdump/gui/spokes/kdump.py:130
+#: ../com_redhat_kdump/tui/spokes/kdump.py:85
+#: ../com_redhat_kdump/gui/spokes/kdump.py:131
 msgid "Kdump is enabled"
-msgstr ""
+msgstr "Kdump está habilitado"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:86
-#: ../com_redhat_kdump/gui/spokes/kdump.py:132
+#: ../com_redhat_kdump/tui/spokes/kdump.py:87
+#: ../com_redhat_kdump/gui/spokes/kdump.py:133
 msgid "Kdump is disabled"
-msgstr ""
+msgstr "Kdump esta inhabilitado"
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:46
+#: ../com_redhat_kdump/gui/spokes/kdump.py:47
 msgid "_KDUMP"
-msgstr ""
+msgstr "_KDUMP"
 
 #: tmp/kdump.glade.h:1
 msgid "KDUMP"
-msgstr ""
+msgstr "KDUMP"
 
 #: tmp/kdump.glade.h:2
 msgid ""
@@ -63,7 +64,6 @@ msgstr ""
 "disponible para otros usos."
 
 #: tmp/kdump.glade.h:3
-#, fuzzy
 msgid "Memory To Be _Reserved (MB):"
 msgstr "Memoria que va a ser _Reservada (MB):"
 
@@ -76,14 +76,12 @@ msgid "Usable System Memory (MB):"
 msgstr "Memoria del sistema utilizable (MB):"
 
 #: tmp/kdump.glade.h:6
-#, fuzzy
 msgid "_Enable kdump"
-msgstr "_Habilitar kdump?"
+msgstr "_Habilitar kdump"
 
 #: tmp/kdump.glade.h:7
-#, fuzzy
 msgid "_Enable dump mode fadump"
-msgstr "_Habilitar kdump?"
+msgstr "_Habilitar modo de volcado fadump"
 
 #~ msgid "Kdump Memory Reservation:"
 #~ msgstr "Reserva de memoria de Kdump (MB):"
@@ -93,44 +91,3 @@ msgstr "_Habilitar kdump?"
 
 #~ msgid "_Manual"
 #~ msgstr "_Manual"
-
-#~ msgid "%s"
-#~ msgstr "%s"
-
-#~ msgid "Memory Currently Reserved (MB):"
-#~ msgstr "Memoria reservada actualmente (MB):"
-
-#~ msgid ""
-#~ "\n"
-#~ "Advanced kdump configuration"
-#~ msgstr ""
-#~ "\n"
-#~ "Configuración avanzada de Kdump "
-
-#~ msgid ""
-#~ "Sorry, your system does not have enough memory for kdump to be viable!"
-#~ msgstr ""
-#~ "Lamentablemente su sistema no tiene memoria suficiente para usar kdump."
-
-#~ msgid "Sorry, Xen kernels do not support kdump at this time!"
-#~ msgstr ""
-#~ "¡Lo siento, los kernel Xen no ofrecen soporte a kdump en este momento!"
-
-#~ msgid "Sorry, the %s architecture does not support kdump at this time!"
-#~ msgstr ""
-#~ "Lamentablemente la arquitectura %s no tiene soporte para kdump en este "
-#~ "momento."
-
-#~ msgid ""
-#~ "Changing Kdump settings requires rebooting the system to reallocate "
-#~ "memory accordingly. Would you like to continue with this change and "
-#~ "reboot the system after firstboot is complete?"
-#~ msgstr ""
-#~ "El cambio de la configuración de Kdump requiere reiniciar el sistema para "
-#~ "reasignar memoria de forma apropiada. ¿Desea continuar con este cambio y "
-#~ "reiniciar el sistema cuando se complete el primer arranque ?"
-
-#~ msgid "Error! No bootloader config file found, aborting configuration!"
-#~ msgstr ""
-#~ "¡Error! No se encontró el archivo de configuración del cargador de "
-#~ "arranque, ¡abortando la configuración!"

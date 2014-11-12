@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-17 17:34+0800\n"
+"POT-Creation-Date: 2014-11-12 16:19+0800\n"
 "PO-Revision-Date: 2007-04-24 10:50-0400\n"
 "Last-Translator: Richard Allen <ra@ra.is>\n"
 "Language-Team: is <kde-isl@molar.is>\n"
@@ -17,26 +17,26 @@ msgstr ""
 "X-Generator: Zanata 2.0.2\n"
 "Plural-Forms: nplurals=2; plural=(n%10!=1 || n%100==11)\n"
 
-#: ../com_redhat_kdump/ks/kdump.py:119
+#: ../com_redhat_kdump/ks/kdump.py:120
 #, python-format
 msgid "Invalid value %s for --reserve-mb"
 msgstr ""
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:56
+#: ../com_redhat_kdump/tui/spokes/kdump.py:57
 msgid "Kdump"
 msgstr "Kdump"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:84
-#: ../com_redhat_kdump/gui/spokes/kdump.py:130
+#: ../com_redhat_kdump/tui/spokes/kdump.py:85
+#: ../com_redhat_kdump/gui/spokes/kdump.py:131
 msgid "Kdump is enabled"
 msgstr ""
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:86
-#: ../com_redhat_kdump/gui/spokes/kdump.py:132
+#: ../com_redhat_kdump/tui/spokes/kdump.py:87
+#: ../com_redhat_kdump/gui/spokes/kdump.py:133
 msgid "Kdump is disabled"
 msgstr ""
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:46
+#: ../com_redhat_kdump/gui/spokes/kdump.py:47
 msgid "_KDUMP"
 msgstr ""
 

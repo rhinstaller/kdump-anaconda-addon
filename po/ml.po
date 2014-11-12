@@ -1,51 +1,52 @@
 # translation of ml.po to Malayalam
-# translation of ml.po to
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
+# Ani Peter <apeter@redhat.com>, 2007.
+# translation of ml.po to
 # Ani Peter <apeter@redhat.com>, 2007, 2010.
-# anipeter <anipeter@fedoraproject.org>, 2012. #zanata
+# apeter <apeter@redhat.com>, 2014. #zanata
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-17 17:34+0800\n"
-"PO-Revision-Date: 2012-12-13 03:50-0500\n"
-"Last-Translator: anipeter <anipeter@fedoraproject.org>\n"
+"POT-Creation-Date: 2014-11-12 16:19+0800\n"
+"PO-Revision-Date: 2014-11-04 01:20-0500\n"
+"Last-Translator: apeter <apeter@redhat.com>\n"
 "Language-Team: Malayalam <smc-discuss@googlegorups.com>\n"
 "Language: ml\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Zanata 2.0.2\n"
+"X-Generator: Zanata 3.5.1\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: ../com_redhat_kdump/ks/kdump.py:119
+#: ../com_redhat_kdump/ks/kdump.py:120
 #, python-format
 msgid "Invalid value %s for --reserve-mb"
-msgstr ""
+msgstr "--reserve-mb-നു്  %s എന്ന അസാധു മൂല്ല്യം"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:56
+#: ../com_redhat_kdump/tui/spokes/kdump.py:57
 msgid "Kdump"
 msgstr "Kdump"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:84
-#: ../com_redhat_kdump/gui/spokes/kdump.py:130
+#: ../com_redhat_kdump/tui/spokes/kdump.py:85
+#: ../com_redhat_kdump/gui/spokes/kdump.py:131
 msgid "Kdump is enabled"
-msgstr ""
+msgstr "Kdump പ്രവര്‍ത്തന സജ്ജമാക്കിയിരിയ്ക്കുന്നു"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:86
-#: ../com_redhat_kdump/gui/spokes/kdump.py:132
+#: ../com_redhat_kdump/tui/spokes/kdump.py:87
+#: ../com_redhat_kdump/gui/spokes/kdump.py:133
 msgid "Kdump is disabled"
-msgstr ""
+msgstr "Kdump പ്രവര്‍ത്തന രഹിതമാക്കിയിരിയ്ക്കുന്നു"
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:46
+#: ../com_redhat_kdump/gui/spokes/kdump.py:47
 msgid "_KDUMP"
-msgstr ""
+msgstr "_KDUMP"
 
 #: tmp/kdump.glade.h:1
 msgid "KDUMP"
-msgstr ""
+msgstr "KDUMP"
 
 #: tmp/kdump.glade.h:2
 msgid ""
@@ -59,7 +60,6 @@ msgstr ""
 "ഉപയോക്താക്കള്‍ക്കു് ലഭ്യമല്ലാത്ത സിസ്റ്റത്തിന്റെ ഒരു ഭാഗം മെമ്മറി kdump-നു് ആവശ്യമുണ്ട്."
 
 #: tmp/kdump.glade.h:3
-#, fuzzy
 msgid "Memory To Be _Reserved (MB):"
 msgstr "കരുതിവയ്ക്കേണ്ട മെമ്മറി (MB) :"
 
@@ -72,14 +72,12 @@ msgid "Usable System Memory (MB):"
 msgstr "സിസ്റ്റത്തില്‍ ഉപയോഗപ്രദമായ മെമ്മറി (MB):"
 
 #: tmp/kdump.glade.h:6
-#, fuzzy
 msgid "_Enable kdump"
-msgstr "kdump പ്രവര്‍ത്തന സജ്ജമാക്കണമോ (_E)?"
+msgstr "kdump പ്ര_വര്‍ത്തന സജ്ജമാക്കൂ"
 
 #: tmp/kdump.glade.h:7
-#, fuzzy
 msgid "_Enable dump mode fadump"
-msgstr "kdump പ്രവര്‍ത്തന സജ്ജമാക്കണമോ (_E)?"
+msgstr "fadump എന്ന ഡമ്പ് മോഡ് പ്ര_വര്‍ത്തന സജ്ജമാക്കൂ"
 
 #~ msgid "Kdump Memory Reservation:"
 #~ msgstr "Kdump മെമ്മറി കരുതല്‍:"
@@ -89,38 +87,3 @@ msgstr "kdump പ്രവര്‍ത്തന സജ്ജമാക്കണ�
 
 #~ msgid "_Manual"
 #~ msgstr "_മാനുവല്‍"
-
-#~ msgid "%s"
-#~ msgstr "%s"
-
-#~ msgid "Memory Currently Reserved (MB):"
-#~ msgstr "നിലവില്‍ സൂക്ഷിച്ചിട്ടുള്ള മെമ്മറി (MB) :"
-
-#~ msgid ""
-#~ "\n"
-#~ "Advanced kdump configuration"
-#~ msgstr ""
-#~ "\n"
-#~ "മെച്ചപ്പെട്ട kdump ക്രമീകരണം"
-
-#~ msgid ""
-#~ "Sorry, your system does not have enough memory for kdump to be viable!"
-#~ msgstr "ക്ഷമിക്കണം, നിങ്ങളുടെ സിസ്റ്റത്തില്‍ kdump-നു് ആവശ്യമുളള മെമ്മറി നിലവിലില്ല!"
-
-#~ msgid "Sorry, Xen kernels do not support kdump at this time!"
-#~ msgstr "ക്ഷമിക്കണം, Xen കേര്‍ണലുകള്‍ നിലവില്‍ kdump പിന്തുണയ്ക്കുന്നില്ല!"
-
-#~ msgid "Sorry, the %s architecture does not support kdump at this time!"
-#~ msgstr "ക്ഷമിക്കണം, %s ആര്‍ക്കിടക്ചര്‍ നിലവില്‍ kdump പിന്തുണയ്ക്കുന്നില്ല!"
-
-#~ msgid ""
-#~ "Changing Kdump settings requires rebooting the system to reallocate "
-#~ "memory accordingly. Would you like to continue with this change and "
-#~ "reboot the system after firstboot is complete?"
-#~ msgstr ""
-#~ "Kdump ക്രമീകരണങ്ങളില്‍ മാറ്റം വരുത്തുന്നതിനായി നിങ്ങളുടെ സിസ്റ്റം റീബൂട്ട് ചെയ്തു് മെമ്മറി "
-#~ "സജ്ജീകരണങ്ങള്‍ വീണ്ടും ക്രമപ്പെടുത്തേണ്ടതാകുന്നു. നിങ്ങള്‍ക്ക് ഈ മാറ്റവുമായി മുമ്പോട്ട് പോയി, "
-#~ "ഫസ്റ്റ്ബൂട്ട് പൂര്‍ത്തിയാക്കിയ ശേഷം സിസ്റ്റം വീണ്ടും റീബൂട്ട് ചെയ്യണമോ?"
-
-#~ msgid "Error! No bootloader config file found, aborting configuration!"
-#~ msgstr "പിഴവ്! ബൂട്ട്ലോഡര്‍ ക്രമീകരണ ഫയല്‍ ലഭ്യമായില്ല, ക്രമീകരണം നിര്‍ത്തുന്നു!"

@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # A S Alam <aalam@users.sf.net>, 2007.
+# Jaswinder Singh <jsingh@redhat.com>, 2007.
 # Jaswinder Singh <jsingh@redhat.com>, 2007, 2010, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-17 17:34+0800\n"
+"POT-Creation-Date: 2014-11-12 16:19+0800\n"
 "PO-Revision-Date: 2012-12-13 05:01-0500\n"
 "Last-Translator: Jaswinder Singh <jsingh@redhat.com>\n"
 "Language-Team: Punjabi/Panjabi <kde-i18n-doc@kde.org>\n"
@@ -16,29 +17,29 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Zanata 2.0.2\n"
+"X-Generator: Zanata 3.5.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../com_redhat_kdump/ks/kdump.py:119
+#: ../com_redhat_kdump/ks/kdump.py:120
 #, python-format
 msgid "Invalid value %s for --reserve-mb"
 msgstr ""
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:56
+#: ../com_redhat_kdump/tui/spokes/kdump.py:57
 msgid "Kdump"
 msgstr "ਕੇ-ਡੰਪ"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:84
-#: ../com_redhat_kdump/gui/spokes/kdump.py:130
+#: ../com_redhat_kdump/tui/spokes/kdump.py:85
+#: ../com_redhat_kdump/gui/spokes/kdump.py:131
 msgid "Kdump is enabled"
 msgstr ""
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:86
-#: ../com_redhat_kdump/gui/spokes/kdump.py:132
+#: ../com_redhat_kdump/tui/spokes/kdump.py:87
+#: ../com_redhat_kdump/gui/spokes/kdump.py:133
 msgid "Kdump is disabled"
 msgstr ""
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:46
+#: ../com_redhat_kdump/gui/spokes/kdump.py:47
 msgid "_KDUMP"
 msgstr ""
 
@@ -58,7 +59,6 @@ msgstr ""
 "ਨੂੰ ਸਿਸਟਮ ਮੈਮੋਰੀ ਦਾ ਕੁਝ ਭਾਗ ਰਾਖਵਾਂ ਰੱਖਣਾ ਪੈਂਦਾ ਹੈ ਜੋ ਕਿ ਹੋਰ ਵਰਤੋਂ ਲਈ ਉਪਲੱਬਧ ਨਹੀਂ ਹੋਵੇਗਾ"
 
 #: tmp/kdump.glade.h:3
-#, fuzzy
 msgid "Memory To Be _Reserved (MB):"
 msgstr "ਰਾਖਵੀਂ ਮੈਮੋਰੀ(_R) (MB):"
 
@@ -71,14 +71,12 @@ msgid "Usable System Memory (MB):"
 msgstr "ਵਰਤੋਂ-ਯੋਗ ਸਿਸਟਮ ਮੈਮੋਰੀ (MB):"
 
 #: tmp/kdump.glade.h:6
-#, fuzzy
 msgid "_Enable kdump"
-msgstr "ਕੇ-ਡੰਪ ਯੋਗ ਕਰੋ(_E)?"
+msgstr ""
 
 #: tmp/kdump.glade.h:7
-#, fuzzy
 msgid "_Enable dump mode fadump"
-msgstr "ਕੇ-ਡੰਪ ਯੋਗ ਕਰੋ(_E)?"
+msgstr ""
 
 #~ msgid "Kdump Memory Reservation:"
 #~ msgstr "ਕੇ-ਡੰਪ ਮੈਮੋਰੀ (MB):"
@@ -88,38 +86,3 @@ msgstr "ਕੇ-ਡੰਪ ਯੋਗ ਕਰੋ(_E)?"
 
 #~ msgid "_Manual"
 #~ msgstr "ਦਸਤੀ(_M)"
-
-#~ msgid "%s"
-#~ msgstr "%s"
-
-#~ msgid "Memory Currently Reserved (MB):"
-#~ msgstr "ਮੌਜੂਦਾ ਰਾਖਵੀਂ ਮੈਮੋਰੀ (MB):"
-
-#~ msgid ""
-#~ "\n"
-#~ "Advanced kdump configuration"
-#~ msgstr ""
-#~ "\n"
-#~ "ਤਕਨੀਕੀ ਕੇ-ਡੰਪ ਸੰਰਚਨਾ"
-
-#~ msgid ""
-#~ "Sorry, your system does not have enough memory for kdump to be viable!"
-#~ msgstr "ਅਫਸੋਸ, ਕਿ ਤੁਹਾਡੇ ਸਿਸਟਮ ਉੱਤੇ ਕੇ-ਡੰਪ ਲਈ ਲੋੜੀਦੀ ਮੈਮੋਰੀ ਉਪਲੱਬਧ ਨਹੀਂ ਹੈ!"
-
-#~ msgid "Sorry, Xen kernels do not support kdump at this time!"
-#~ msgstr "ਮੁਆਫ਼ੀ, Xen ਕਰਨਲ ਹਾਲੇ ਕੇ-ਡੰਪ ਲਈ ਸਹਿਯੋਗੀ ਨਹੀਂ ਹਨ!"
-
-#~ msgid "Sorry, the %s architecture does not support kdump at this time!"
-#~ msgstr "ਮੁਆਫੀ, ਕਿ %s ਢਾਂਚਾ ਹਾਲੇ ਕੇ-ਡੰਪ ਲਈ ਸਹਿਯੋਗੀ ਨਹੀਂ ਹੈ!"
-
-#~ msgid ""
-#~ "Changing Kdump settings requires rebooting the system to reallocate "
-#~ "memory accordingly. Would you like to continue with this change and "
-#~ "reboot the system after firstboot is complete?"
-#~ msgstr ""
-#~ "ਕੇ-ਡੰਪ ਦੀ ਸੈਟਿੰਗ ਬਦਲਣ ਨਾਲ ਸਿਸਟਮ ਨੂੰ ਮੁੜ-ਚਾਲ ਕਰਨਾ ਪਵੇਗਾ ਤਾਂ ਕਿ ਮੈਮੋਰੀ ਮੁੜ-ਜਾਰੀ ਕੀਤੀ ਜਾ "
-#~ "ਸਕੇ। %sਕੀ ਤੁਸੀਂ ਇਹ ਤਬਦੀਲੀ ਕਰਨੀ ਚਾਹੁੰਦੇ ਹੋ ਅਤੇ ਸਿਸਟਮ ਫਸਟ-ਬੂਟ ਪੂਰਾ ਹੋਣ ਬਾਅਦ ਮੁੜ-ਚਾਲੂ "
-#~ "ਹੋਵੇਗਾ?"
-
-#~ msgid "Error! No bootloader config file found, aborting configuration!"
-#~ msgstr "ਗਲਤੀ! ਬੂਟ-ਲੋਡਰ ਸੰਰਚਨਾ ਨਹੀਂ ਮਿਲੀ ਹੈ, ਸੰਰਚਨਾ ਅਧੂਰੀ ਛੱਡੀ ਜਾਂਦੀ ਹੈ!"
