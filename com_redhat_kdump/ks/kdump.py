@@ -88,7 +88,7 @@ class KdumpData(AddonData):
         if self.enabled:
             storage.bootloader.boot_args.add('crashkernel=%s' % self.reserveMB)
             ksdata.packages.packageList.append("kexec-tools")
-	    if self.enablefadump and os.path.exists(FADUMP_CAPABLE_FILE):
+        if self.enablefadump and os.path.exists(FADUMP_CAPABLE_FILE):
                 storage.bootloader.boot_args.add('fadump=on')
 
     def handle_header(self, lineno, args):
