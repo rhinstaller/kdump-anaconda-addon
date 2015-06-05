@@ -25,6 +25,7 @@ import os.path
 import re
 
 from pyanaconda.flags import flags
+from pyanaconda.ui.categories.system import SystemCategory
 from pyanaconda.ui.tui.spokes import EditTUISpoke
 from pyanaconda.ui.tui.spokes import EditTUISpokeEntry as Entry
 from com_redhat_kdump.common import getMemoryBounds
@@ -56,7 +57,7 @@ RESERVE_VALID = _re(r'^((auto)|(\d+M?))$', lower, upper)
 
 class KdumpSpoke(EditTUISpoke):
     title = N_("Kdump")
-    category = "system"
+    category = SystemCategory
 
     edit_fields = [
         Entry("Enable kdump", "enabled", EditTUISpoke.CHECK, True),
