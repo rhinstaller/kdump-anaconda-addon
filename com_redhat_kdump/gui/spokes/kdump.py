@@ -44,7 +44,7 @@ class KdumpSpoke(NormalSpoke):
     helpFile = "KdumpSpoke.xml"
     translationDomain = "kdump-anaconda-addon"
 
-    icon = "computer-fail-symbolic"
+    icon = "kdump"
     title = N_("_KDUMP")
     category = SystemCategory
 
