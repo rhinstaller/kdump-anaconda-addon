@@ -10,6 +10,7 @@ FILES = $(ADDON) \
 	po \
 	Makefile \
 	README \
+	kdump.svg \
 	version.sh
 
 EXCLUDES = \
@@ -26,10 +27,13 @@ DISTNAME = $(NAME)-$(VERSION)
 ADDONDIR = /usr/share/anaconda/addons/
 DISTBALL = $(DISTNAME).tar.gz
 NUM_PROCS = $$(getconf _NPROCESSORS_ONLN)
+ICONDIR = /usr/share/icons/hicolor/scalable/apps/
 
 install: version.sh
 	mkdir -p $(DESTDIR)$(ADDONDIR)
+	mkdir -p $(DESTDIR)$(ICONDIR)
 	cp -rv $(ADDON) $(DESTDIR)$(ADDONDIR)
+	install -c -m 644 kdump.svg $(DESTDIR)$(ICONDIR)
 	$(MAKE) install-po-files
 
 uninstall:

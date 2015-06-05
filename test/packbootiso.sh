@@ -28,6 +28,7 @@ mkdir -p mnt/usr/share/anaconda/addons
 rm -rf mnt/usr/share/anaconda/addons/com_redhat_kdump
 find mnt/ -name kdump-anaconda-addon.mo -exec rm -f {} \;
 cp -aRf kdump-anaconda-addon/com_redhat_kdump mnt/usr/share/anaconda/addons/
+cp -a kdump-anaconda-addon/kdump.svg mnt/usr/share/icons/hicolor/scalable/apps/
 make -C kdump-anaconda-addon/po install DESTDIR=../../mnt
 umount mnt
 rm -rf kdump-anaconda-addon
