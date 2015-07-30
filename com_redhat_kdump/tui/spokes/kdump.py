@@ -35,13 +35,12 @@ from com_redhat_kdump.constants import FADUMP_CAPABLE_FILE
 __all__ = ["KdumpSpoke"]
 
 class _re:
-    def __init__(self, patten, low, up):
+    def __init__(self, patten):
         self.re = re.compile(patten)
-        self.low = low
-        self.up = up
 
     def match(self, key):
         if self.re.match(key):
+            self.low, self.up, self.step = getMemoryBounds()
             if key == "auto":
                 return True
             if key[-1] == 'M':
@@ -51,9 +50,8 @@ class _re:
                 return True
         return False
 
-lower, upper ,step = getMemoryBounds()
 # Allow either "auto" or a string of digits optionally followed by 'M'
-RESERVE_VALID = _re(r'^((auto)|(\d+M?))$', lower, upper)
+RESERVE_VALID = _re(r'^((auto)|(\d+M?))$')
 
 class KdumpSpoke(EditTUISpoke):
     title = N_("Kdump")
