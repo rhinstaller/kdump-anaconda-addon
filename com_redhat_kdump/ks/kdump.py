@@ -54,10 +54,10 @@ class KdumpData(AddonData):
         if self.reserveMB:
             addon_str += " --reserve-mb='%s'" % self.reserveMB
 
-        addon_str += "\n%s\n%%end\n" % self.content.strip()
-
         if self.enablefadump:
             addon_str += " --enablefadump"
+
+        addon_str += "\n%s\n%%end\n" % self.content.strip()
 
         return addon_str
 
