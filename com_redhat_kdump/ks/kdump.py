@@ -55,7 +55,7 @@ class KdumpData(AddonData):
 
         return addon_str
 
-    def setup(self, storage, ksdata, instClass):
+    def setup(self, storage, ksdata, instClass, payload):
         # the kdump addon should run only if requested
         if not flags.cmdline.getbool("kdump_addon", default=True):
             return
@@ -118,7 +118,7 @@ class KdumpData(AddonData):
         self.enabled = opts.enabled
         self.reserveMB =opts.reserveMB
 
-    def execute(self, storage, ksdata, instClass, users):
+    def execute(self, storage, ksdata, instClass, users, payload):
         # the KdumpSpoke should run only if requested
         if not flags.cmdline.getbool("kdump_addon", default=True):
             return
