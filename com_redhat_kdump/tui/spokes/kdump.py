@@ -54,11 +54,11 @@ RESERVE_VALID = _re(r'^(\d+M?)$')
 class KdumpSpoke(EditTUISpoke):
     title = N_("Kdump")
     category = SystemCategory
-
+    lower, upper ,_step = getMemoryBounds()
     edit_fields = [
         Entry("Enable kdump", "enabled", EditTUISpoke.CHECK, True),
         Entry("Enable dump mode fadump", "enablefadump", EditTUISpoke.CHECK, os.path.exists(FADUMP_CAPABLE_FILE) and (lambda self,args: args.enabled)),
-        Entry("Reserve amount(MB)", "reserveMB", RESERVE_VALID, lambda self,args: args.enabled)
+        Entry("Reserve amount (%d - %d MB)" % (lower, upper), "reserveMB", RESERVE_VALID, lambda self,args: args.enabled)
         ]
 
     @classmethod
