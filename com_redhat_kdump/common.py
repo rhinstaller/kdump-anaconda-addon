@@ -19,11 +19,10 @@
 # Red Hat Author(s): David Shea <dshea@redhat.com>
 #
 import os
+import re
 __all__ = ["getReservedMemory", "getTotalMemory", "getMemoryBounds"]
 
 import blivet.arch
-
-from pyanaconda.isys import total_memory
 
 _reservedMemory = None
 def getReservedMemory():
@@ -47,9 +46,14 @@ def getTotalMemory():
        This is the amount reported by /proc/meminfo plus the aount
        currently reserved for kdump.
     """
+    memkb = 0
+    fd = open('/proc/meminfo').read()
+    matched = re.search(r'^MemTotal:\s+(\d+)', fd)
+    if matched:
+        memkb = int(matched.groups()[0])
 
     # total_memory return memory in KB, convert to MB
-    availMem = total_memory() / 1024
+    availMem = memkb / 1024
 
     return availMem + getReservedMemory()
 
