@@ -133,7 +133,7 @@ class KdumpSpoke(NormalSpoke):
         else:
             state = _("Kdump is disabled")
 
-        return state
+        return state.decode()
 
     # SIGNAL HANDLERS
     def on_enable_kdump_toggled(self, checkbutton, user_data=None):
