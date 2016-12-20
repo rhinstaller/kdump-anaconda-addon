@@ -23,5 +23,5 @@ __all__ = ["_", "N_"]
 
 import gettext
 
-_ = lambda x: gettext.ldgettext("kdump-anaconda-addon", x)
+_ = lambda x: gettext.translation("kdump-anaconda-addon", fallback=True).gettext(x) if x != "" else ""
 N_ = lambda x: x
