@@ -81,3 +81,15 @@ def getMemoryBounds():
         upperBound = lowerBound = 0
 
     return (lowerBound, upperBound, step)
+
+def crashkernel_auto():
+    _arch=blivet.arch.getArch()
+    if _arch == 'ppc64' or _arch == 'ppc64le':
+        crashkernel_args='2G-4G:384M,4G-16G:512M,16G-64G:1G,64G-128G:2G,128G-:4G'
+    elif _arch == 's390x':
+        crashkernel_args='4G-:160M'
+    elif _arch == 'aarch64':
+        crashkernel_args='2G-:512M'
+    else:
+        crashkernel_args='2G-:160M'
+    return crashkernel_args

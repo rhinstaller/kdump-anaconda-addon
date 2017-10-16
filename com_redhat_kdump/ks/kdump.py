@@ -26,7 +26,7 @@ from pyanaconda.flags import flags
 
 from pykickstart.options import KSOptionParser
 from pykickstart.errors import KickstartParseError, formatErrorMsg
-from com_redhat_kdump.common import getMemoryBounds
+from com_redhat_kdump.common import getMemoryBounds, crashkernel_auto
 from com_redhat_kdump.i18n import _
 from com_redhat_kdump.constants import FADUMP_CAPABLE_FILE
 
@@ -62,6 +62,8 @@ class KdumpData(AddonData):
         return addon_str
 
     def setup(self, storage, ksdata, instClass, payload):
+        crashkernel_arg = crashkernel_auto()
+
         # the kdump addon should run only if requested
         if not flags.cmdline.getbool("kdump_addon", default=True):
             return
@@ -77,7 +79,10 @@ class KdumpData(AddonData):
             # Ensure that the amount is "auto" or an amount in MB
             if self.reserveMB != "auto" and self.reserveMB[-1] != 'M':
                 self.reserveMB += 'M'
-            ksdata.bootloader.appendLine += ' crashkernel=%s' % self.reserveMB
+            if self.reserveMB == "auto":
+                ksdata.bootloader.appendLine += ' crashkernel=%s' % crashkernel_arg
+            else:
+                ksdata.bootloader.appendLine += ' crashkernel=%s' % self.reserveMB
 
         # Do the same thing with the storage.bootloader.boot_args set
         if storage.bootloader.boot_args:
@@ -86,7 +91,10 @@ class KdumpData(AddonData):
             storage.bootloader.boot_args -= set(crashargs)
 
         if self.enabled:
-            storage.bootloader.boot_args.add('crashkernel=%s' % self.reserveMB)
+            if self.reserveMB == "auto":
+                storage.bootloader.boot_args.add('crashkernel=%s' % crashkernel_arg)
+            else:
+                storage.bootloader.boot_args.add('crashkernel=%s' % self.reserveMB)
             ksdata.packages.packageList.append("kexec-tools")
 	    if self.enablefadump and os.path.exists(FADUMP_CAPABLE_FILE):
                 storage.bootloader.boot_args.add('fadump=on')
