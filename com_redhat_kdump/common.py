@@ -84,6 +84,10 @@ def getMemoryBounds():
 
 def crashkernel_auto():
     _arch=blivet.arch.getArch()
+    _kver=os.uname()[2]
+
+    if _kver < '4.14.0':
+        return 'auto'
     if _arch == 'ppc64' or _arch == 'ppc64le':
         crashkernel_args='2G-4G:384M,4G-16G:512M,16G-64G:1G,64G-128G:2G,128G-:4G'
     elif _arch == 's390x':
