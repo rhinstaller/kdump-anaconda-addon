@@ -26,6 +26,7 @@ from pyanaconda.flags import flags
 
 from pykickstart.options import KSOptionParser
 from pykickstart.errors import KickstartParseError, formatErrorMsg
+from pykickstart.version import F27
 from com_redhat_kdump.common import getMemoryBounds
 from com_redhat_kdump.i18n import _
 from com_redhat_kdump.constants import FADUMP_CAPABLE_FILE
@@ -92,17 +93,18 @@ class KdumpData(AddonData):
                 storage.bootloader.boot_args.add('fadump=on')
 
     def handle_header(self, lineno, args):
-        op = KSOptionParser()
-        op.add_option("--enable", action="store_true", default=True,
-                dest="enabled", help="Enable kdump")
-        op.add_option("--enablefadump", action="store_true", default=False,
-                dest="enablefadump", help="Enable dump mode fadump")
-        op.add_option("--disable", action="store_false",
-                dest="enabled", help="Disable kdump")
-        op.add_option("--reserve-mb", type="string", dest="reserveMB",
-                default="auto", help="Amount of memory in MB to reserve for kdump, or auto")
+        op = KSOptionParser(prog="addon com_redhat_kdump", version=F27,
+                            description="Configure the Kdump Addon.")
+        op.add_argument("--enable", action="store_true", default=True,
+                version=F27, dest="enabled", help="Enable kdump")
+        op.add_argument("--enablefadump", action="store_true", default=False,
+                version=F27, dest="enablefadump", help="Enable dump mode fadump")
+        op.add_argument("--disable", action="store_false",
+                version=F27, dest="enabled", help="Disable kdump")
+        op.add_argument("--reserve-mb", type=str, dest="reserveMB",
+                version=F27, default="128", help="Amount of memory in MB to reserve for kdump.")
 
-        (opts, extra) = op.parse_args(args=args, lineno=lineno)
+        (opts, extra) = op.parse_known_args(args=args, lineno=lineno)
 
         # Reject any additional arguments
         if extra:
