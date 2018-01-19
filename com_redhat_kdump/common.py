@@ -18,7 +18,6 @@
 #
 # Red Hat Author(s): David Shea <dshea@redhat.com>
 #
-import os
 import re
 __all__ = ["getReservedMemory", "getTotalMemory", "getMemoryBounds"]
 

@@ -125,7 +125,7 @@ class KdumpData(AddonData):
 
         # Store the parsed arguments
         self.enabled = opts.enabled
-        self.reserveMB =opts.reserveMB
+        self.reserveMB = opts.reserveMB
         self.enablefadump = opts.enablefadump
 
     def execute(self, storage, ksdata, instClass, users, payload):
