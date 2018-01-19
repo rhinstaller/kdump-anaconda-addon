@@ -21,7 +21,7 @@
 
 import os.path
 from pyanaconda.addons import AddonData
-from pyanaconda import iutil
+from pyanaconda.core import util
 from pyanaconda.flags import flags
 
 from pykickstart.options import KSOptionParser
@@ -138,4 +138,4 @@ class KdumpData(AddonData):
         else:
             action = "disable"
 
-        iutil.execWithRedirect("systemctl", [action, "kdump.service"], root=iutil.getSysroot())
+        util.execWithRedirect("systemctl", [action, "kdump.service"], root=util.getSysroot())
