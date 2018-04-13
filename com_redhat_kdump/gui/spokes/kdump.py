@@ -167,7 +167,7 @@ class KdumpSpoke(NormalSpoke):
         if not status:
             self._fadumpButton.set_active(False)
 
-	if status:
+        if status:
                 self._autoButton.emit("toggled")
 
 
