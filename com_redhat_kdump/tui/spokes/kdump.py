@@ -54,7 +54,6 @@ class _re:
 RESERVE_VALID = _re(r'^((auto)|(\d+M?))$')
 
 class KdumpSpoke(EditTUISpoke):
-    title = N_("Kdump")
     category = SystemCategory
     lower, upper, _step = getMemoryBounds()
     edit_fields = [
@@ -71,6 +70,7 @@ class KdumpSpoke(EditTUISpoke):
     def __init__(self, data, storage, payload, instclass):
         EditTUISpoke.__init__(self, data, storage, payload, instclass)
         self.args = self.data.addons.com_redhat_kdump
+        self.title = N_("Kdump")
 
     def apply(self):
         pass
