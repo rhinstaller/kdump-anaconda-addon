@@ -56,7 +56,7 @@ RESERVE_VALID = _re(r'^((auto)|(\d+M?))$')
 class KdumpSpoke(EditTUISpoke):
     title = N_("Kdump")
     category = SystemCategory
-    lower, upper ,_step = getMemoryBounds()
+    lower, upper, _step = getMemoryBounds()
     edit_fields = [
         Entry("Enable kdump", "enabled", EditTUISpoke.CHECK, True),
         Entry("Enable dump mode fadump", "enablefadump", EditTUISpoke.CHECK, os.path.exists(FADUMP_CAPABLE_FILE) and (lambda self,args: args.enabled)),
@@ -68,8 +68,8 @@ class KdumpSpoke(EditTUISpoke):
         # the KdumpSpoke should run only if requested
         return flags.cmdline.getbool("kdump_addon", default=True)
 
-    def __init__(self, app, data, storage, payload, instclass):
-        EditTUISpoke.__init__(self, app, data, storage, payload, instclass)
+    def __init__(self, data, storage, payload, instclass):
+        EditTUISpoke.__init__(self, data, storage, payload, instclass)
         self.args = self.data.addons.com_redhat_kdump
 
     def apply(self):
