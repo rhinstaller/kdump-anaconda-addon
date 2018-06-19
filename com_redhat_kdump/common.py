@@ -64,14 +64,19 @@ def getMemoryBounds():
     """
 
     totalMemory = getTotalMemory()
+    arch = blivet.arch.get_arch()
 
-    if blivet.arch.get_arch() == 'ppc64':
-        lowerBound = 256
+    if arch.startswith('ppc64'):
+        lowerBound = 384
         minUsable = 1024
         step = 1
+    elif arch == 'aarch64':
+        lowerBound = 512
+        minUsable = 512
+        step = 1
     else:
-        lowerBound = 128
-        minUsable = 256
+        lowerBound = 160
+        minUsable = 512
         step = 1
 
     upperBound = (totalMemory - minUsable) - (totalMemory % step)
