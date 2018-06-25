@@ -23,6 +23,8 @@ import os.path
 from pyanaconda.addons import AddonData
 from pyanaconda.core import util
 from pyanaconda.flags import flags
+from pyanaconda.modules.common.constants.services import STORAGE
+from pyanaconda.modules.common.constants.objects import BOOTLOADER
 
 from pykickstart.options import KSOptionParser
 from pykickstart.errors import KickstartParseError, formatErrorMsg
@@ -67,18 +69,21 @@ class KdumpData(AddonData):
         if not flags.cmdline.getbool("kdump_addon", default=True):
             return
 
+        bootloader_proxy = STORAGE.get_proxy(BOOTLOADER)
+
         # Clear any existing crashkernel bootloader arguments
-        if ksdata.bootloader.appendLine:
-            ksdata.bootloader.appendLine = ' '.join(
-                    (arg for arg in ksdata.bootloader.appendLine.split() \
-                            if not arg.startswith('crashkernel=')))
+        extra_args = bootloader_proxy.ExtraArguments
+        new_args = [arg for arg in extra_args
+                    if not arg.startswith('crashkernel=')]
 
         # Copy our reserved amount to the bootloader arguments
         if self.enabled:
             # Ensure that the amount is "auto" or an amount in MB
             if self.reserveMB != "auto" and self.reserveMB[-1] != 'M':
                 self.reserveMB += 'M'
-            ksdata.bootloader.appendLine += ' crashkernel=%s' % self.reserveMB
+            new_args.append(' crashkernel=%s' % self.reserveMB)
+
+        bootloader_proxy.SetExtraArguments(new_args)
 
         # Do the same thing with the storage.bootloader.boot_args set
         if storage.bootloader.boot_args:
