@@ -138,12 +138,9 @@ class KdumpData(AddonData):
 
     def execute(self, storage, ksdata, instClass, users, payload):
         # the KdumpSpoke should run only if requested
-        if not flags.cmdline.getbool("kdump_addon", default=True):
+        if not flags.cmdline.getbool("kdump_addon", default=True) or not self.enabled:
             return
 
-        if self.enabled:
-            action = "enable"
-        else:
-            action = "disable"
+        action = "enable"
 
         util.execWithRedirect("systemctl", [action, "kdump.service"], root=util.getSysroot())
