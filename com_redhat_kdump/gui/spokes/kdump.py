@@ -41,7 +41,7 @@ class KdumpSpoke(NormalSpoke):
     builderObjects = ["KdumpWindow", "advancedConfigBuffer"]
     mainWidgetName = "KdumpWindow"
     uiFile = "kdump.glade"
-    helpFile = "KdumpSpoke.xml"
+    help_id = "KdumpSpoke"
     translationDomain = "kdump-anaconda-addon"
 
     icon = "kdump"

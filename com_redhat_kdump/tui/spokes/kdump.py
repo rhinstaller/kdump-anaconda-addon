@@ -39,6 +39,7 @@ __all__ = ["KdumpSpoke"]
 
 class KdumpSpoke(NormalTUISpoke):
     category = SystemCategory
+    help_id = "KdumpSpoke"
 
     def __init__(self, data, storage, payload, instclass):
         super().__init__(data, storage, payload, instclass)
