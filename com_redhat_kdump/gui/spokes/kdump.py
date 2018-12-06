@@ -53,8 +53,8 @@ class KdumpSpoke(NormalSpoke):
         # the KdumpSpoke should run only if requested
         return kernel_arguments.get("kdump_addon", default=True) not in ["0", "off", False]
 
-    def __init__(self, data, storage, payload, instclass):
-        NormalSpoke.__init__(self, data, storage, payload, instclass)
+    def __init__(self, *args):
+        NormalSpoke.__init__(self, *args)
         self._reserveMem = 0
 
     def initialize(self):

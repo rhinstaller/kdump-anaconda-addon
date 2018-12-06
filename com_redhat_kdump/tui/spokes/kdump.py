@@ -41,8 +41,8 @@ class KdumpSpoke(NormalTUISpoke):
     category = SystemCategory
     help_id = "KdumpSpoke"
 
-    def __init__(self, data, storage, payload, instclass):
-        super().__init__(data, storage, payload, instclass)
+    def __init__(self, *args):
+        super().__init__(*args)
         self.title = N_("Kdump")
         self._addon_data = self.data.addons.com_redhat_kdump
 
