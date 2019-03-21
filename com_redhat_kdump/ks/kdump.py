@@ -117,7 +117,8 @@ class KdumpData(AddonData):
 
         # Validate the reserve-mb argument
         # Allow a final 'M' for consistency with the crashkernel kernel
-        # parameter. Strip it if found.
+        # parameter. Strip it if found. And strip quotes.
+        opts.reserveMB = opts.reserveMB.strip("'\"")
         if opts.reserveMB and opts.reserveMB[-1] == 'M':
             opts.reserveMB = opts.reserveMB[:-1]
 
