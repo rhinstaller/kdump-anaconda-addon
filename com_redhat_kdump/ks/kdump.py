@@ -116,6 +116,7 @@ class KdumpData(AddonData):
             AddonData.handle_header(self, lineno, extra)
 
         # Validate the reserve-mb argument
+        opts.reserveMB = opts.reserveMB.strip("'\"")
         if opts.reserveMB != "auto":
             # Allow a final 'M' for consistency with the crashkernel kernel
             # parameter. Strip it if found.
