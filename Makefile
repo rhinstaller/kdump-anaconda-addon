@@ -77,14 +77,14 @@ test:
 	@find . -name '*.py' -print|xargs -n1 --max-procs=$(NUM_PROCS) pylint -E 2> /dev/null
 	@echo "[ OK ]"
 	@echo "***Running unittests checks***"
-	@PYTHONPATH=. nosetests --processes=-1 -vw tests/
+	@PYTHONPATH=. python3 -m nose --processes=-1 -vw test/unittests
 
 runpylint:
 	@find . -name '*.py' -print|xargs -n1 --max-procs=$(NUM_PROCS) pylint -E 2> /dev/null
 	@echo "[ OK ]"
 
 unittest:
-	PYTHONPATH=. nosetests --processes=-1 -vw tests/
+	PYTHONPATH=. python3 -m nose --processes=-1 -vw test/unittests
 
 version.sh:
 	@echo "KDUMP_ADDON_VERSION=$(VERSION)" > version.sh
