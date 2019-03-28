@@ -26,7 +26,6 @@ all:
 DISTNAME = $(NAME)-$(VERSION)
 ADDONDIR = /usr/share/anaconda/addons/
 DISTBALL = $(DISTNAME).tar.gz
-NUM_PROCS = $$(getconf _NPROCESSORS_ONLN)
 ICONDIR = /usr/share/icons/hicolor/scalable/apps/
 
 install: version.sh
@@ -74,17 +73,17 @@ install-po-files:
 
 test:
 	@echo "***Running pylint checks***"
-	@find . -name '*.py' -print|xargs -n1 --max-procs=$(NUM_PROCS) pylint -E 2> /dev/null
+	@find . -name '*.py' -print | xargs -n1 pylint -E 2> /dev/null
 	@echo "[ OK ]"
 	@echo "***Running unittests checks***"
-	@PYTHONPATH=. python3 -m nose --processes=-1 -vw test/unittests
+	@PYTHONPATH=. python3 -m nose -vw test/unittests
 
 runpylint:
-	@find . -name '*.py' -print|xargs -n1 --max-procs=$(NUM_PROCS) pylint -E 2> /dev/null
+	@find . -name '*.py' -print | xargs -n1 pylint -E 2> /dev/null
 	@echo "[ OK ]"
 
 unittest:
-	PYTHONPATH=. python3 -m nose --processes=-1 -vw test/unittests
+	PYTHONPATH=. python3 -m nose -vw test/unittests
 
 version.sh:
 	@echo "KDUMP_ADDON_VERSION=$(VERSION)" > version.sh
