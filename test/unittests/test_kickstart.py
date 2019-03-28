@@ -31,7 +31,7 @@ class KdumpKickstartTestCase(KdumpTestCase):
 
     def ks_default_to_str_test(self):
         ks_addon_data = new_ks_addon_data()
-        kdump_check_ks(self, ks_addon_data, ["--disable"])
+        kdump_check_ks(self, ks_addon_data, ["--enable"])
 
     def ks_enable_to_str_test(self):
         ks_addon_data = new_ks_addon_data()

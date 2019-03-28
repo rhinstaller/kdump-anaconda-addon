@@ -44,14 +44,14 @@ class KdumpCommonTestCase(KdumpTestCase):
     @patch("builtins.open", MockFileRead(X86_INFO_FIXTURE))
     @patch("blivet.arch.get_arch", return_value="x86_64")
     def memory_bound_test_x86(self, _mock_read):
-        self.assertEqual((128, 4 * 1024 - 256, 1), common.getMemoryBounds())
+        self.assertEqual((160, 4 * 1024 - 512, 1), common.getMemoryBounds())
 
     @patch("builtins.open", MockFileRead(AARCH64_INFO_FIXTURE))
     @patch("blivet.arch.get_arch", return_value="aarch64")
     def memory_bound_test_aarch64(self, _mock_read):
-        self.assertEqual((128, 64 * 1024 - 256, 1), common.getMemoryBounds())
+        self.assertEqual((512, 64 * 1024 - 512, 1), common.getMemoryBounds())
 
     @patch("builtins.open", MockFileRead(PPC64_INFO_FIXTURE))
     @patch("blivet.arch.get_arch", return_value="ppc64")
     def memory_bound_test_ppc64(self, _mock_read):
-        self.assertEqual((256, 64 * 1024 - 1024, 1), common.getMemoryBounds())
+        self.assertEqual((384, 64 * 1024 - 1024, 1), common.getMemoryBounds())
