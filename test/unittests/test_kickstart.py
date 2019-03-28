@@ -29,7 +29,7 @@ class KdumpKickstartTestCase(KdumpTestCase):
         ks_addon_data = new_ks_addon_data()
         self.assertIsNotNone(ks_addon_data)
 
-    def ks_default_to_str_test(self, _MockMemoryBounds):
+    def ks_default_to_str_test(self):
         ks_addon_data = new_ks_addon_data()
         kdump_check_ks(self, ks_addon_data, ["--disable"])
 
