@@ -22,6 +22,7 @@
 import os.path
 from pyanaconda.addons import AddonData
 from pyanaconda.core import util
+from pyanaconda.core.configuration.anaconda import conf
 from pyanaconda.flags import flags
 from pyanaconda.modules.common.constants.services import STORAGE
 from pyanaconda.modules.common.constants.objects import BOOTLOADER
@@ -144,4 +145,4 @@ class KdumpData(AddonData):
 
         action = "enable"
 
-        util.execWithRedirect("systemctl", [action, "kdump.service"], root=util.getSysroot())
+        util.execWithRedirect("systemctl", [action, "kdump.service"], root=conf.target.system_root)
