@@ -23,7 +23,7 @@ import os.path
 from pyanaconda.addons import AddonData
 from pyanaconda.core import util
 from pyanaconda.core.configuration.anaconda import conf
-from pyanaconda.flags import flags
+from pyanaconda.core.kernel import kernel_arguments
 from pyanaconda.modules.common.constants.services import STORAGE
 from pyanaconda.modules.common.constants.objects import BOOTLOADER
 
@@ -67,7 +67,7 @@ class KdumpData(AddonData):
 
     def setup(self, storage, ksdata, instClass, payload):
         # the kdump addon should run only if requested
-        if not flags.cmdline.getbool("kdump_addon", default=True):
+        if kernel_arguments.get("kdump_addon", default=True) in ["0", "off", False]:
             return
 
         bootloader_proxy = STORAGE.get_proxy(BOOTLOADER)
@@ -140,7 +140,7 @@ class KdumpData(AddonData):
 
     def execute(self, storage, ksdata, instClass, users, payload):
         # the KdumpSpoke should run only if requested
-        if not flags.cmdline.getbool("kdump_addon", default=True) or not self.enabled:
+        if kernel_arguments.get("kdump_addon", default=True) in ["0", "off", False] or not self.enabled:
             return
 
         action = "enable"
