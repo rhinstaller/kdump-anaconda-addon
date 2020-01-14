@@ -24,7 +24,7 @@
 import os.path
 from gi.repository import Gtk
 
-from pyanaconda.flags import flags
+from pyanaconda.core.kernel import kernel_arguments
 from pyanaconda.ui.categories.system import SystemCategory
 from pyanaconda.ui.gui.spokes import NormalSpoke
 from pyanaconda.ui.gui.utils import fancy_set_sensitive
@@ -51,7 +51,7 @@ class KdumpSpoke(NormalSpoke):
     @classmethod
     def should_run(cls, environment, data):
         # the KdumpSpoke should run only if requested
-        return flags.cmdline.getbool("kdump_addon", default=False)
+        return kernel_arguments.is_enabled("kdump_addon")
 
     def __init__(self, *args):
         NormalSpoke.__init__(self, *args)

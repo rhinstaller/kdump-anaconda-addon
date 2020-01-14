@@ -24,7 +24,7 @@
 import os.path
 import re
 
-from pyanaconda.flags import flags
+from pyanaconda.core.kernel import kernel_arguments
 from pyanaconda.ui.categories.system import SystemCategory
 from pyanaconda.ui.tui.spokes import NormalTUISpoke
 from pyanaconda.ui.tui.tuiobject import Dialog
@@ -54,7 +54,7 @@ class KdumpSpoke(NormalTUISpoke):
     @classmethod
     def should_run(cls, environment, data):
         # the KdumpSpoke should run only if requested
-        return flags.cmdline.getbool("kdump_addon", default=False)
+        return kernel_arguments.is_enabled("kdump_addon")
 
     def apply(self):
         pass

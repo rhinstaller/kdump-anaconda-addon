@@ -4,7 +4,7 @@ from unittest.mock import patch
 from com_redhat_kdump import common
 
 def enable_kdump_addon_in_anaconda():
-    return patch('pyanaconda.flags.cmdline.getbool', return_value=True)
+    return patch('pyanaconda.kernel.kernel_arguments.is_enabled', return_value=True)
 
 class KdumpTestCase(unittest.TestCase):
     def setUp(self):
