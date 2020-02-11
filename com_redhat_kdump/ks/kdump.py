@@ -70,7 +70,11 @@ class KdumpData(AddonData):
         if not kernel_arguments.is_enabled("kdump_addon"):
             return
 
+        # Update the package list.
+        if self.enabled:
+            ksdata.packages.packageList.append("kexec-tools")
 
+        # Update the bootloader arguments.
         bootloader_proxy = STORAGE.get_proxy(BOOTLOADER)
 
         # Clear any existing crashkernel bootloader arguments
@@ -83,9 +87,17 @@ class KdumpData(AddonData):
             # Ensure that the amount is an amount in MB
             if self.reserveMB[-1] != 'M':
                 self.reserveMB += 'M'
-            new_args.append(' crashkernel=%s' % self.reserveMB)
+            new_args.append('crashkernel=%s' % self.reserveMB)
+
+        if self.enablefadump and os.path.exists(FADUMP_CAPABLE_FILE):
+            new_args.append('fadump=on')
 
         bootloader_proxy.SetExtraArguments(new_args)
+
+        # If the local storage object is not available, skip.
+        # FIXME: This is a temporary workaround.
+        if not storage:
+            return
 
         # Do the same thing with the storage.bootloader.boot_args set
         if storage.bootloader.boot_args:
@@ -95,7 +107,7 @@ class KdumpData(AddonData):
 
         if self.enabled:
             storage.bootloader.boot_args.add('crashkernel=%s' % self.reserveMB)
-            ksdata.packages.packageList.append("kexec-tools")
+
         if self.enablefadump and os.path.exists(FADUMP_CAPABLE_FILE):
                 storage.bootloader.boot_args.add('fadump=on')
 
