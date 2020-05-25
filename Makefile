@@ -33,7 +33,7 @@ install: version.sh
 	mkdir -p $(DESTDIR)$(ICONDIR)
 	cp -rv $(ADDON) $(DESTDIR)$(ADDONDIR)
 	install -c -m 644 kdump.svg $(DESTDIR)$(ICONDIR)
-	$(MAKE) install-po-files
+	$(MAKE) install-po-files DESTDIR=$(DESTDIR)
 
 uninstall:
 	rm -rfv $(DESTDIR)$(ADDONDIR)
