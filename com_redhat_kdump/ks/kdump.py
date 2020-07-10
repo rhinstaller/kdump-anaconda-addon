@@ -94,23 +94,6 @@ class KdumpData(AddonData):
 
         bootloader_proxy.SetExtraArguments(new_args)
 
-        # If the local storage object is not available, skip.
-        # FIXME: This is a temporary workaround.
-        if not storage:
-            return
-
-        # Do the same thing with the storage.bootloader.boot_args set
-        if storage.bootloader.boot_args:
-            crashargs = [arg for arg in storage.bootloader.boot_args \
-                    if arg.startswith('crashkernel=')]
-            storage.bootloader.boot_args -= set(crashargs)
-
-        if self.enabled:
-            storage.bootloader.boot_args.add('crashkernel=%s' % self.reserveMB)
-
-        if self.enablefadump and os.path.exists(FADUMP_CAPABLE_FILE):
-                storage.bootloader.boot_args.add('fadump=on')
-
     def handle_header(self, lineno, args):
         op = KSOptionParser(prog="addon com_redhat_kdump", version=F27,
                             description="Configure the Kdump Addon.")
