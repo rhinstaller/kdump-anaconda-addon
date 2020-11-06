@@ -24,7 +24,7 @@
 import os.path
 import re
 
-from pyanaconda.core.kernel import kernel_arguments
+from pyanaconda.modules.common.util import is_module_available
 from pyanaconda.ui.categories.system import SystemCategory
 from pyanaconda.ui.tui.spokes import NormalTUISpoke
 from pyanaconda.ui.tui.tuiobject import Dialog
@@ -33,9 +33,10 @@ from simpleline.render.containers import ListColumnContainer
 from simpleline.render.screen import InputState
 from com_redhat_kdump.common import getMemoryBounds
 from com_redhat_kdump.i18n import N_, _
-from com_redhat_kdump.constants import FADUMP_CAPABLE_FILE
+from com_redhat_kdump.constants import FADUMP_CAPABLE_FILE, KDUMP
 
 __all__ = ["KdumpSpoke"]
+
 
 class KdumpSpoke(NormalTUISpoke):
     category = SystemCategory
@@ -43,18 +44,17 @@ class KdumpSpoke(NormalTUISpoke):
     def __init__(self, *args):
         super().__init__(*args)
         self.title = N_("Kdump")
-        self._addon_data = self.data.addons.com_redhat_kdump
+        self._container = None
 
         self._lower, self._upper, self._step = getMemoryBounds()
         # Allow a string of digits optionally followed by 'M'
         self._reserve_check_re = re.compile(r'^(\d+M?)$')
 
-        self._container = None
+        self._proxy = KDUMP.get_proxy()
 
     @classmethod
     def should_run(cls, environment, data):
-        # the KdumpSpoke should run only if requested
-        return kernel_arguments.is_enabled("kdump_addon")
+        return is_module_available(KDUMP)
 
     def apply(self):
         pass
@@ -65,7 +65,7 @@ class KdumpSpoke(NormalTUISpoke):
 
     @property
     def status(self):
-        if self._addon_data.enabled:
+        if self._proxy.KdumpEnabled:
             state = _("Kdump is enabled")
         else:
             state = _("Kdump is disabled")
@@ -79,7 +79,7 @@ class KdumpSpoke(NormalTUISpoke):
 
         self._create_enable_checkbox()
 
-        if self._addon_data.enabled:
+        if self._proxy.KdumpEnabled:
             self._create_fadump_checkbox()
             self._create_reserve_amount_text_widget()
 
@@ -87,7 +87,7 @@ class KdumpSpoke(NormalTUISpoke):
 
     def _create_enable_checkbox(self):
         enable_kdump_checkbox = CheckboxWidget(title=_("Enable kdump"),
-                                               completed=self._addon_data.enabled)
+                                               completed=self._proxy.KdumpEnabled)
         self._container.add(enable_kdump_checkbox, self._set_enabled)
 
     def _create_fadump_checkbox(self):
@@ -95,25 +95,24 @@ class KdumpSpoke(NormalTUISpoke):
             return
 
         enable_fadump_checkbox = CheckboxWidget(title=_("Enable dump mode fadump"),
-                                                completed=self._addon_data.enablefadump)
+                                                completed=self._proxy.FadumpEnabled)
         self._container.add(enable_fadump_checkbox, self._set_fadump_enable)
 
     def _create_reserve_amount_text_widget(self):
         title = _("Reserve amount (%d - %d MB)" % (self._lower, self._upper))
-        reserve_amount_entry = EntryWidget(title=title, value=self._addon_data.reserveMB)
+        reserve_amount_entry = EntryWidget(title=title, value=self._proxy.ReservedMemory)
         self._container.add(reserve_amount_entry, self._get_reserve_amount)
 
     def _set_enabled(self, data):
-        self._addon_data.enabled = not self._addon_data.enabled
+        self._proxy.KdumpEnabled = not self._proxy.KdumpEnabled
 
     def _set_fadump_enable(self, data):
-        self._addon_data.enablefadump = not self._addon_data.enablefadump
+        self._proxy.FadumpEnabled = not self._proxy.FadumpEnabled
 
     def _get_reserve_amount(self, data):
         text = "Reserve amount (%d - %d MB)" % (self._lower, self._upper)
         dialog = Dialog(title=text, conditions=[self._check_reserve_valid])
-
-        self._addon_data.reserveMB = dialog.run()
+        self._proxy.ReservedMemory = dialog.run()
 
     def _check_reserve_valid(self, key, report_func):
         if self._reserve_check_re.match(key):
