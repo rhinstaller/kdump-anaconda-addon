@@ -1,67 +1,116 @@
-from utils import KdumpTestCase
-from unittest.mock import patch
-from com_redhat_kdump.ks.kdump import KdumpData
-from pykickstart.errors import KickstartParseError
-import re
+from textwrap import dedent
+from unittest.case import TestCase
+from com_redhat_kdump import common
+from com_redhat_kdump.service.kdump import KdumpService
 
 
-ALL_ARGS_RE = re.compile(
-    r"[\s\n]*%addon\s+KdumpData\s+"
-    r"(--enable|--disable|--enablefadump|--reverse-mb[=|\ ]['\"]?\d+['\"][Mm]?)*"
-    r"\s+.*[\s\n]+%end[\s\n]*")
+class KdumpKickstartTestCase(TestCase):
 
-def new_ks_addon_data():
-    return KdumpData("KdumpData")
+    def setUp(self):
+        # Show unlimited diff.
+        self.maxDiff = None
 
+        # Clean up global variable that may cache test result of previous test case
+        common._reservedMemory = None
 
-def kdump_check_ks(test, addon_data, required_arguments):
-    ks_str = str(addon_data)
-    for arg in required_arguments:
-        # Ensure rerquired argument is generated.
-        arg_regex = re.compile(r"[\s\n]*%addon\s+KdumpData.*\s+" + arg + r"\s+.*[\s\n]+%end[\s\n]*")
-        test.assertRegexpMatches(ks_str, arg_regex)
-    # Ensure no invalid argument is generated.
-    test.assertRegexpMatches(ks_str, ALL_ARGS_RE)
+        # Create the Kdump service.
+        self._service = KdumpService()
 
+    def _check_ks_input(self, ks_in, errors=None, warnings=None):
+        report = self._service.read_kickstart(ks_in)
+        self.assertEqual([i.message for i in report.error_messages], errors or [])
+        self.assertEqual([i.message for i in report.warning_messages], warnings or [])
 
-class KdumpKickstartTestCase(KdumpTestCase):
-    def new_ks_addon_data_test(self):
-        ks_addon_data = new_ks_addon_data()
-        self.assertIsNotNone(ks_addon_data)
+    def _check_ks_output(self, ks_out):
+        output = self._service.generate_kickstart()
+        self.assertEqual(output.strip(), dedent(ks_out).strip())
 
-    def ks_default_to_str_test(self):
-        ks_addon_data = new_ks_addon_data()
-        kdump_check_ks(self, ks_addon_data, ["--disable"])
+    def ks_default_test(self):
+        self.assertEqual(self._service.kdump_enabled, False)
+        self.assertEqual(self._service.fadump_enabled, False)
+        self.assertEqual(self._service.reserved_memory, "128")
 
-    def ks_enable_to_str_test(self):
-        ks_addon_data = new_ks_addon_data()
-        ks_addon_data.enabled = True
-        kdump_check_ks(self, ks_addon_data, ["--enable"])
+        self._check_ks_output("""
+        %addon com_redhat_kdump --disable
 
-    def ks_disable_to_str_test(self):
-        ks_addon_data = new_ks_addon_data()
-        ks_addon_data.enabled = False
-        kdump_check_ks(self, ks_addon_data, ["--disable"])
+        %end
+        """)
 
-    def ks_parse_enable_to_str_test(self):
-        ks_addon_data = new_ks_addon_data()
-        ks_addon_data.handle_header(0, ["--enable"])
-        kdump_check_ks(self, ks_addon_data, ["--enable"])
+    def ks_enable_test(self):
+        self._check_ks_input("""
+        %addon com_redhat_kdump --enable
+        %end
+        """)
 
-    def ks_parse_reserve_to_str_test(self):
-        ks_addon_data = new_ks_addon_data()
-        ks_addon_data.handle_header(0, ["--enable", "--reserve-mb=256"])
-        kdump_check_ks(self, ks_addon_data, ["--enable", "--reserve-mb[=|\ ](\"256\"|'256'|256)[Mm]?"])
+        self.assertEqual(self._service.kdump_enabled, True)
+        self.assertEqual(self._service.fadump_enabled, False)
+        self.assertEqual(self._service.reserved_memory, "128")
 
-    def ks_parse_fadump_to_str_test(self):
-        ks_addon_data = new_ks_addon_data()
-        ks_addon_data.handle_header(0, ['--enablefadump'])
-        kdump_check_ks(self, ks_addon_data, ["--enablefadump"])
+        self._check_ks_output("""
+        %addon com_redhat_kdump --enable --reserve-mb='128'
 
-    def ks_parse_invalid_reserve_size_test(self):
-        with self.assertRaises(KickstartParseError) as error:
-            ks_addon_data = new_ks_addon_data()
-            ks_addon_data.handle_header(0, ['--reserve-mb='])
-        with self.assertRaises(KickstartParseError) as error:
-            ks_addon_data = new_ks_addon_data()
-            ks_addon_data.handle_header(0, ['--reserve-mb=invalid'])
+        %end
+        """)
+
+    def ks_disable_test(self):
+        self._check_ks_input("""
+        %addon com_redhat_kdump --disable
+        %end
+        """)
+
+        self.assertEqual(self._service.kdump_enabled, False)
+        self.assertEqual(self._service.fadump_enabled, False)
+        self.assertEqual(self._service.reserved_memory, "128")
+
+        self._check_ks_output("""
+        %addon com_redhat_kdump --disable
+
+        %end
+        """)
+
+    def ks_reserve_mb_test(self):
+        self._check_ks_input("""
+        %addon com_redhat_kdump --enable --reserve-mb=256
+        %end
+        """)
+
+        self.assertEqual(self._service.kdump_enabled, True)
+        self.assertEqual(self._service.fadump_enabled, False)
+        self.assertEqual(self._service.reserved_memory, "256")
+
+        self._check_ks_output("""
+        %addon com_redhat_kdump --enable --reserve-mb='256'
+
+        %end
+        """)
+
+    def ks_reserve_mb_invalid_test(self):
+        ks_in = """
+        %addon com_redhat_kdump --reserve-mb=
+        %end
+        """
+        ks_err = "Invalid value '' for --reserve-mb"
+        self._check_ks_input(ks_in, [ks_err])
+
+        ks_in = """
+        %addon com_redhat_kdump --reserve-mb=invalid
+        %end
+        """
+        ks_err = "Invalid value 'invalid' for --reserve-mb"
+        self._check_ks_input(ks_in, [ks_err])
+
+    def ks_enablefadump_test(self):
+        self._check_ks_input("""
+        %addon com_redhat_kdump --disable --enablefadump
+        %end
+        """)
+
+        self.assertEqual(self._service.kdump_enabled, False)
+        self.assertEqual(self._service.fadump_enabled, True)
+        self.assertEqual(self._service.reserved_memory, "128")
+
+        self._check_ks_output("""
+        %addon com_redhat_kdump --disable --enablefadump
+
+        %end
+        """)
