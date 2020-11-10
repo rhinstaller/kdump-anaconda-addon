@@ -11,6 +11,8 @@ FILES = $(ADDON) \
 	Makefile \
 	README \
 	kdump.svg \
+	data/*.service \
+	data/*.conf \
 	version.sh
 
 EXCLUDES = \
@@ -25,6 +27,8 @@ all:
 
 DISTNAME = $(NAME)-$(VERSION)
 ADDONDIR = /usr/share/anaconda/addons/
+SERVICEDIR = /usr/share/anaconda/dbus/services/
+CONFDIR = /usr/share/anaconda/dbus/confs/
 DISTBALL = $(DISTNAME).tar.gz
 NUM_PROCS = $$(getconf _NPROCESSORS_ONLN)
 ICONDIR = /usr/share/icons/hicolor/scalable/apps/
@@ -34,6 +38,8 @@ install: version.sh
 	mkdir -p $(DESTDIR)$(ICONDIR)
 	cp -rv $(ADDON) $(DESTDIR)$(ADDONDIR)
 	install -c -m 644 kdump.svg $(DESTDIR)$(ICONDIR)
+	install -c -m 644 data/*.service $(DESTDIR)$(SERVICEDIR)
+	install -c -m 644 data/*.conf $(DESTDIR)$(CONFDIR)
 	$(MAKE) install-po-files
 
 uninstall:

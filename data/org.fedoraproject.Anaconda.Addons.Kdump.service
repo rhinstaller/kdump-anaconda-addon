@@ -1,0 +1,5 @@
+[D-BUS Service]
+# Start the org.fedoraproject.Anaconda.Addons.Kdump service.
+Name=org.fedoraproject.Anaconda.Addons.Kdump
+Exec=/usr/libexec/anaconda/start-module com_redhat_kdump.service
+User=root
