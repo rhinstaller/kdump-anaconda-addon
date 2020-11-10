@@ -1,6 +1,5 @@
-# Kdump configuration constants
 #
-# Copyright (C) 2014 Red Hat, Inc.
+# Copyright (C) 2020 Red Hat, Inc.
 #
 # This copyrighted material is made available to anyone wishing to use,
 # modify, copy, or redistribute it subject to the terms and conditions of
@@ -16,23 +15,18 @@
 # License and may only be used or replicated with the express permission of
 # Red Hat, Inc.
 #
-# Red Hat Author(s): David Shea <dshea@redhat.com>
-#
-from dasbus.identifier import DBusServiceIdentifier
+import logging
+import sys
 
-from pyanaconda.core.dbus import DBus
-from pyanaconda.modules.common.constants.namespaces import ADDONS_NAMESPACE
+from pyanaconda.core.kernel import kernel_arguments
 
-# The constants
-FADUMP_CAPABLE_FILE = "/proc/device-tree/rtas/ibm,configure-kernel-dump"
+log = logging.getLogger(__name__)
 
-# DBus constants
-KDUMP_NAMESPACE = (
-    *ADDONS_NAMESPACE,
-    "Kdump"
-)
+__all__ = ["check_initial_conditions"]
 
-KDUMP = DBusServiceIdentifier(
-    namespace=KDUMP_NAMESPACE,
-    message_bus=DBus
-)
+
+def check_initial_conditions():
+    """Can the Kdump service run?"""
+    if not kernel_arguments.is_enabled("kdump_addon"):
+        log.debug("The kdump add-on is disabled. Quit.")
+        sys.exit(1)
