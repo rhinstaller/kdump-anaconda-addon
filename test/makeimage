@@ -1,8 +1,16 @@
 #!/bin/bash
 rm -rf usr/
 rm -rf updates.img
+
 mkdir -p usr/share/anaconda/addons
 cp -r ../com_redhat_kdump ./usr/share/anaconda/addons/
+
+mkdir -p usr/share/anaconda/dbus/services
+cp ../data/*.service ./usr/share/anaconda/dbus/services/
+
+mkdir -p usr/share/anaconda/dbus/confs
+cp ../data/*.conf ./usr/share/anaconda/dbus/confs/
+
 make -C ../po install DESTDIR=../test
 ( find ./usr | cpio -oc | gzip -c9 ) > updates.img
 rm -rf ./usr

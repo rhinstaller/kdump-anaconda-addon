@@ -1,5 +1,5 @@
-from utils import KdumpTestCase
-from unittest.mock import patch, mock_open, MagicMock
+from unittest.case import TestCase
+from unittest.mock import patch, MagicMock
 from com_redhat_kdump import common
 
 SYS_CRASH_SIZE = '/sys/kernel/kexec_crash_size'
@@ -40,7 +40,12 @@ class MockFileRead(MagicMock):
         self.side_effect = reset_choose_file
 
 
-class KdumpCommonTestCase(KdumpTestCase):
+class KdumpCommonTestCase(TestCase):
+
+    def setUp(self):
+        # Clean up global variable that may cache test result of previous test case
+        common._reservedMemory = None
+
     @patch("builtins.open", MockFileRead(X86_INFO_FIXTURE))
     @patch("blivet.arch.get_arch", return_value="x86_64")
     def memory_bound_test_x86(self, _mock_read):

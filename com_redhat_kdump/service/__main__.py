@@ -1,6 +1,5 @@
-# Kdump configuration constants
 #
-# Copyright (C) 2014 Red Hat, Inc.
+# Copyright (C) 2020 Red Hat, Inc.
 #
 # This copyrighted material is made available to anyone wishing to use,
 # modify, copy, or redistribute it subject to the terms and conditions of
@@ -16,23 +15,16 @@
 # License and may only be used or replicated with the express permission of
 # Red Hat, Inc.
 #
-# Red Hat Author(s): David Shea <dshea@redhat.com>
-#
-from dasbus.identifier import DBusServiceIdentifier
 
-from pyanaconda.core.dbus import DBus
-from pyanaconda.modules.common.constants.namespaces import ADDONS_NAMESPACE
+# Initialize the service.
+from pyanaconda.modules.common import init
+init()
 
-# The constants
-FADUMP_CAPABLE_FILE = "/proc/device-tree/rtas/ibm,configure-kernel-dump"
+# Check the initial conditions.
+from com_redhat_kdump.service.initialization import check_initial_conditions
+check_initial_conditions()
 
-# DBus constants
-KDUMP_NAMESPACE = (
-    *ADDONS_NAMESPACE,
-    "Kdump"
-)
-
-KDUMP = DBusServiceIdentifier(
-    namespace=KDUMP_NAMESPACE,
-    message_bus=DBus
-)
+# Start the service.
+from com_redhat_kdump.service.kdump import KdumpService
+service = KdumpService()
+service.run()

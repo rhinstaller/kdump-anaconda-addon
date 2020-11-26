@@ -24,16 +24,17 @@
 import os.path
 from gi.repository import Gtk
 
-from pyanaconda.core.kernel import kernel_arguments
+from pyanaconda.modules.common.util import is_module_available
 from pyanaconda.ui.categories.system import SystemCategory
 from pyanaconda.ui.gui.spokes import NormalSpoke
 from pyanaconda.ui.gui.utils import fancy_set_sensitive
 
 from com_redhat_kdump.i18n import _, N_
 from com_redhat_kdump.common import getTotalMemory, getMemoryBounds
-from com_redhat_kdump.constants import FADUMP_CAPABLE_FILE
+from com_redhat_kdump.constants import FADUMP_CAPABLE_FILE, KDUMP
 
 __all__ = ["KdumpSpoke"]
+
 
 class KdumpSpoke(NormalSpoke):
     """Kdump configuration spoke"""
@@ -50,12 +51,12 @@ class KdumpSpoke(NormalSpoke):
 
     @classmethod
     def should_run(cls, environment, data):
-        # the KdumpSpoke should run only if requested
-        return kernel_arguments.is_enabled("kdump_addon")
+        return is_module_available(KDUMP)
 
     def __init__(self, *args):
         NormalSpoke.__init__(self, *args)
         self._reserveMem = 0
+        self._proxy = KDUMP.get_proxy()
 
     def initialize(self):
         NormalSpoke.initialize(self)
@@ -81,7 +82,7 @@ class KdumpSpoke(NormalSpoke):
     def refresh(self):
         # If a reserve amount is requested, set it in the spin button
         # Strip the trailing 'M'
-        reserveMB = self.data.addons.com_redhat_kdump.reserveMB
+        reserveMB = self._proxy.ReservedMemory
         if reserveMB and reserveMB[-1] == 'M':
             reserveMB = reserveMB[:-1]
         if reserveMB:
@@ -96,22 +97,21 @@ class KdumpSpoke(NormalSpoke):
         # the sensitivities on the related widgets. Set the radio button first,
         # since the radio buttons' bailiwick is a subset of that of the
         # enable/disable checkbox.
-        if self.data.addons.com_redhat_kdump.enabled:
+        if self._proxy.KdumpEnabled:
             self._enableButton.set_active(True)
         else:
             self._enableButton.set_active(False)
 
-        _fadump = self.data.addons.com_redhat_kdump.enablefadump
+        _fadump = self._proxy.FadumpEnabled
         self._fadumpButton.set_active(_fadump)
         # Force a toggled signal on the button in case it's state has not changed
         self._enableButton.emit("toggled")
 
     def apply(self):
         # Copy the GUI state into the AddonData object
-        self.data.addons.com_redhat_kdump.enabled = self._enableButton.get_active()
-        reserveMem = "%dM" % self._toBeReservedSpin.get_value_as_int()
-        self.data.addons.com_redhat_kdump.reserveMB = reserveMem
-        self.data.addons.com_redhat_kdump.enablefadump = self._fadumpButton.get_active()
+        self._proxy.KdumpEnabled = self._enableButton.get_active()
+        self._proxy.ReservedMemory = "%dM" % self._toBeReservedSpin.get_value_as_int()
+        self._proxy.FadumpEnabled = self._fadumpButton.get_active()
 
     @property
     def ready(self):
@@ -128,7 +128,7 @@ class KdumpSpoke(NormalSpoke):
 
     @property
     def status(self):
-        if self.data.addons.com_redhat_kdump.enabled:
+        if self._proxy.KdumpEnabled:
             state = _("Kdump is enabled")
         else:
             state = _("Kdump is disabled")
