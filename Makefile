@@ -22,12 +22,14 @@ all:
 	@echo "       make test"
 	@echo "       make install"
 	@echo "       make uninstall"
+	@echo "       make container-test"
 
 DISTNAME = $(NAME)-$(VERSION)
 ADDONDIR = /usr/share/anaconda/addons/
 DISTBALL = $(DISTNAME).tar.gz
 NUM_PROCS = $$(getconf _NPROCESSORS_ONLN)
 ICONDIR = /usr/share/icons/hicolor/scalable/apps/
+CONTAINER_NAME = kdump-anaconda-addon-ci
 
 install: version.sh
 	mkdir -p $(DESTDIR)$(ADDONDIR)
@@ -72,18 +74,19 @@ po-pull:
 install-po-files:
 	$(MAKE) -C po install
 
-test:
-	@echo "***Running pylint checks***"
-	@find . -name '*.py' -print|xargs -n1 --max-procs=$(NUM_PROCS) pylint -E 2> /dev/null
-	@echo "[ OK ]"
-	@echo "***Running unittests checks***"
-	@PYTHONPATH=. python3 -m nose --processes=-1 -vw test/unittests
+container-test:
+	podman build --tag $(CONTAINER_NAME) --file test/Dockerfile
+	podman run --volume .:/kdump-anaconda-addon:Z $(CONTAINER_NAME) make test
+
+test: runpylint unittest
 
 runpylint:
-	@find . -name '*.py' -print|xargs -n1 --max-procs=$(NUM_PROCS) pylint -E 2> /dev/null
+	@echo "***Running pylint checks***"
+	pylint com_redhat_kdump -E 2> /dev/null
 	@echo "[ OK ]"
 
 unittest:
+	@echo "***Running unittests checks***"
 	PYTHONPATH=. python3 -m nose --processes=-1 -vw test/unittests
 
 version.sh:
@@ -95,4 +98,4 @@ clean:
 	rm -f version.sh
 	rm -f test/updates.img
 
-.PHONY: install clean test all version.sh
+.PHONY: install clean container-test test runpylint unittest all version.sh
