@@ -38,6 +38,8 @@ CONTAINER_NAME = kdump-anaconda-addon-ci
 install: version.sh
 	mkdir -p $(DESTDIR)$(ADDONDIR)
 	mkdir -p $(DESTDIR)$(ICONDIR)
+	mkdir -p $(DESTDIR)$(SERVICEDIR)
+	mkdir -p $(DESTDIR)$(CONFDIR)
 	cp -rv $(ADDON) $(DESTDIR)$(ADDONDIR)
 	install -c -m 644 kdump.svg $(DESTDIR)$(ICONDIR)
 	install -c -m 644 data/*.service $(DESTDIR)$(SERVICEDIR)
