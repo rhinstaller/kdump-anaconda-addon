@@ -121,7 +121,7 @@ class KdumpData(AddonData):
         op.add_argument("--disable", action="store_false",
                 version=F27, dest="enabled", help="Disable kdump")
         op.add_argument("--reserve-mb", type=str, dest="reserveMB",
-                version=F27, default="128", help="Amount of memory in MB to reserve for kdump.")
+                version=F27, default="auto", help="Amount of memory in MB to reserve for kdump.")
 
         (opts, extra) = op.parse_known_args(args=args, lineno=lineno)
 
