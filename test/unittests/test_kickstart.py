@@ -28,7 +28,7 @@ class KdumpKickstartTestCase(TestCase):
     def ks_default_test(self):
         self.assertEqual(self._service.kdump_enabled, False)
         self.assertEqual(self._service.fadump_enabled, False)
-        self.assertEqual(self._service.reserved_memory, "160")
+        self.assertEqual(self._service.reserved_memory, "auto")
 
         self._check_ks_output("""
         %addon com_redhat_kdump --disable
@@ -44,10 +44,10 @@ class KdumpKickstartTestCase(TestCase):
 
         self.assertEqual(self._service.kdump_enabled, True)
         self.assertEqual(self._service.fadump_enabled, False)
-        self.assertEqual(self._service.reserved_memory, "128")
+        self.assertEqual(self._service.reserved_memory, "auto")
 
         self._check_ks_output("""
-        %addon com_redhat_kdump --enable --reserve-mb='128'
+        %addon com_redhat_kdump --enable --reserve-mb='auto'
 
         %end
         """)
@@ -60,7 +60,7 @@ class KdumpKickstartTestCase(TestCase):
 
         self.assertEqual(self._service.kdump_enabled, False)
         self.assertEqual(self._service.fadump_enabled, False)
-        self.assertEqual(self._service.reserved_memory, "128")
+        self.assertEqual(self._service.reserved_memory, "auto")
 
         self._check_ks_output("""
         %addon com_redhat_kdump --disable
@@ -80,6 +80,22 @@ class KdumpKickstartTestCase(TestCase):
 
         self._check_ks_output("""
         %addon com_redhat_kdump --enable --reserve-mb='256'
+
+        %end
+        """)
+
+    def ks_reserve_auto_test(self):
+        self._check_ks_input("""
+        %addon com_redhat_kdump --enable --reserve-mb=auto
+        %end
+        """)
+
+        self.assertEqual(self._service.kdump_enabled, True)
+        self.assertEqual(self._service.fadump_enabled, False)
+        self.assertEqual(self._service.reserved_memory, "auto")
+
+        self._check_ks_output("""
+        %addon com_redhat_kdump --enable --reserve-mb='auto'
 
         %end
         """)
@@ -107,7 +123,7 @@ class KdumpKickstartTestCase(TestCase):
 
         self.assertEqual(self._service.kdump_enabled, False)
         self.assertEqual(self._service.fadump_enabled, True)
-        self.assertEqual(self._service.reserved_memory, "128")
+        self.assertEqual(self._service.reserved_memory, "auto")
 
         self._check_ks_output("""
         %addon com_redhat_kdump --disable --enablefadump

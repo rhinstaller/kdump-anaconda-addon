@@ -25,6 +25,7 @@ from pyanaconda.modules.common.constants.namespaces import ADDONS_NAMESPACE
 
 # The constants
 FADUMP_CAPABLE_FILE = "/proc/device-tree/rtas/ibm,configure-kernel-dump"
+CRASHKERNEL_DEFAULT_FILE = "/usr/lib/modules/%s/crashkernel.default"
 
 # DBus constants
 KDUMP_NAMESPACE = (

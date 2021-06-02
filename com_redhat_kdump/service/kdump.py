@@ -26,7 +26,7 @@ from pyanaconda.modules.common.structures.requirement import Requirement
 
 from com_redhat_kdump.common import getMemoryBounds
 from com_redhat_kdump.constants import KDUMP
-from com_redhat_kdump.service.installation import KdumpConfigurationTask, KdumpInstallationTask
+from com_redhat_kdump.service.installation import KdumpBootloaderConfigurationTask, KdumpInstallationTask
 from com_redhat_kdump.service.kdump_interface import KdumpInterface
 from com_redhat_kdump.service.kickstart import KdumpKickstartSpecification
 
@@ -47,8 +47,7 @@ class KdumpService(KickstartService):
         self._fadump_enabled = False
         self.fadump_enabled_changed = Signal()
 
-        lower, upper, step = getMemoryBounds()
-        self._reserved_memory = "%d" % lower
+        self._reserved_memory = "auto"
         self.reserved_memory_changed = Signal()
 
     def publish(self):
@@ -124,19 +123,6 @@ class KdumpService(KickstartService):
 
         return requirements
 
-    def configure_with_tasks(self):
-        """Return configuration tasks.
-
-        :return: a list of tasks
-        """
-        return [
-            KdumpConfigurationTask(
-                kdump_enabled=self.kdump_enabled,
-                fadump_enabled=self.fadump_enabled,
-                reserved_memory=self.reserved_memory
-            )
-        ]
-
     def install_with_tasks(self):
         """Return installation tasks.
 
@@ -146,5 +132,16 @@ class KdumpService(KickstartService):
             KdumpInstallationTask(
                 sysroot=conf.target.system_root,
                 kdump_enabled=self.kdump_enabled,
+            )
+        ]
+
+    def configure_bootloader_with_tasks(self, kernels):
+        return [
+            KdumpBootloaderConfigurationTask(
+                kernels=kernels,
+                sysroot=conf.target.system_root,
+                kdump_enabled=self.kdump_enabled,
+                fadump_enabled=self.fadump_enabled,
+                reserved_memory=self.reserved_memory
             )
         ]

@@ -28,7 +28,7 @@ from pyanaconda.modules.common.util import is_module_available
 from pyanaconda.ui.categories.system import SystemCategory
 from pyanaconda.ui.tui.spokes import NormalTUISpoke
 from pyanaconda.ui.tui.tuiobject import Dialog
-from simpleline.render.widgets import CheckboxWidget, EntryWidget
+from simpleline.render.widgets import CheckboxWidget, EntryWidget, TextWidget
 from simpleline.render.containers import ListColumnContainer
 from simpleline.render.screen import InputState
 from com_redhat_kdump.common import getMemoryBounds
@@ -48,7 +48,7 @@ class KdumpSpoke(NormalTUISpoke):
 
         self._lower, self._upper, self._step = getMemoryBounds()
         # Allow a string of digits optionally followed by 'M'
-        self._reserve_check_re = re.compile(r'^(\d+M?)$')
+        self._reserve_check_re = re.compile(r'^(auto)|(\d+M?)$')
 
         self._proxy = KDUMP.get_proxy()
 
@@ -83,6 +83,18 @@ class KdumpSpoke(NormalTUISpoke):
             self._create_fadump_checkbox()
             self._create_reserve_amount_text_widget()
 
+            if self._proxy.ReservedMemory == 'auto':
+                self.window.add_separator()
+                message = TextWidget(_(
+                    "Automatic kdump memory reservation is in use. "
+                    "Kdump will use the default crashkernel value "
+                    "provided by the kernel package. This is a "
+                    "best-effort support and might not fit "
+                    "your use case. It is recommended to verify "
+                    "if the crashkernel value is suitable after "
+                    "installation."))
+                self.window.add(message)
+
         self.window.add_separator()
 
     def _create_enable_checkbox(self):
@@ -116,6 +128,8 @@ class KdumpSpoke(NormalTUISpoke):
 
     def _check_reserve_valid(self, key, report_func):
         if self._reserve_check_re.match(key):
+            if key == 'auto':
+                return True
             if key[-1] == 'M':
                 key = key[:-1]
             key = int(key)

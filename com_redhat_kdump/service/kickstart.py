@@ -37,7 +37,7 @@ class KdumpKickstartData(AddonData):
     def __init__(self):
         super().__init__()
         self.enabled = False
-        self.reserve_mb = ""
+        self.reserve_mb = "auto"
         self.enablefadump = False
 
     def __str__(self):
@@ -83,7 +83,7 @@ class KdumpKickstartData(AddonData):
         )
         op.add_argument(
             "--reserve-mb", type=str, dest="reserve_mb",
-            version=F27, default="128", help="Amount of memory in MB to reserve for kdump."
+            version=F27, default="auto", help="Amount of memory in MB to reserve for kdump."
         )
 
         opts = op.parse_args(args=args, lineno=line_number)
@@ -96,11 +96,12 @@ class KdumpKickstartData(AddonData):
         if opts.reserve_mb and opts.reserve_mb[-1] == 'M':
             opts.reserve_mb = opts.reserve_mb[:-1]
 
-        try:
-            _test = int(opts.reserve_mb)
-        except ValueError:
-            msg = _("Invalid value '%s' for --reserve-mb") % opts.reserve_mb
-            raise KickstartParseError(msg, lineno=line_number)
+        if opts.reserve_mb != "auto":
+            try:
+                _test = int(opts.reserve_mb)
+            except ValueError:
+                msg = _("Invalid value '%s' for --reserve-mb") % opts.reserve_mb
+                raise KickstartParseError(msg, lineno=line_number)
 
         # Store the parsed arguments
         self.enabled = opts.enabled

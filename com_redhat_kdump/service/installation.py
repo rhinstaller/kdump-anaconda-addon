@@ -20,29 +20,32 @@ import os
 
 from pyanaconda.core import util
 from pyanaconda.modules.common.constants.objects import BOOTLOADER
-from pyanaconda.modules.common.constants.services import STORAGE
+from pyanaconda.modules.common.constants.services import STORAGE, PAYLOADS
 from pyanaconda.modules.common.task import Task
+from pyanaconda.modules.payloads.payload.dnf.utils import get_kernel_version_list
 
-from com_redhat_kdump.constants import FADUMP_CAPABLE_FILE
+from com_redhat_kdump.constants import FADUMP_CAPABLE_FILE, CRASHKERNEL_DEFAULT_FILE
 
 log = logging.getLogger(__name__)
 
-__all__ = ["KdumpConfigurationTask", "KdumpInstallationTask"]
+__all__ = ["KdumpBootloaderConfigurationTask", "KdumpInstallationTask"]
 
 
-class KdumpConfigurationTask(Task):
-    """The installation task for configuration of the runtime environment."""
+class KdumpBootloaderConfigurationTask(Task):
+    """The bootloader configuration task for kdump and fadump"""
 
-    def __init__(self, kdump_enabled, fadump_enabled, reserved_memory):
+    def __init__(self, kernels, sysroot, kdump_enabled, fadump_enabled, reserved_memory):
         """Create a task."""
         super().__init__()
+        self._kernels = kernels
+        self._sysroot = sysroot
         self._kdump_enabled = kdump_enabled
         self._fadump_enabled = fadump_enabled
         self._reserved_memory = reserved_memory
 
     @property
     def name(self):
-        return "Configure kdump and fadump"
+        return "Configure kernel parameters for kdump and fadump"
 
     def run(self):
         """Run the task."""
@@ -55,17 +58,50 @@ class KdumpConfigurationTask(Task):
             if not arg.startswith('crashkernel=')
         ]
 
-        # Copy our reserved amount to the bootloader arguments.
-        if self._kdump_enabled:
-            # Ensure that the amount is an amount in MB.
-            if self._reserved_memory[-1] != 'M':
-                self._reserved_memory += 'M'
-
-            args.append('crashkernel=%s' % self._reserved_memory)
-
         # Enable fadump.
         if self._fadump_enabled and os.path.exists(FADUMP_CAPABLE_FILE):
             args.append('fadump=on')
+
+        # Set crashkernel argument
+        if self._kdump_enabled:
+            ck_arg = None
+
+            if self._reserved_memory == 'auto':
+                # Try to get crashkernel arg from crashkernel.con
+                if len(self._kernels) > 1:
+                    log.warn("crashkernel=auto specified, and multiple kernels installed, "
+                             "will use crashkernel.default value from latest installed kernel.")
+
+                for k in self._kernels:
+                    ck_conf_file = "%s/%s" % (self._sysroot, CRASHKERNEL_DEFAULT_FILE % k)
+                    if os.path.exists(ck_conf_file):
+                        with open(ck_conf_file, 'r') as ck_conf:
+                            ck_arg = ck_conf.read().rstrip()
+                            log.debug("Using default crashkernel cmdline ('%s') from '%s'",
+                                      ck_arg, ck_conf_file)
+                            break
+
+                if ck_arg is None:
+                    log.warn("Can't find a valid crashkernel.default from the installation, "
+                             "falling back to use installer kernel's crashkernel.default")
+                    ck_conf_file = CRASHKERNEL_DEFAULT_FILE % os.uname().release
+                    if os.path.exists(ck_conf_file):
+                        with open(ck_conf_file, 'r') as ck_conf:
+                            ck_arg = ck_conf.read().rstrip()
+                            log.debug("Using default crashkernel cmdline ('%s') from '%s'",
+                                      ck_arg, ck_conf_file)
+
+                if ck_arg is None:
+                    log.error("Can't find a valid crashkernel.default, will set crashkernel=auto.")
+                    ck_arg = 'crashkernel=auto'
+
+            else:
+                # Ensure that the amount is an amount in MB.
+                if self._reserved_memory[-1] != 'M':
+                    self._reserved_memory += 'M'
+                ck_arg = 'crashkernel=%s' % self._reserved_memory
+
+            args.append(ck_arg)
 
         bootloader_proxy.SetExtraArguments(args)
 

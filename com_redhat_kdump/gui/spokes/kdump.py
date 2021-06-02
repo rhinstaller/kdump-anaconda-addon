@@ -61,17 +61,21 @@ class KdumpSpoke(NormalSpoke):
     def initialize(self):
         NormalSpoke.initialize(self)
         self._enableButton = self.builder.get_object("enableKdumpCheck")
+        self._reservationTypeLabel = self.builder.get_object("reservationTypeLabel")
+        self._autoButton = self.builder.get_object("autoButton")
+        self._manualButton = self.builder.get_object("manualButton")
         self._fadumpButton = self.builder.get_object("fadumpCheck")
+        self._toBeReservedSpin = self.builder.get_object("toBeReservedSpin")
+        self._totalMemMB = self.builder.get_object("totalMemMB")
+        self._usableMemMB = self.builder.get_object("usableMemMB")
+        self._autoWarn = self.builder.get_object("autoReservationWarning")
+        self._reserveTypeGrid = self.builder.get_object("kdumpReserveTypeGrid")
+        self._reserveMemoryGrid = self.builder.get_object("kdumpReserveMemoryGrid")
+
         if os.path.exists(FADUMP_CAPABLE_FILE):
             self._fadumpButton.show()
         else:
             self._fadumpButton.hide()
-        self._toBeReservedLabel = self.builder.get_object("toBeReservedLabel")
-        self._toBeReservedSpin = self.builder.get_object("toBeReservedSpin")
-        self._totalMemLabel = self.builder.get_object("totalMemLabel")
-        self._totalMemMB = self.builder.get_object("totalMemMB")
-        self._usableMemLabel = self.builder.get_object("usableMemLabel")
-        self._usableMemMB = self.builder.get_object("usableMemMB")
 
         # Set an initial value and adjustment on the spin button
         lower, upper, step = getMemoryBounds()
@@ -83,10 +87,11 @@ class KdumpSpoke(NormalSpoke):
         # If a reserve amount is requested, set it in the spin button
         # Strip the trailing 'M'
         reserveMB = self._proxy.ReservedMemory
-        if reserveMB and reserveMB[-1] == 'M':
-            reserveMB = reserveMB[:-1]
-        if reserveMB:
-            self._toBeReservedSpin.set_value(int(reserveMB))
+        if reserveMB != "auto":
+            if reserveMB and reserveMB[-1] == 'M':
+                reserveMB = reserveMB[:-1]
+            if reserveMB:
+                self._toBeReservedSpin.set_value(int(reserveMB))
 
         # Set the various labels. Use the spin button signal handler to set the
         # usable memory label once the other two have been set.
@@ -99,6 +104,12 @@ class KdumpSpoke(NormalSpoke):
         # enable/disable checkbox.
         if self._proxy.KdumpEnabled:
             self._enableButton.set_active(True)
+            if reserveMB == "auto":
+                self._autoButton.set_active(True)
+                self._manualButton.set_active(False)
+            else:
+                self._autoButton.set_active(False)
+                self._manualButton.set_active(True)
         else:
             self._enableButton.set_active(False)
 
@@ -110,7 +121,10 @@ class KdumpSpoke(NormalSpoke):
     def apply(self):
         # Copy the GUI state into the AddonData object
         self._proxy.KdumpEnabled = self._enableButton.get_active()
-        self._proxy.ReservedMemory = "%dM" % self._toBeReservedSpin.get_value_as_int()
+        if self._autoButton.get_active():
+            self._proxy.ReservedMemory = "auto"
+        else:
+            self._proxy.ReservedMemory = "%dM" % self._toBeReservedSpin.get_value_as_int()
         self._proxy.FadumpEnabled = self._fadumpButton.get_active()
 
     @property
@@ -138,18 +152,32 @@ class KdumpSpoke(NormalSpoke):
     # SIGNAL HANDLERS
     def on_enable_kdump_toggled(self, checkbutton, user_data=None):
         status = checkbutton.get_active()
-        # If disabling, set everything to insensitve. Otherwise, only set the radio
+        # If disabling, hide everything. Otherwise, set the radio
         # button and currently reserved widgets to sensitive and then fake a
         # toggle event on the radio button to set the state on the reserve
         # amount spin button and total/usable mem display.
-        fancy_set_sensitive(self._toBeReservedSpin, status)
-        self._totalMemLabel.set_sensitive(status)
-        self._totalMemMB.set_sensitive(status)
-        self._usableMemLabel.set_sensitive(status)
-        self._usableMemMB.set_sensitive(status)
         self._fadumpButton.set_sensitive(status)
-        if not status:
+        if status:
+            self._autoButton.emit("toggled")
+            self._reserveTypeGrid.show()
+        else:
+            self._autoWarn.hide()
+            self._reserveMemoryGrid.hide()
+            self._reserveTypeGrid.hide()
             self._fadumpButton.set_active(False)
+
+    def on_reservation_toggled(self, radiobutton, user_data=None):
+        status = self._manualButton.get_active()
+
+        # If setting to auto, hide the manual config spinner and
+        # the total/usable memory labels
+        if status:
+            self._autoWarn.hide()
+            self._reserveMemoryGrid.show()
+            fancy_set_sensitive(self._toBeReservedSpin, status)
+        else:
+            self._autoWarn.show()
+            self._reserveMemoryGrid.hide()
 
     def on_enable_fadump_toggled(self, checkbutton, user_data=None):
         if self._enableButton.get_active():
