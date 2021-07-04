@@ -37,3 +37,5 @@ KDUMP = DBusServiceIdentifier(
     namespace=KDUMP_NAMESPACE,
     message_bus=DBus
 )
+
+ENCRYPTION_WARNING = "Encrypted storage is in use. If kdump target is based on the encrypted device, kdump may require extra memory and prompt for password before starting the dump process. "

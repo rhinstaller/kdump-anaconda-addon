@@ -19,9 +19,11 @@
 # Red Hat Author(s): David Shea <dshea@redhat.com>
 #
 import re
-__all__ = ["getReservedMemory", "getTotalMemory", "getMemoryBounds"]
+__all__ = ["getReservedMemory", "getTotalMemory", "getMemoryBounds", "getLuksDevices"]
 
 import blivet.arch
+from pyanaconda.modules.common.structures.storage import DeviceData
+from pyanaconda.modules.common.constants.services import STORAGE
 
 _reservedMemory = None
 def getReservedMemory():
@@ -85,3 +87,23 @@ def getMemoryBounds():
         upperBound = lowerBound = 0
 
     return (lowerBound, upperBound, step)
+
+def getLuksDevices():
+    devs = []
+
+    storage_module = STORAGE.get_proxy()
+    if storage_module.CreatedPartitioning:
+        object_path = storage_module.CreatedPartitioning[-1]
+        partitioning = STORAGE.get_proxy(object_path)
+        device_tree = STORAGE.get_proxy(partitioning.GetDeviceTree())
+        devices = device_tree.GetDevices()
+
+        for device_name in devices:
+            device_data = DeviceData.from_structure(
+                device_tree.GetDeviceData(device_name)
+            )
+
+            if device_data.type == 'luks/dm-crypt':
+                devs.append(device_name)
+
+    return devs

@@ -15,12 +15,16 @@ CRASHKERNEL_FIXTURE = {
 
 class KdumpInstallationTestCase(TestCase):
 
+    @patch("com_redhat_kdump.common.STORAGE")
     @patch("com_redhat_kdump.service.installation.STORAGE")
-    def configuration_kdump_disabled_test(self, mock_storage):
+    def configuration_kdump_disabled_test(self, mock_storage, partition_storage):
         bootloader_proxy = mock_storage.get_proxy.return_value
         bootloader_proxy.ExtraArguments = [
             "a=1", "b=2", "c=3", "crashkernel=128M"
         ]
+
+        partition_proxy = partition_storage.get_proxy.return_value
+        partition_proxy.CreatedPartitioning = []
 
         task = KdumpBootloaderConfigurationTask(
             kernels=[],
@@ -35,12 +39,16 @@ class KdumpInstallationTestCase(TestCase):
             "a=1", "b=2", "c=3"
         ])
 
+    @patch("com_redhat_kdump.common.STORAGE")
     @patch("com_redhat_kdump.service.installation.STORAGE")
-    def configuration_kdump_enabled_test(self, mock_storage):
+    def configuration_kdump_enabled_test(self, mock_storage, partition_storage):
         bootloader_proxy = mock_storage.get_proxy.return_value
         bootloader_proxy.ExtraArguments = [
             "a=1", "b=2", "c=3", "crashkernel=128M"
         ]
+
+        partition_proxy = partition_storage.get_proxy.return_value
+        partition_proxy.CreatedPartitioning = []
 
         task = KdumpBootloaderConfigurationTask(
             kernels=[],
@@ -55,13 +63,17 @@ class KdumpInstallationTestCase(TestCase):
             "a=1", "b=2", "c=3", "crashkernel=128M"
         ])
 
+    @patch("com_redhat_kdump.common.STORAGE")
     @patch("com_redhat_kdump.service.installation.os")
     @patch("com_redhat_kdump.service.installation.STORAGE")
-    def configuration_fadump_enabled_test(self, mock_storage, mock_os):
+    def configuration_fadump_enabled_test(self, mock_storage, mock_os, partition_storage):
         bootloader_proxy = mock_storage.get_proxy.return_value
         bootloader_proxy.ExtraArguments = [
             "a=1", "b=2", "c=3", "crashkernel=256M"
         ]
+
+        partition_proxy = partition_storage.get_proxy.return_value
+        partition_proxy.CreatedPartitioning = []
 
         task = KdumpBootloaderConfigurationTask(
             kernels=[],
@@ -77,14 +89,18 @@ class KdumpInstallationTestCase(TestCase):
             "a=1", "b=2", "c=3", "fadump=on"
         ])
 
+    @patch("com_redhat_kdump.common.STORAGE")
     @patch("builtins.open", MockBuiltinRead(CRASHKERNEL_FIXTURE))
     @patch("os.path.exists", MockOsPathExists(CRASHKERNEL_FIXTURE))
     @patch("com_redhat_kdump.service.installation.STORAGE")
-    def configuration_kdump_crashkernel_auto_test(self, mock_storage):
+    def configuration_kdump_crashkernel_auto_test(self, mock_storage, partition_storage):
         bootloader_proxy = mock_storage.get_proxy.return_value
         bootloader_proxy.ExtraArguments = [
             "a=1", "b=2", "c=3", "crashkernel=auto"
         ]
+
+        partition_proxy = partition_storage.get_proxy.return_value
+        partition_proxy.CreatedPartitioning = []
 
         task = KdumpBootloaderConfigurationTask(
             kernels=['5.13'],
@@ -99,14 +115,18 @@ class KdumpInstallationTestCase(TestCase):
             "a=1", "b=2", "c=3", "crashkernel=3G"
         ])
 
+    @patch("com_redhat_kdump.common.STORAGE")
     @patch("builtins.open", MockBuiltinRead(CRASHKERNEL_FIXTURE))
     @patch("os.path.exists", MockOsPathExists(CRASHKERNEL_FIXTURE))
     @patch("com_redhat_kdump.service.installation.STORAGE")
-    def configuration_kdump_crashkernel_auto_fallback_test(self, mock_storage):
+    def configuration_kdump_crashkernel_auto_fallback_test(self, mock_storage, partition_storage):
         bootloader_proxy = mock_storage.get_proxy.return_value
         bootloader_proxy.ExtraArguments = [
             "a=1", "b=2", "c=3", "crashkernel=auto"
         ]
+
+        partition_proxy = partition_storage.get_proxy.return_value
+        partition_proxy.CreatedPartitioning = []
 
         task = KdumpBootloaderConfigurationTask(
             kernels=['non-exist'],
@@ -121,14 +141,18 @@ class KdumpInstallationTestCase(TestCase):
             "a=1", "b=2", "c=3", "crashkernel=256M"
         ])
 
+    @patch("com_redhat_kdump.common.STORAGE")
     @patch("builtins.open", MockBuiltinRead({}))
     @patch("os.path.exists", MockOsPathExists({}))
     @patch("com_redhat_kdump.service.installation.STORAGE")
-    def configuration_kdump_crashkernel_auto_fallback_legacy_test(self, mock_storage):
+    def configuration_kdump_crashkernel_auto_fallback_legacy_test(self, mock_storage, partition_storage):
         bootloader_proxy = mock_storage.get_proxy.return_value
         bootloader_proxy.ExtraArguments = [
             "a=1", "b=2", "c=3", "crashkernel=auto"
         ]
+
+        partition_proxy = partition_storage.get_proxy.return_value
+        partition_proxy.CreatedPartitioning = []
 
         task = KdumpBootloaderConfigurationTask(
             kernels=['non-exist'],

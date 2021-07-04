@@ -24,16 +24,18 @@
 import os.path
 import re
 
+from pyanaconda.modules.common.constants.services import STORAGE
 from pyanaconda.modules.common.util import is_module_available
 from pyanaconda.ui.categories.system import SystemCategory
 from pyanaconda.ui.tui.spokes import NormalTUISpoke
 from pyanaconda.ui.tui.tuiobject import Dialog
+
 from simpleline.render.widgets import CheckboxWidget, EntryWidget, TextWidget
 from simpleline.render.containers import ListColumnContainer
 from simpleline.render.screen import InputState
-from com_redhat_kdump.common import getMemoryBounds
+from com_redhat_kdump.common import getMemoryBounds, getLuksDevices
 from com_redhat_kdump.i18n import N_, _
-from com_redhat_kdump.constants import FADUMP_CAPABLE_FILE, KDUMP
+from com_redhat_kdump.constants import FADUMP_CAPABLE_FILE, KDUMP, ENCRYPTION_WARNING
 
 __all__ = ["KdumpSpoke"]
 
@@ -49,8 +51,25 @@ class KdumpSpoke(NormalTUISpoke):
         self._lower, self._upper, self._step = getMemoryBounds()
         # Allow a string of digits optionally followed by 'M'
         self._reserve_check_re = re.compile(r'^(auto)|(\d+M?)$')
-
         self._proxy = KDUMP.get_proxy()
+        self._luks_devs = []
+        self._ready = True
+
+    def _check_storage_change(self, interface, changed, invalid):
+        self._ready = False
+        if changed.get("AppliedPartitioning"):
+            self._luks_devs = getLuksDevices()
+        self._ready = True
+
+    @property
+    def ready(self):
+        return self._ready
+
+    def initialize(self):
+        self._luks_devs = getLuksDevices()
+        # Connect a callback to the PropertiesChanged signal.
+        storage = STORAGE.get_proxy()
+        storage.PropertiesChanged.connect(self._check_storage_change)
 
     @classmethod
     def should_run(cls, environment, data):
@@ -65,11 +84,13 @@ class KdumpSpoke(NormalTUISpoke):
 
     @property
     def status(self):
-        if self._proxy.KdumpEnabled:
-            state = _("Kdump is enabled")
-        else:
-            state = _("Kdump is disabled")
-        return state
+        if not self._proxy.KdumpEnabled:
+            return _("Kdump is disabled")
+        if not self._ready:
+            return _("Checking storage...")
+        if self._luks_devs:
+            return _("Kdump may require extra setup for encrypted devices.")
+        return _("Kdump is enabled")
 
     def refresh(self, args=None):
         super().refresh(args)
@@ -93,6 +114,11 @@ class KdumpSpoke(NormalTUISpoke):
                     "your use case. It is recommended to verify "
                     "if the crashkernel value is suitable after "
                     "installation."))
+                self.window.add(message)
+
+            if self._luks_devs:
+                self.window.add_separator()
+                message = TextWidget(_(ENCRYPTION_WARNING))
                 self.window.add(message)
 
         self.window.add_separator()

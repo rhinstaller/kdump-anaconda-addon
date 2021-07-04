@@ -24,7 +24,8 @@ from pyanaconda.modules.common.constants.services import STORAGE, PAYLOADS
 from pyanaconda.modules.common.task import Task
 from pyanaconda.modules.payloads.payload.dnf.utils import get_kernel_version_list
 
-from com_redhat_kdump.constants import FADUMP_CAPABLE_FILE, CRASHKERNEL_DEFAULT_FILE
+from com_redhat_kdump.constants import FADUMP_CAPABLE_FILE, CRASHKERNEL_DEFAULT_FILE, ENCRYPTION_WARNING
+from com_redhat_kdump.common import getLuksDevices
 
 log = logging.getLogger(__name__)
 
@@ -49,6 +50,9 @@ class KdumpBootloaderConfigurationTask(Task):
 
     def run(self):
         """Run the task."""
+        if getLuksDevices():
+            log.warning(ENCRYPTION_WARNING)
+
         # Update the bootloader arguments.
         bootloader_proxy = STORAGE.get_proxy(BOOTLOADER)
 
