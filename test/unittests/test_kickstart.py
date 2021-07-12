@@ -28,7 +28,7 @@ class KdumpKickstartTestCase(TestCase):
     def ks_default_test(self):
         self.assertEqual(self._service.kdump_enabled, False)
         self.assertEqual(self._service.fadump_enabled, False)
-        self.assertEqual(self._service.reserved_memory, "128")
+        self.assertEqual(self._service.reserved_memory, "160")
 
         self._check_ks_output("""
         %addon com_redhat_kdump --disable

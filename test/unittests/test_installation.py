@@ -10,7 +10,7 @@ class KdumpInstallationTestCase(TestCase):
     def configuration_kdump_disabled_test(self, mock_storage):
         bootloader_proxy = mock_storage.get_proxy.return_value
         bootloader_proxy.ExtraArguments = [
-            "a=1", "b=2", "c=3", "crashkernel=128M"
+            "a=1", "b=2", "c=3", "crashkernel=160M"
         ]
 
         task = KdumpConfigurationTask(
@@ -28,7 +28,7 @@ class KdumpInstallationTestCase(TestCase):
     def configuration_kdump_enabled_test(self, mock_storage):
         bootloader_proxy = mock_storage.get_proxy.return_value
         bootloader_proxy.ExtraArguments = [
-            "a=1", "b=2", "c=3", "crashkernel=128M"
+            "a=1", "b=2", "c=3", "crashkernel=160M"
         ]
 
         task = KdumpConfigurationTask(
@@ -47,7 +47,7 @@ class KdumpInstallationTestCase(TestCase):
     def configuration_fadump_enabled_test(self, mock_storage, mock_os):
         bootloader_proxy = mock_storage.get_proxy.return_value
         bootloader_proxy.ExtraArguments = [
-            "a=1", "b=2", "c=3", "crashkernel=128M"
+            "a=1", "b=2", "c=3", "crashkernel=160M"
         ]
 
         task = KdumpConfigurationTask(
