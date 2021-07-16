@@ -69,8 +69,8 @@ class KdumpBootloaderConfigurationTask(Task):
             if self._reserved_memory == 'auto':
                 # Try to get crashkernel arg from crashkernel.con
                 if len(self._kernels) > 1:
-                    log.warn("crashkernel=auto specified, and multiple kernels installed, "
-                             "will use crashkernel.default value from latest installed kernel.")
+                    log.warning("crashkernel=auto specified, and multiple kernels installed, "
+                                "will use crashkernel.default value from latest installed kernel.")
 
                 for k in self._kernels:
                     ck_conf_file = "%s/%s" % (self._sysroot, CRASHKERNEL_DEFAULT_FILE % k)
@@ -82,8 +82,8 @@ class KdumpBootloaderConfigurationTask(Task):
                             break
 
                 if ck_arg is None:
-                    log.warn("Can't find a valid crashkernel.default from the installation, "
-                             "falling back to use installer kernel's crashkernel.default")
+                    log.warning("Can't find a valid crashkernel.default from the installation, "
+                                "falling back to use installer kernel's crashkernel.default")
                     ck_conf_file = CRASHKERNEL_DEFAULT_FILE % os.uname().release
                     if os.path.exists(ck_conf_file):
                         with open(ck_conf_file, 'r') as ck_conf:
