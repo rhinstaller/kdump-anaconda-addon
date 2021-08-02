@@ -57,8 +57,9 @@ class KdumpSpoke(NormalTUISpoke):
 
     def _check_storage_change(self, interface, changed, invalid):
         self._ready = False
-        if changed.get("AppliedPartitioning"):
-            self._luks_devs = getLuksDevices()
+        partition = changed.get("AppliedPartitioning")
+        if partition:
+            self._luks_devs = getLuksDevices(partition.unpack())
         self._ready = True
 
     @property

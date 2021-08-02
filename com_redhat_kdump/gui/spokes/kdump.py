@@ -148,8 +148,9 @@ class KdumpSpoke(NormalSpoke):
         # pylint: disable=no-member
         hubQ.send_not_ready(self.__class__.__name__)
 
-        if changed.get("AppliedPartitioning"):
-            self._luks_devs = getLuksDevices()
+        partition = changed.get("AppliedPartitioning")
+        if partition:
+            self._luks_devs = getLuksDevices(partition.unpack())
 
         self._ready = True
         # pylint: disable=no-member
