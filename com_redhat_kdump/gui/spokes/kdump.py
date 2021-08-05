@@ -24,6 +24,7 @@
 import os.path
 from gi.repository import Gtk
 
+from pyanaconda.flags import flags
 from pyanaconda.modules.common.constants.services import STORAGE
 from pyanaconda.modules.common.util import is_module_available
 from pyanaconda.ui.categories.system import SystemCategory
@@ -163,7 +164,7 @@ class KdumpSpoke(NormalSpoke):
     @property
     def completed(self):
         """ Make sure user have checked the warning about crypted devices """
-        if self._checked_luks_devs != self._luks_devs:
+        if self._checked_luks_devs != self._luks_devs and not flags.automatedInstall:
             return False
         return True
 
