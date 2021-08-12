@@ -164,7 +164,7 @@ class KdumpSpoke(NormalSpoke):
     @property
     def completed(self):
         """ Make sure user have checked the warning about crypted devices """
-        if self._checked_luks_devs != self._luks_devs and not flags.automatedInstall:
+        if self._luks_devs and self._checked_luks_devs != self._luks_devs and not flags.automatedInstall:
             return False
         return True
 
