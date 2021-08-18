@@ -50,9 +50,6 @@ class KdumpBootloaderConfigurationTask(Task):
 
     def run(self):
         """Run the task."""
-        if getLuksDevices():
-            log.warning(ENCRYPTION_WARNING)
-
         # Update the bootloader arguments.
         bootloader_proxy = STORAGE.get_proxy(BOOTLOADER)
 

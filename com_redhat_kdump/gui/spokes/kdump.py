@@ -89,7 +89,6 @@ class KdumpSpoke(NormalSpoke):
         self._toBeReservedSpin.set_adjustment(adjustment)
         self._toBeReservedSpin.set_value(lower)
 
-        self._luks_devs = getLuksDevices()
         # Connect a callback to the PropertiesChanged signal.
         storage = STORAGE.get_proxy()
         storage.PropertiesChanged.connect(self._check_storage_change)

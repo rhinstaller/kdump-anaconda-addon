@@ -67,7 +67,6 @@ class KdumpSpoke(NormalTUISpoke):
         return self._ready
 
     def initialize(self):
-        self._luks_devs = getLuksDevices()
         # Connect a callback to the PropertiesChanged signal.
         storage = STORAGE.get_proxy()
         storage.PropertiesChanged.connect(self._check_storage_change)

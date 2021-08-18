@@ -88,25 +88,19 @@ def getMemoryBounds():
 
     return (lowerBound, upperBound, step)
 
-def getLuksDevices(object_path=None):
+def getLuksDevices(object_path):
     devs = []
 
-    if object_path is None:
-        storage_module = STORAGE.get_proxy()
-        if storage_module.CreatedPartitioning:
-            object_path = storage_module.CreatedPartitioning[-1]
+    partitioning = STORAGE.get_proxy(object_path)
+    device_tree = STORAGE.get_proxy(partitioning.GetDeviceTree())
+    devices = device_tree.GetDevices()
 
-    if object_path:
-        partitioning = STORAGE.get_proxy(object_path)
-        device_tree = STORAGE.get_proxy(partitioning.GetDeviceTree())
-        devices = device_tree.GetDevices()
+    for device_name in devices:
+        device_data = DeviceData.from_structure(
+            device_tree.GetDeviceData(device_name)
+        )
 
-        for device_name in devices:
-            device_data = DeviceData.from_structure(
-                device_tree.GetDeviceData(device_name)
-            )
-
-            if device_data.type == 'luks/dm-crypt':
-                devs.append(device_name)
+        if device_data.type == 'luks/dm-crypt':
+            devs.append(device_name)
 
     return devs
