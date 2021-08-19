@@ -128,6 +128,7 @@ class KdumpSpoke(NormalSpoke):
         # Force a toggled signal on the button in case it's state has not changed
         self._enableButton.emit("toggled")
 
+        self.clear_info()
         if self._luks_devs:
             self.set_warning(_(ENCRYPTION_WARNING))
 
