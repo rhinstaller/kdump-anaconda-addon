@@ -55,6 +55,11 @@ class KdumpSpoke(NormalTUISpoke):
         self._luks_devs = []
         self._ready = True
 
+    @staticmethod
+    def get_screen_id():
+        """Return a unique id of this UI screen."""
+        return "kdump-configuration"
+
     def _check_storage_change(self, interface, changed, invalid):
         self._ready = False
         partition = changed.get("AppliedPartitioning")
