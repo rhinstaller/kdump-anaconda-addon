@@ -25,7 +25,7 @@ class KdumpKickstartTestCase(TestCase):
         output = self._service.generate_kickstart()
         self.assertEqual(output.strip(), dedent(ks_out).strip())
 
-    def ks_default_test(self):
+    def test_ks_default(self):
         self.assertEqual(self._service.kdump_enabled, False)
         self.assertEqual(self._service.fadump_enabled, False)
         self.assertEqual(self._service.reserved_memory, "auto")
@@ -36,7 +36,7 @@ class KdumpKickstartTestCase(TestCase):
         %end
         """)
 
-    def ks_enable_test(self):
+    def test_ks_enable(self):
         self._check_ks_input("""
         %addon com_redhat_kdump --enable
         %end
@@ -52,7 +52,7 @@ class KdumpKickstartTestCase(TestCase):
         %end
         """)
 
-    def ks_disable_test(self):
+    def test_ks_disable(self):
         self._check_ks_input("""
         %addon com_redhat_kdump --disable
         %end
@@ -68,7 +68,7 @@ class KdumpKickstartTestCase(TestCase):
         %end
         """)
 
-    def ks_reserve_mb_test(self):
+    def test_ks_reserve_mb(self):
         self._check_ks_input("""
         %addon com_redhat_kdump --enable --reserve-mb=256
         %end
@@ -84,7 +84,7 @@ class KdumpKickstartTestCase(TestCase):
         %end
         """)
 
-    def ks_reserve_auto_test(self):
+    def test_ks_reserve_auto(self):
         self._check_ks_input("""
         %addon com_redhat_kdump --enable --reserve-mb=auto
         %end
@@ -100,7 +100,7 @@ class KdumpKickstartTestCase(TestCase):
         %end
         """)
 
-    def ks_reserve_mb_invalid_test(self):
+    def test_ks_reserve_mb_invalid(self):
         ks_in = """
         %addon com_redhat_kdump --reserve-mb=
         %end
@@ -115,7 +115,7 @@ class KdumpKickstartTestCase(TestCase):
         ks_err = "Invalid value 'invalid' for --reserve-mb"
         self._check_ks_input(ks_in, [ks_err])
 
-    def ks_enablefadump_test(self):
+    def test_ks_enablefadump(self):
         self._check_ks_input("""
         %addon com_redhat_kdump --disable --enablefadump
         %end

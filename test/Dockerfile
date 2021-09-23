@@ -9,7 +9,7 @@ RUN dnf update -y \
 
 RUN pip install \
   pylint \
-  nose
+  pytest
 
 RUN mkdir /kdump-anaconda-addon
 WORKDIR /kdump-anaconda-addon

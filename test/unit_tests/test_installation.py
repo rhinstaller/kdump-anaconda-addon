@@ -17,7 +17,7 @@ class KdumpInstallationTestCase(TestCase):
 
     @patch("com_redhat_kdump.common.STORAGE")
     @patch("com_redhat_kdump.service.installation.STORAGE")
-    def configuration_kdump_disabled_test(self, mock_storage, partition_storage):
+    def test_configuration_kdump_disabled(self, mock_storage, partition_storage):
         bootloader_proxy = mock_storage.get_proxy.return_value
         bootloader_proxy.ExtraArguments = [
             "a=1", "b=2", "c=3", "crashkernel=128M"
@@ -41,7 +41,7 @@ class KdumpInstallationTestCase(TestCase):
 
     @patch("com_redhat_kdump.common.STORAGE")
     @patch("com_redhat_kdump.service.installation.STORAGE")
-    def configuration_kdump_enabled_test(self, mock_storage, partition_storage):
+    def test_configuration_kdump_enabled(self, mock_storage, partition_storage):
         bootloader_proxy = mock_storage.get_proxy.return_value
         bootloader_proxy.ExtraArguments = [
             "a=1", "b=2", "c=3", "crashkernel=128M"
@@ -66,7 +66,7 @@ class KdumpInstallationTestCase(TestCase):
     @patch("com_redhat_kdump.common.STORAGE")
     @patch("com_redhat_kdump.service.installation.os")
     @patch("com_redhat_kdump.service.installation.STORAGE")
-    def configuration_fadump_enabled_test(self, mock_storage, mock_os, partition_storage):
+    def test_configuration_fadump_enabled(self, mock_storage, mock_os, partition_storage):
         bootloader_proxy = mock_storage.get_proxy.return_value
         bootloader_proxy.ExtraArguments = [
             "a=1", "b=2", "c=3", "crashkernel=256M"
@@ -93,7 +93,7 @@ class KdumpInstallationTestCase(TestCase):
     @patch("builtins.open", MockBuiltinRead(CRASHKERNEL_FIXTURE))
     @patch("os.path.exists", MockOsPathExists(CRASHKERNEL_FIXTURE))
     @patch("com_redhat_kdump.service.installation.STORAGE")
-    def configuration_kdump_crashkernel_auto_test(self, mock_storage, partition_storage):
+    def test_configuration_kdump_crashkernel_auto(self, mock_storage, partition_storage):
         bootloader_proxy = mock_storage.get_proxy.return_value
         bootloader_proxy.ExtraArguments = [
             "a=1", "b=2", "c=3", "crashkernel=auto"
@@ -119,7 +119,7 @@ class KdumpInstallationTestCase(TestCase):
     @patch("builtins.open", MockBuiltinRead(CRASHKERNEL_FIXTURE))
     @patch("os.path.exists", MockOsPathExists(CRASHKERNEL_FIXTURE))
     @patch("com_redhat_kdump.service.installation.STORAGE")
-    def configuration_kdump_crashkernel_auto_fallback_test(self, mock_storage, partition_storage):
+    def test_configuration_kdump_crashkernel_auto_fallback(self, mock_storage, partition_storage):
         bootloader_proxy = mock_storage.get_proxy.return_value
         bootloader_proxy.ExtraArguments = [
             "a=1", "b=2", "c=3", "crashkernel=auto"
@@ -145,7 +145,7 @@ class KdumpInstallationTestCase(TestCase):
     @patch("builtins.open", MockBuiltinRead({}))
     @patch("os.path.exists", MockOsPathExists({}))
     @patch("com_redhat_kdump.service.installation.STORAGE")
-    def configuration_kdump_crashkernel_auto_fallback_legacy_test(self, mock_storage, partition_storage):
+    def test_configuration_kdump_crashkernel_auto_fallback_legacy(self, mock_storage, partition_storage):
         bootloader_proxy = mock_storage.get_proxy.return_value
         bootloader_proxy.ExtraArguments = [
             "a=1", "b=2", "c=3", "crashkernel=auto"
@@ -168,7 +168,7 @@ class KdumpInstallationTestCase(TestCase):
         ])
 
     @patch("com_redhat_kdump.service.installation.util")
-    def installation_kdump_disabled_test(self, mock_util):
+    def test_installation_kdump_disabled(self, mock_util):
         task = KdumpInstallationTask(
             sysroot="/mnt/sysroot",
             kdump_enabled=False
@@ -177,7 +177,7 @@ class KdumpInstallationTestCase(TestCase):
         mock_util.execWithRedirect.assert_not_called()
 
     @patch("com_redhat_kdump.service.installation.util")
-    def installation_kdump_enabled_test(self, mock_util):
+    def test_installation_kdump_enabled(self, mock_util):
         task = KdumpInstallationTask(
             sysroot="/mnt/sysroot",
             kdump_enabled=True

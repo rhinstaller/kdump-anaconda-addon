@@ -95,7 +95,7 @@ runpylint:
 
 unittest:
 	@echo "***Running unittests checks***"
-	PYTHONPATH=. python3 -m nose --processes=-1 -vw test/unittests
+	pytest -vv test/unit_tests
 
 version.sh:
 	@echo "KDUMP_ADDON_VERSION=$(VERSION)" > version.sh
