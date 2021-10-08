@@ -10,27 +10,27 @@
 # noriko <noriko@redhat.com>, 2014. #zanata
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-08 14:21+0800\n"
-"PO-Revision-Date: 2014-11-04 01:51-0500\n"
+"POT-Creation-Date: 2021-09-18 14:03+0800\n"
+"PO-Revision-Date: 2021-09-29 16:10+0200\n"
 "Last-Translator: noriko <noriko@redhat.com>\n"
 "Language-Team: Japanese <jp@li.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Zanata 3.5.1\n"
-"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Poedit 2.2.1\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../com_redhat_kdump/service/kickstart.py:103
-#, fuzzy, python-format
+#, python-format
 msgid "Invalid value '%s' for --reserve-mb"
-msgstr "--reserve-mb に対して %s は不正な値です"
+msgstr "--reserve-mb の無効な値 '%s'"
 
 #: ../com_redhat_kdump/gui/spokes/kdump.py:52
 msgid "_KDUMP"
-msgstr "_KDUMP"
+msgstr "_KDUMP(_K)"
 
 #: ../com_redhat_kdump/gui/spokes/kdump.py:180
 #: ../com_redhat_kdump/tui/spokes/kdump.py:88
@@ -40,12 +40,12 @@ msgstr "Kdump が無効になります"
 #: ../com_redhat_kdump/gui/spokes/kdump.py:182
 #: ../com_redhat_kdump/tui/spokes/kdump.py:90
 msgid "Checking storage..."
-msgstr ""
+msgstr "ストレージを確認中..."
 
 #: ../com_redhat_kdump/gui/spokes/kdump.py:184
 #: ../com_redhat_kdump/tui/spokes/kdump.py:92
 msgid "Kdump may require extra setup for encrypted devices."
-msgstr ""
+msgstr "kdump では、暗号化されたデバイスに追加の設定が必要になる場合があります。"
 
 #: ../com_redhat_kdump/gui/spokes/kdump.py:185
 #: ../com_redhat_kdump/tui/spokes/kdump.py:93
@@ -62,22 +62,20 @@ msgid ""
 "crashkernel value provided by the kernel package. This is a best-effort "
 "support and might not fit your use case. It is recommended to verify if the "
 "crashkernel value is suitable after installation."
-msgstr ""
+msgstr "kdump メモリーの自動予約は使用中です。Kdump は、カーネルパッケージが提供するデフォルトの crashkernel 値を使用します。これはベストエフォートで、ユースケースに適合しない可能性があります。インストール後に crashkernel の値が適切かどうかを確認することが推奨されます。"
 
 #: ../com_redhat_kdump/tui/spokes/kdump.py:127
-#, fuzzy
 msgid "Enable kdump"
-msgstr "kdump を有効にする (_E)"
+msgstr "kdump の有効化"
 
 #: ../com_redhat_kdump/tui/spokes/kdump.py:135
-#, fuzzy
 msgid "Enable dump mode fadump"
-msgstr "ダンプモードの fadump を有効にする (_E)"
+msgstr "ダンプモード fadump を有効にします"
 
 #: ../com_redhat_kdump/tui/spokes/kdump.py:140
 #, python-format
 msgid "Reserve amount (%d - %d MB)"
-msgstr ""
+msgstr "予約容量 (%d - %d MB)"
 
 #: tmp/kdump.glade.h:1
 msgid "KDUMP"
@@ -89,11 +87,7 @@ msgid ""
 "kdump will capture information from your system that can be invaluable in "
 "determining the cause of the crash. Note that kdump does require reserving a "
 "portion of system memory that will be unavailable for other uses."
-msgstr ""
-"Kdump はカーネルクラッシュダンプのメカニズムです。システムがクラッシュした場"
-"合、Kdump によりクラッシュの原因の判定に重要となる可能性のある情報がシステム"
-"からキャプチャされます。kdump 以外には使用できない kdump 専用の領域をシステム"
-"メモリー内に予約しておく必要があるため注意してください。"
+msgstr "Kdump はカーネルクラッシュダンプのメカニズムです。システムがクラッシュした場合、Kdump によりクラッシュの原因の判定に重要となる可能性のある情報がシステムからキャプチャされます。kdump 以外には使用できない kdump 専用の領域をシステムメモリー内に予約しておく必要があるため注意してください。"
 
 #: tmp/kdump.glade.h:3
 msgid "_Enable kdump"

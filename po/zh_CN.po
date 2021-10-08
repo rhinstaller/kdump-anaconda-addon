@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-08 14:21+0800\n"
+"POT-Creation-Date: 2021-09-18 14:03+0800\n"
 "PO-Revision-Date: 2014-11-03 11:59-0500\n"
 "Last-Translator: Leah Liu <lliu@redhat.com>\n"
 "Language-Team: Wei Liu\n"
@@ -22,9 +22,9 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 
 #: ../com_redhat_kdump/service/kickstart.py:103
-#, fuzzy, python-format
+#, python-format
 msgid "Invalid value '%s' for --reserve-mb"
-msgstr "--reserve-mb 的有效值"
+msgstr "--reserve-mb 的无效的值 '%s'"
 
 #: ../com_redhat_kdump/gui/spokes/kdump.py:52
 msgid "_KDUMP"
@@ -38,12 +38,12 @@ msgstr "已禁用 Kdump"
 #: ../com_redhat_kdump/gui/spokes/kdump.py:182
 #: ../com_redhat_kdump/tui/spokes/kdump.py:90
 msgid "Checking storage..."
-msgstr ""
+msgstr "正在检查存储......"
 
 #: ../com_redhat_kdump/gui/spokes/kdump.py:184
 #: ../com_redhat_kdump/tui/spokes/kdump.py:92
 msgid "Kdump may require extra setup for encrypted devices."
-msgstr ""
+msgstr "Kdump 可能会需要额外的步骤来处理加密的设备。"
 
 #: ../com_redhat_kdump/gui/spokes/kdump.py:185
 #: ../com_redhat_kdump/tui/spokes/kdump.py:93
@@ -60,22 +60,20 @@ msgid ""
 "crashkernel value provided by the kernel package. This is a best-effort "
 "support and might not fit your use case. It is recommended to verify if the "
 "crashkernel value is suitable after installation."
-msgstr ""
+msgstr "自动 kdump 内存保留功能在使用。Kdump 将会使用内核软件包提供的默认 crashkernel 值。这个值可能并不适用于您的具体环境，我们推荐在安装后对 crashkernel 值进行检查。"
 
 #: ../com_redhat_kdump/tui/spokes/kdump.py:127
-#, fuzzy
 msgid "Enable kdump"
-msgstr "启用 kdump（_E）"
+msgstr "启用 kdump"
 
 #: ../com_redhat_kdump/tui/spokes/kdump.py:135
-#, fuzzy
 msgid "Enable dump mode fadump"
-msgstr "启用转储模式 fadump（_E）"
+msgstr "启用 dump 模式 fadump"
 
 #: ../com_redhat_kdump/tui/spokes/kdump.py:140
 #, python-format
 msgid "Reserve amount (%d - %d MB)"
-msgstr ""
+msgstr "保留量 (%d - %d MB)"
 
 #: tmp/kdump.glade.h:1
 msgid "KDUMP"
@@ -87,10 +85,7 @@ msgid ""
 "kdump will capture information from your system that can be invaluable in "
 "determining the cause of the crash. Note that kdump does require reserving a "
 "portion of system memory that will be unavailable for other uses."
-msgstr ""
-"Kdump 是一个内核崩溃转储机制。在系统崩溃的时候，kdump 将捕获系统信息，这对于"
-"诊断崩溃的原因非常有用。注意，kdump 需要预留一部分系统内存，且这部分内存对于"
-"其他用户是不可用的。"
+msgstr "Kdump 是一个内核崩溃转储机制。在系统崩溃的时候，kdump 将捕获系统信息，这对于诊断崩溃的原因非常有用。注意，kdump 需要预留一部分系统内存，且这部分内存对于其他用户是不可用的。"
 
 #: tmp/kdump.glade.h:3
 msgid "_Enable kdump"

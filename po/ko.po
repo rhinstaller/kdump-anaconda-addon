@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-08 14:21+0800\n"
+"POT-Creation-Date: 2021-09-18 14:03+0800\n"
 "PO-Revision-Date: 2014-11-10 05:08-0500\n"
 "Last-Translator: eukim <eukim@redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -23,9 +23,9 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../com_redhat_kdump/service/kickstart.py:103
-#, fuzzy, python-format
+#, python-format
 msgid "Invalid value '%s' for --reserve-mb"
-msgstr "--reserve-mb에 대해 %s는 잘못된 값입니다 "
+msgstr "--reserve-mb에 대한 잘못된 값 '%s'"
 
 #: ../com_redhat_kdump/gui/spokes/kdump.py:52
 msgid "_KDUMP"
@@ -34,22 +34,22 @@ msgstr "_KDUMP"
 #: ../com_redhat_kdump/gui/spokes/kdump.py:180
 #: ../com_redhat_kdump/tui/spokes/kdump.py:88
 msgid "Kdump is disabled"
-msgstr "Kdump가 비활성화됩니다 "
+msgstr "Kdump가 비활성화됩니다"
 
 #: ../com_redhat_kdump/gui/spokes/kdump.py:182
 #: ../com_redhat_kdump/tui/spokes/kdump.py:90
 msgid "Checking storage..."
-msgstr ""
+msgstr "저장소 확인 중..."
 
 #: ../com_redhat_kdump/gui/spokes/kdump.py:184
 #: ../com_redhat_kdump/tui/spokes/kdump.py:92
 msgid "Kdump may require extra setup for encrypted devices."
-msgstr ""
+msgstr "Kdump는 암호화된 장치에 대한 추가 설정이 필요할 수 있습니다."
 
 #: ../com_redhat_kdump/gui/spokes/kdump.py:185
 #: ../com_redhat_kdump/tui/spokes/kdump.py:93
 msgid "Kdump is enabled"
-msgstr "Kdump가 활성화됩니다 "
+msgstr "Kdump가 활성화됩니다"
 
 #: ../com_redhat_kdump/tui/spokes/kdump.py:48
 msgid "Kdump"
@@ -61,22 +61,20 @@ msgid ""
 "crashkernel value provided by the kernel package. This is a best-effort "
 "support and might not fit your use case. It is recommended to verify if the "
 "crashkernel value is suitable after installation."
-msgstr ""
+msgstr "자동 kdump 메모리 예약이 사용 중입니다. Kdump는 커널 패키지에서 제공하는 기본 크래시커널 값을 사용합니다. 이는 사용 사례에 적합하지 않을 수 있으므로 설치 후 크래시커널 값을 확인하는 것이 좋습니다."
 
 #: ../com_redhat_kdump/tui/spokes/kdump.py:127
-#, fuzzy
 msgid "Enable kdump"
-msgstr "kdump 활성화 (_E)"
+msgstr "kdump 활성화"
 
 #: ../com_redhat_kdump/tui/spokes/kdump.py:135
-#, fuzzy
 msgid "Enable dump mode fadump"
-msgstr "덤프 모드 fadump 활성화 (_E)"
+msgstr "덤프 모드 fadump 활성화"
 
 #: ../com_redhat_kdump/tui/spokes/kdump.py:140
 #, python-format
 msgid "Reserve amount (%d - %d MB)"
-msgstr ""
+msgstr "저장 가능 용량 (%d - %d MB)"
 
 #: tmp/kdump.glade.h:1
 msgid "KDUMP"
@@ -88,10 +86,7 @@ msgid ""
 "kdump will capture information from your system that can be invaluable in "
 "determining the cause of the crash. Note that kdump does require reserving a "
 "portion of system memory that will be unavailable for other uses."
-msgstr ""
-"kdump는 커널 충돌 덤프 기술입니다. 시스템 충돌 시, kdump는 충돌의 원인을 파악"
-"하는데 유용한 시스템 정보를 캡쳐합니다.kdump는 시스템 메모리의 한 부분을 차지"
-"하며, 이 부분은 다른 목적으로 사용할 수 없음을 알려드립니다."
+msgstr "kdump는 커널 충돌 덤프 기술입니다. 시스템 충돌 시, kdump는 충돌의 원인을 파악하는데 유용한 시스템 정보를 캡쳐합니다.kdump는 시스템 메모리의 한 부분을 차지하며, 이 부분은 다른 목적으로 사용할 수 없음을 알려드립니다."
 
 #: tmp/kdump.glade.h:3
 msgid "_Enable kdump"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-08 14:21+0800\n"
+"POT-Creation-Date: 2021-09-18 14:03+0800\n"
 "PO-Revision-Date: 2014-11-04 05:32-0500\n"
 "Last-Translator: Sam Friedmann <sfriedma@redhat.com>\n"
 "Language-Team: French <French fedora-trans-fr@fedoraproject.org>\n"
@@ -23,9 +23,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
 #: ../com_redhat_kdump/service/kickstart.py:103
-#, fuzzy, python-format
+#, python-format
 msgid "Invalid value '%s' for --reserve-mb"
-msgstr "Valeur %s non valide pour --reserve-mb"
+msgstr "Value '%s' non valide pour --reserve-mb"
 
 #: ../com_redhat_kdump/gui/spokes/kdump.py:52
 msgid "_KDUMP"
@@ -39,12 +39,12 @@ msgstr "Kdump est désactivé"
 #: ../com_redhat_kdump/gui/spokes/kdump.py:182
 #: ../com_redhat_kdump/tui/spokes/kdump.py:90
 msgid "Checking storage..."
-msgstr ""
+msgstr "Vérification du statut..."
 
 #: ../com_redhat_kdump/gui/spokes/kdump.py:184
 #: ../com_redhat_kdump/tui/spokes/kdump.py:92
 msgid "Kdump may require extra setup for encrypted devices."
-msgstr ""
+msgstr "Kdump peut nécessiter une configuration supplémentaire pour les périphériques cryptés."
 
 #: ../com_redhat_kdump/gui/spokes/kdump.py:185
 #: ../com_redhat_kdump/tui/spokes/kdump.py:93
@@ -61,22 +61,20 @@ msgid ""
 "crashkernel value provided by the kernel package. This is a best-effort "
 "support and might not fit your use case. It is recommended to verify if the "
 "crashkernel value is suitable after installation."
-msgstr ""
+msgstr "La réservation automatique de la mémoire kdump est en cours d'utilisation. Kdump utilisera la valeur par défaut du crashkernel fournie par le package du noyau. Il s'agit d'une assistance «best-effort» qui peut ne pas correspondre à votre cas d'utilisation. Il est recommandé de vérifier si la valeur crashkernel est appropriée après l'installation."
 
 #: ../com_redhat_kdump/tui/spokes/kdump.py:127
-#, fuzzy
 msgid "Enable kdump"
-msgstr "Activ_er Kdump"
+msgstr "Activer kdump"
 
 #: ../com_redhat_kdump/tui/spokes/kdump.py:135
-#, fuzzy
 msgid "Enable dump mode fadump"
-msgstr "Activ_er le mode de vidage fadump"
+msgstr "Activer le mode de vidage fadump"
 
 #: ../com_redhat_kdump/tui/spokes/kdump.py:140
 #, python-format
 msgid "Reserve amount (%d - %d MB)"
-msgstr ""
+msgstr "Montant de réserve (%d - %d Mo)"
 
 #: tmp/kdump.glade.h:1
 msgid "KDUMP"
@@ -88,11 +86,7 @@ msgid ""
 "kdump will capture information from your system that can be invaluable in "
 "determining the cause of the crash. Note that kdump does require reserving a "
 "portion of system memory that will be unavailable for other uses."
-msgstr ""
-"Kdump est un mécanisme de capture lors du plantage d'un noyau. Kdump capture "
-"les informations de votre système qui peuvent être cruciales pour aider à "
-"déterminer la cause de l'échec. Notez que kdump requiert une partie de la "
-"mémoire système qui sera indisponible pour d'autres utilisations."
+msgstr "Kdump est un mécanisme de capture lors du plantage d'un noyau. Kdump capture les informations de votre système qui peuvent être cruciales pour aider à déterminer la cause de l'échec. Notez que kdump requiert une partie de la mémoire système qui sera indisponible pour d'autres utilisations."
 
 #: tmp/kdump.glade.h:3
 msgid "_Enable kdump"
