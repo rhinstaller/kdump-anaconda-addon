@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-08 14:21+0800\n"
+"POT-Creation-Date: 2021-10-08 17:58+0800\n"
 "PO-Revision-Date: 2007-03-09 07:35-0500\n"
 "Last-Translator: Magnus Larsson <fedoratrans@gmail.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -15,6 +15,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Zanata 2.0.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: ../com_redhat_kdump/constants.py:41
+msgid ""
+"Encrypted storage is in use. If kdump target is based on the encrypted "
+"device, kdump may require extra memory and prompt for password before "
+"starting the dump process."
+msgstr ""
 
 #: ../com_redhat_kdump/service/kickstart.py:103
 #, python-format

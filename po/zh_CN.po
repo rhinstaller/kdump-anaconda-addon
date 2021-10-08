@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 14:03+0800\n"
+"POT-Creation-Date: 2021-10-08 17:58+0800\n"
 "PO-Revision-Date: 2014-11-03 11:59-0500\n"
 "Last-Translator: Leah Liu <lliu@redhat.com>\n"
 "Language-Team: Wei Liu\n"
@@ -20,6 +20,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Zanata 3.5.1\n"
 "Plural-Forms: nplurals=1; plural=0\n"
+
+#: ../com_redhat_kdump/constants.py:41
+msgid ""
+"Encrypted storage is in use. If kdump target is based on the encrypted "
+"device, kdump may require extra memory and prompt for password before "
+"starting the dump process."
+msgstr ""
 
 #: ../com_redhat_kdump/service/kickstart.py:103
 #, python-format
@@ -60,7 +67,10 @@ msgid ""
 "crashkernel value provided by the kernel package. This is a best-effort "
 "support and might not fit your use case. It is recommended to verify if the "
 "crashkernel value is suitable after installation."
-msgstr "自动 kdump 内存保留功能在使用。Kdump 将会使用内核软件包提供的默认 crashkernel 值。这个值可能并不适用于您的具体环境，我们推荐在安装后对 crashkernel 值进行检查。"
+msgstr ""
+"自动 kdump 内存保留功能在使用。Kdump 将会使用内核软件包提供的默认 "
+"crashkernel 值。这个值可能并不适用于您的具体环境，我们推荐在安装后对 "
+"crashkernel 值进行检查。"
 
 #: ../com_redhat_kdump/tui/spokes/kdump.py:127
 msgid "Enable kdump"
@@ -85,7 +95,10 @@ msgid ""
 "kdump will capture information from your system that can be invaluable in "
 "determining the cause of the crash. Note that kdump does require reserving a "
 "portion of system memory that will be unavailable for other uses."
-msgstr "Kdump 是一个内核崩溃转储机制。在系统崩溃的时候，kdump 将捕获系统信息，这对于诊断崩溃的原因非常有用。注意，kdump 需要预留一部分系统内存，且这部分内存对于其他用户是不可用的。"
+msgstr ""
+"Kdump 是一个内核崩溃转储机制。在系统崩溃的时候，kdump 将捕获系统信息，这对于"
+"诊断崩溃的原因非常有用。注意，kdump 需要预留一部分系统内存，且这部分内存对于"
+"其他用户是不可用的。"
 
 #: tmp/kdump.glade.h:3
 msgid "_Enable kdump"

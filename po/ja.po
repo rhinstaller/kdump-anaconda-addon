@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 14:03+0800\n"
+"POT-Creation-Date: 2021-10-08 17:58+0800\n"
 "PO-Revision-Date: 2021-09-29 16:10+0200\n"
 "Last-Translator: noriko <noriko@redhat.com>\n"
 "Language-Team: Japanese <jp@li.org>\n"
@@ -22,6 +22,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../com_redhat_kdump/constants.py:41
+msgid ""
+"Encrypted storage is in use. If kdump target is based on the encrypted "
+"device, kdump may require extra memory and prompt for password before "
+"starting the dump process."
+msgstr ""
 
 #: ../com_redhat_kdump/service/kickstart.py:103
 #, python-format
@@ -45,7 +52,8 @@ msgstr "ストレージを確認中..."
 #: ../com_redhat_kdump/gui/spokes/kdump.py:184
 #: ../com_redhat_kdump/tui/spokes/kdump.py:92
 msgid "Kdump may require extra setup for encrypted devices."
-msgstr "kdump では、暗号化されたデバイスに追加の設定が必要になる場合があります。"
+msgstr ""
+"kdump では、暗号化されたデバイスに追加の設定が必要になる場合があります。"
 
 #: ../com_redhat_kdump/gui/spokes/kdump.py:185
 #: ../com_redhat_kdump/tui/spokes/kdump.py:93
@@ -62,7 +70,11 @@ msgid ""
 "crashkernel value provided by the kernel package. This is a best-effort "
 "support and might not fit your use case. It is recommended to verify if the "
 "crashkernel value is suitable after installation."
-msgstr "kdump メモリーの自動予約は使用中です。Kdump は、カーネルパッケージが提供するデフォルトの crashkernel 値を使用します。これはベストエフォートで、ユースケースに適合しない可能性があります。インストール後に crashkernel の値が適切かどうかを確認することが推奨されます。"
+msgstr ""
+"kdump メモリーの自動予約は使用中です。Kdump は、カーネルパッケージが提供する"
+"デフォルトの crashkernel 値を使用します。これはベストエフォートで、ユースケー"
+"スに適合しない可能性があります。インストール後に crashkernel の値が適切かどう"
+"かを確認することが推奨されます。"
 
 #: ../com_redhat_kdump/tui/spokes/kdump.py:127
 msgid "Enable kdump"
@@ -87,7 +99,11 @@ msgid ""
 "kdump will capture information from your system that can be invaluable in "
 "determining the cause of the crash. Note that kdump does require reserving a "
 "portion of system memory that will be unavailable for other uses."
-msgstr "Kdump はカーネルクラッシュダンプのメカニズムです。システムがクラッシュした場合、Kdump によりクラッシュの原因の判定に重要となる可能性のある情報がシステムからキャプチャされます。kdump 以外には使用できない kdump 専用の領域をシステムメモリー内に予約しておく必要があるため注意してください。"
+msgstr ""
+"Kdump はカーネルクラッシュダンプのメカニズムです。システムがクラッシュした場"
+"合、Kdump によりクラッシュの原因の判定に重要となる可能性のある情報がシステム"
+"からキャプチャされます。kdump 以外には使用できない kdump 専用の領域をシステム"
+"メモリー内に予約しておく必要があるため注意してください。"
 
 #: tmp/kdump.glade.h:3
 msgid "_Enable kdump"

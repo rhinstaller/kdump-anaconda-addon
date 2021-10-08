@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 14:03+0800\n"
+"POT-Creation-Date: 2021-10-08 17:58+0800\n"
 "PO-Revision-Date: 2014-11-10 05:08-0500\n"
 "Last-Translator: eukim <eukim@redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -21,6 +21,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Zanata 3.5.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../com_redhat_kdump/constants.py:41
+msgid ""
+"Encrypted storage is in use. If kdump target is based on the encrypted "
+"device, kdump may require extra memory and prompt for password before "
+"starting the dump process."
+msgstr ""
 
 #: ../com_redhat_kdump/service/kickstart.py:103
 #, python-format
@@ -61,7 +68,10 @@ msgid ""
 "crashkernel value provided by the kernel package. This is a best-effort "
 "support and might not fit your use case. It is recommended to verify if the "
 "crashkernel value is suitable after installation."
-msgstr "자동 kdump 메모리 예약이 사용 중입니다. Kdump는 커널 패키지에서 제공하는 기본 크래시커널 값을 사용합니다. 이는 사용 사례에 적합하지 않을 수 있으므로 설치 후 크래시커널 값을 확인하는 것이 좋습니다."
+msgstr ""
+"자동 kdump 메모리 예약이 사용 중입니다. Kdump는 커널 패키지에서 제공하는 기"
+"본 크래시커널 값을 사용합니다. 이는 사용 사례에 적합하지 않을 수 있으므로 설"
+"치 후 크래시커널 값을 확인하는 것이 좋습니다."
 
 #: ../com_redhat_kdump/tui/spokes/kdump.py:127
 msgid "Enable kdump"
@@ -86,7 +96,10 @@ msgid ""
 "kdump will capture information from your system that can be invaluable in "
 "determining the cause of the crash. Note that kdump does require reserving a "
 "portion of system memory that will be unavailable for other uses."
-msgstr "kdump는 커널 충돌 덤프 기술입니다. 시스템 충돌 시, kdump는 충돌의 원인을 파악하는데 유용한 시스템 정보를 캡쳐합니다.kdump는 시스템 메모리의 한 부분을 차지하며, 이 부분은 다른 목적으로 사용할 수 없음을 알려드립니다."
+msgstr ""
+"kdump는 커널 충돌 덤프 기술입니다. 시스템 충돌 시, kdump는 충돌의 원인을 파악"
+"하는데 유용한 시스템 정보를 캡쳐합니다.kdump는 시스템 메모리의 한 부분을 차지"
+"하며, 이 부분은 다른 목적으로 사용할 수 없음을 알려드립니다."
 
 #: tmp/kdump.glade.h:3
 msgid "_Enable kdump"
