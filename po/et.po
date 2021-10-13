@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-08 17:58+0800\n"
+"POT-Creation-Date: 2021-10-14 02:29+0800\n"
 "PO-Revision-Date: \n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,12 @@ msgstr ""
 "X-Generator: Zanata 2.0.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: ../com_redhat_kdump/constants.py:41
+#: ../com_redhat_kdump/constants.py:43
 msgid ""
-"Encrypted storage is in use. If kdump target is based on the encrypted "
-"device, kdump may require extra memory and prompt for password before "
-"starting the dump process."
+"Encrypted storage is in use, using an encrypted device as dump target for "
+"kdump might fail. Please verify if kdump is working properly after the "
+"installation finished. For more details see the \"Notes on encrypted dump "
+"target\" section in /usr/share/doc/kexec-tools/kexec-kdump-howto.txt."
 msgstr ""
 
 #: ../com_redhat_kdump/service/kickstart.py:103
