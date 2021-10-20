@@ -24,14 +24,18 @@
 import os.path
 from gi.repository import Gtk
 
+from pyanaconda.flags import flags
+from pyanaconda.modules.common.constants.services import STORAGE
 from pyanaconda.core.kernel import kernel_arguments
 from pyanaconda.ui.categories.system import SystemCategory
 from pyanaconda.ui.gui.spokes import NormalSpoke
 from pyanaconda.ui.gui.utils import fancy_set_sensitive
+from pyanaconda.ui.communication import hubQ
 
 from com_redhat_kdump.i18n import _, N_
-from com_redhat_kdump.common import getTotalMemory, getMemoryBounds
-from com_redhat_kdump.constants import FADUMP_CAPABLE_FILE
+from com_redhat_kdump.constants import FADUMP_CAPABLE_FILE, ENCRYPTION_WARNING
+from com_redhat_kdump.common import getTotalMemory, getMemoryBounds, getLuksDevices
+
 
 __all__ = ["KdumpSpoke"]
 
@@ -56,6 +60,9 @@ class KdumpSpoke(NormalSpoke):
     def __init__(self, *args):
         NormalSpoke.__init__(self, *args)
         self._reserveMem = 0
+        self._ready = True
+        self._luks_devs = []
+        self._checked_luks_devs = []
 
     def initialize(self):
         NormalSpoke.initialize(self)
@@ -80,6 +87,10 @@ class KdumpSpoke(NormalSpoke):
         adjustment = Gtk.Adjustment(lower, lower, upper, step, step, 0)
         self._toBeReservedSpin.set_adjustment(adjustment)
         self._toBeReservedSpin.set_value(lower)
+
+        # Connect a callback to the PropertiesChanged signal.
+        storage = STORAGE.get_proxy()
+        storage.PropertiesChanged.connect(self._check_storage_change)
 
     def refresh(self):
         # If a reserve amount is requested, set it in the spin button
@@ -117,6 +128,10 @@ class KdumpSpoke(NormalSpoke):
         # Force a toggled signal on the button in case it's state has not changed
         self._enableButton.emit("toggled")
 
+        self.clear_info()
+        if self._luks_devs:
+            self.set_warning(_(ENCRYPTION_WARNING))
+
     def apply(self):
         # Copy the GUI state into the AddonData object
         self.data.addons.com_redhat_kdump.enabled = self._enableButton.get_active()
@@ -127,27 +142,47 @@ class KdumpSpoke(NormalSpoke):
         self.data.addons.com_redhat_kdump.reserveMB = reserveMem
         self.data.addons.com_redhat_kdump.enablefadump = self._fadumpButton.get_active()
 
+        # This hub have been visited, use should now be aware of the crypted devices issue
+        self._checked_luks_devs = self._luks_devs
+
+    def _check_storage_change(self, interface, changed, invalid):
+        self._ready = False
+        # pylint: disable=no-member
+        hubQ.send_not_ready(self.__class__.__name__)
+
+        partition = changed.get("AppliedPartitioning")
+        if partition:
+            self._luks_devs = getLuksDevices(partition.unpack())
+
+        self._ready = True
+        # pylint: disable=no-member
+        hubQ.send_ready(self.__class__.__name__, True)
+
     @property
     def ready(self):
-        return True
+        return self._ready
 
     @property
     def completed(self):
-        # Always treat as completed
+        """ Make sure user have checked the warning about crypted devices """
+        if self._luks_devs and self._checked_luks_devs != self._luks_devs and not flags.automatedInstall:
+            return False
         return True
 
     @property
     def mandatory(self):
-        return False
+        if self.data.addons.com_redhat_kdump.enabled:
+            return True
 
     @property
     def status(self):
-        if self.data.addons.com_redhat_kdump.enabled:
-            state = _("Kdump is enabled")
-        else:
-            state = _("Kdump is disabled")
-
-        return state
+        if not self.data.addons.com_redhat_kdump.enabled:
+            return _("Kdump is disabled")
+        if not self._ready:
+            return _("Checking storage...")
+        if self._luks_devs:
+            return _("Kdump may require extra setup for encrypted devices.")
+        return _("Kdump is enabled")
 
     # SIGNAL HANDLERS
     def on_enable_kdump_toggled(self, checkbutton, user_data=None):
