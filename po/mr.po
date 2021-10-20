@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # Sandeep Shedmake <sshedmak@redhat.com>, 2013.
 # translation of mr.po to Marathi
-# 
+#
 # sandeep shedmake <sandeep.shedmake@gmail.com>, 2007.
 # Sandeep Shedmake <sshedmak@redhat.com>, 2010.
 # Sandeep Shedmake <sshedmak@redhat.com>, 2010, 2014.
@@ -12,39 +12,72 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-23 10:17+0800\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-10-20 22:13+0800\n"
 "PO-Revision-Date: 2014-11-04 12:16-0500\n"
 "Last-Translator: Sandeep Shedmake <sshedmak@redhat.com>\n"
 "Language-Team: Marathi <fedora-trans-mr@redhat.com>\n"
 "Language: mr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Zanata 3.5.1\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: ../com_redhat_kdump/ks/kdump.py:121
+#: ../com_redhat_kdump/constants.py:27
+msgid ""
+"Encrypted storage is in use, using an encrypted device as dump target for "
+"kdump might fail. Please verify if kdump is working properly after the "
+"installation finished. For more details see the \"Notes on encrypted dump "
+"target\" section in /usr/share/doc/kexec-tools/kexec-kdump-howto.txt."
+msgstr ""
+
+#: ../com_redhat_kdump/ks/kdump.py:143
 #, python-format
 msgid "Invalid value %s for --reserve-mb"
 msgstr "--reserve-mb करिता अवैध मूल्य %s"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:58
-msgid "Kdump"
-msgstr "केडम्प"
+#: ../com_redhat_kdump/gui/spokes/kdump.py:52
+msgid "_KDUMP"
+msgstr "KDUMP (_K)"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:86
-#: ../com_redhat_kdump/gui/spokes/kdump.py:145
-msgid "Kdump is enabled"
-msgstr "केडम्प सुरू केले"
-
-#: ../com_redhat_kdump/tui/spokes/kdump.py:88
-#: ../com_redhat_kdump/gui/spokes/kdump.py:147
+#: ../com_redhat_kdump/gui/spokes/kdump.py:180
+#: ../com_redhat_kdump/tui/spokes/kdump.py:90
 msgid "Kdump is disabled"
 msgstr "केडम्प बंद केले"
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:47
-msgid "_KDUMP"
-msgstr "KDUMP (_K)"
+#: ../com_redhat_kdump/gui/spokes/kdump.py:182
+#: ../com_redhat_kdump/tui/spokes/kdump.py:92
+msgid "Checking storage..."
+msgstr ""
+
+#: ../com_redhat_kdump/gui/spokes/kdump.py:184
+#: ../com_redhat_kdump/tui/spokes/kdump.py:94
+msgid "Kdump may require extra setup for encrypted devices."
+msgstr ""
+
+#: ../com_redhat_kdump/gui/spokes/kdump.py:185
+#: ../com_redhat_kdump/tui/spokes/kdump.py:95
+msgid "Kdump is enabled"
+msgstr "केडम्प सुरू केले"
+
+#: ../com_redhat_kdump/tui/spokes/kdump.py:47
+msgid "Kdump"
+msgstr "केडम्प"
+
+#: ../com_redhat_kdump/tui/spokes/kdump.py:117
+#, fuzzy
+msgid "Enable kdump"
+msgstr "kdump सुरू करा (_E)"
+
+#: ../com_redhat_kdump/tui/spokes/kdump.py:125
+#, fuzzy
+msgid "Enable dump mode fadump"
+msgstr "डम्प मोड fadump सुरू करा (_E)"
+
+#: ../com_redhat_kdump/tui/spokes/kdump.py:130
+#, python-format
+msgid "Reserve amount (%d - %d MB)"
+msgstr ""
 
 #: tmp/kdump.glade.h:1
 msgid "KDUMP"
@@ -57,10 +90,9 @@ msgid ""
 "determining the cause of the crash. Note that kdump does require reserving a "
 "portion of system memory that will be unavailable for other uses."
 msgstr ""
-"केडम्प कर्नल आणीबाणी निर्मुलन पद्धती आहे. प्रणाली आणीबाणी घटनाक्रमास, kdump "
-"आपल्या प्रणालीतील अतीमहत्वाची माहिती ज्यामुऴे आणीबाणी चे कारण शोधण्यास मदत "
-"मिळते. लक्षात घ्या kdump ला प्रणाली स्मृत्तीचे आरक्षण हवे असते जे इतर "
-"वापरकर्त्यांना अनुपलब्ध राहतील."
+"केडम्प कर्नल आणीबाणी निर्मुलन पद्धती आहे. प्रणाली आणीबाणी घटनाक्रमास, kdump आपल्या "
+"प्रणालीतील अतीमहत्वाची माहिती ज्यामुऴे आणीबाणी चे कारण शोधण्यास मदत मिळते. लक्षात घ्या "
+"kdump ला प्रणाली स्मृत्तीचे आरक्षण हवे असते जे इतर वापरकर्त्यांना अनुपलब्ध राहतील."
 
 #: tmp/kdump.glade.h:3
 msgid "_Enable kdump"

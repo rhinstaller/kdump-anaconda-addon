@@ -3,7 +3,7 @@
 # translation of ko.po to
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER, 2007.
-# 
+#
 # Eunju Kim <eukim@redhat.com>, 2007.
 # Hyunsok Oh <hoh@redhat.com>, 2010.
 # eukim <eukim@redhat.com>, 2014. #zanata
@@ -11,39 +11,72 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-23 10:17+0800\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-10-20 22:13+0800\n"
 "PO-Revision-Date: 2014-11-10 05:08-0500\n"
 "Last-Translator: eukim <eukim@redhat.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Zanata 3.5.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../com_redhat_kdump/ks/kdump.py:121
+#: ../com_redhat_kdump/constants.py:27
+msgid ""
+"Encrypted storage is in use, using an encrypted device as dump target for "
+"kdump might fail. Please verify if kdump is working properly after the "
+"installation finished. For more details see the \"Notes on encrypted dump "
+"target\" section in /usr/share/doc/kexec-tools/kexec-kdump-howto.txt."
+msgstr "암호화된 스토리지가 사용 중이며 kdump의 덤프 대상으로 암호화된 장치를 사용하면 실패할 수 있습니다. 설치가 완료된 후 kdump가 제대로 작동하는지 확인하십시오. 자세한 내용은 /usr/share/doc/kexec-tools/kexec-kdump-howto.txt의 \"암호화된 덤프 대상에 대한 주의 사항\" 섹션을 참조하십시오."
+
+#: ../com_redhat_kdump/ks/kdump.py:143
 #, python-format
 msgid "Invalid value %s for --reserve-mb"
 msgstr "--reserve-mb에 대해 %s는 잘못된 값입니다 "
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:58
-msgid "Kdump"
-msgstr "Kdump"
+#: ../com_redhat_kdump/gui/spokes/kdump.py:52
+msgid "_KDUMP"
+msgstr "_KDUMP"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:86
-#: ../com_redhat_kdump/gui/spokes/kdump.py:145
-msgid "Kdump is enabled"
-msgstr "Kdump가 활성화됩니다 "
-
-#: ../com_redhat_kdump/tui/spokes/kdump.py:88
-#: ../com_redhat_kdump/gui/spokes/kdump.py:147
+#: ../com_redhat_kdump/gui/spokes/kdump.py:180
+#: ../com_redhat_kdump/tui/spokes/kdump.py:90
 msgid "Kdump is disabled"
 msgstr "Kdump가 비활성화됩니다 "
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:47
-msgid "_KDUMP"
-msgstr "_KDUMP"
+#: ../com_redhat_kdump/gui/spokes/kdump.py:182
+#: ../com_redhat_kdump/tui/spokes/kdump.py:92
+msgid "Checking storage..."
+msgstr "저장소 확인 중..."
+
+#: ../com_redhat_kdump/gui/spokes/kdump.py:184
+#: ../com_redhat_kdump/tui/spokes/kdump.py:94
+msgid "Kdump may require extra setup for encrypted devices."
+msgstr "Kdump는 암호화된 장치에 대한 추가 설정이 필요할 수 있습니다."
+
+#: ../com_redhat_kdump/gui/spokes/kdump.py:185
+#: ../com_redhat_kdump/tui/spokes/kdump.py:95
+msgid "Kdump is enabled"
+msgstr "Kdump가 활성화됩니다 "
+
+#: ../com_redhat_kdump/tui/spokes/kdump.py:47
+msgid "Kdump"
+msgstr "Kdump"
+
+#: ../com_redhat_kdump/tui/spokes/kdump.py:117
+#, fuzzy
+msgid "Enable kdump"
+msgstr "kdump 활성화 (_E)"
+
+#: ../com_redhat_kdump/tui/spokes/kdump.py:125
+#, fuzzy
+msgid "Enable dump mode fadump"
+msgstr "덤프 모드 fadump 활성화 (_E)"
+
+#: ../com_redhat_kdump/tui/spokes/kdump.py:130
+#, python-format
+msgid "Reserve amount (%d - %d MB)"
+msgstr "저장 가능 용량 (%d - %d MB)"
 
 #: tmp/kdump.glade.h:1
 msgid "KDUMP"
@@ -56,8 +89,9 @@ msgid ""
 "determining the cause of the crash. Note that kdump does require reserving a "
 "portion of system memory that will be unavailable for other uses."
 msgstr ""
-"kdump는 커널 충돌 덤프 기술입니다. 시스템 충돌 시, kdump는 충돌의 원인을 파악하는데 유용한 시스템 정보를 캡쳐합니다."
-"kdump는 시스템 메모리의 한 부분을 차지하며, 이 부분은 다른 목적으로 사용할 수 없음을 알려드립니다."
+"kdump는 커널 충돌 덤프 기술입니다. 시스템 충돌 시, kdump는 충돌의 원인을 파악"
+"하는데 유용한 시스템 정보를 캡쳐합니다.kdump는 시스템 메모리의 한 부분을 차지"
+"하며, 이 부분은 다른 목적으로 사용할 수 없음을 알려드립니다."
 
 #: tmp/kdump.glade.h:3
 msgid "_Enable kdump"

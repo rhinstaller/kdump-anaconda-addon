@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-23 10:17+0800\n"
+"POT-Creation-Date: 2021-10-20 22:13+0800\n"
 "PO-Revision-Date: 2007-04-09 01:38-0400\n"
 "Last-Translator: Rok Papez <rok.papez@lugos.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -19,27 +19,58 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0)\n"
 
-#: ../com_redhat_kdump/ks/kdump.py:121
+#: ../com_redhat_kdump/constants.py:27
+msgid ""
+"Encrypted storage is in use, using an encrypted device as dump target for "
+"kdump might fail. Please verify if kdump is working properly after the "
+"installation finished. For more details see the \"Notes on encrypted dump "
+"target\" section in /usr/share/doc/kexec-tools/kexec-kdump-howto.txt."
+msgstr ""
+
+#: ../com_redhat_kdump/ks/kdump.py:143
 #, python-format
 msgid "Invalid value %s for --reserve-mb"
 msgstr ""
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:58
-msgid "Kdump"
-msgstr "Kdump"
-
-#: ../com_redhat_kdump/tui/spokes/kdump.py:86
-#: ../com_redhat_kdump/gui/spokes/kdump.py:145
-msgid "Kdump is enabled"
+#: ../com_redhat_kdump/gui/spokes/kdump.py:52
+msgid "_KDUMP"
 msgstr ""
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:88
-#: ../com_redhat_kdump/gui/spokes/kdump.py:147
+#: ../com_redhat_kdump/gui/spokes/kdump.py:180
+#: ../com_redhat_kdump/tui/spokes/kdump.py:90
 msgid "Kdump is disabled"
 msgstr ""
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:47
-msgid "_KDUMP"
+#: ../com_redhat_kdump/gui/spokes/kdump.py:182
+#: ../com_redhat_kdump/tui/spokes/kdump.py:92
+msgid "Checking storage..."
+msgstr ""
+
+#: ../com_redhat_kdump/gui/spokes/kdump.py:184
+#: ../com_redhat_kdump/tui/spokes/kdump.py:94
+msgid "Kdump may require extra setup for encrypted devices."
+msgstr ""
+
+#: ../com_redhat_kdump/gui/spokes/kdump.py:185
+#: ../com_redhat_kdump/tui/spokes/kdump.py:95
+msgid "Kdump is enabled"
+msgstr ""
+
+#: ../com_redhat_kdump/tui/spokes/kdump.py:47
+msgid "Kdump"
+msgstr "Kdump"
+
+#: ../com_redhat_kdump/tui/spokes/kdump.py:117
+msgid "Enable kdump"
+msgstr ""
+
+#: ../com_redhat_kdump/tui/spokes/kdump.py:125
+msgid "Enable dump mode fadump"
+msgstr ""
+
+#: ../com_redhat_kdump/tui/spokes/kdump.py:130
+#, python-format
+msgid "Reserve amount (%d - %d MB)"
 msgstr ""
 
 #: tmp/kdump.glade.h:1

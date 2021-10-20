@@ -1,7 +1,7 @@
 # translation of kn.po to Kannada
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Shankar Prasad <svenkate@redhat.com>, 2007.
 # Shankar Prasad <svenkate@redhat.com>, 2007, 2010.
 # Shankar <svenkate@redhat.com>, 2014. #zanata
@@ -9,39 +9,72 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-23 10:17+0800\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-10-20 22:13+0800\n"
 "PO-Revision-Date: 2014-11-04 01:42-0500\n"
 "Last-Translator: Shankar <svenkate@redhat.com>\n"
 "Language-Team: kn_IN <kde-i18n-doc@kde.org>\n"
 "Language: kn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Zanata 3.5.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../com_redhat_kdump/ks/kdump.py:121
+#: ../com_redhat_kdump/constants.py:27
+msgid ""
+"Encrypted storage is in use, using an encrypted device as dump target for "
+"kdump might fail. Please verify if kdump is working properly after the "
+"installation finished. For more details see the \"Notes on encrypted dump "
+"target\" section in /usr/share/doc/kexec-tools/kexec-kdump-howto.txt."
+msgstr ""
+
+#: ../com_redhat_kdump/ks/kdump.py:143
 #, python-format
 msgid "Invalid value %s for --reserve-mb"
 msgstr "%s for --reserve-mb ಗಾಗಿನ ತಪ್ಪಾದ ಮೌಲ್ಯ"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:58
-msgid "Kdump"
-msgstr "Kdump"
+#: ../com_redhat_kdump/gui/spokes/kdump.py:52
+msgid "_KDUMP"
+msgstr "_KDUMP"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:86
-#: ../com_redhat_kdump/gui/spokes/kdump.py:145
-msgid "Kdump is enabled"
-msgstr "Kdump ಸಕ್ರಿಯಗೊಂಡಿದೆ"
-
-#: ../com_redhat_kdump/tui/spokes/kdump.py:88
-#: ../com_redhat_kdump/gui/spokes/kdump.py:147
+#: ../com_redhat_kdump/gui/spokes/kdump.py:180
+#: ../com_redhat_kdump/tui/spokes/kdump.py:90
 msgid "Kdump is disabled"
 msgstr "Kdump ನಿಷ್ಕ್ರಿಯಗೊಂಡಿದೆ"
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:47
-msgid "_KDUMP"
-msgstr "_KDUMP"
+#: ../com_redhat_kdump/gui/spokes/kdump.py:182
+#: ../com_redhat_kdump/tui/spokes/kdump.py:92
+msgid "Checking storage..."
+msgstr ""
+
+#: ../com_redhat_kdump/gui/spokes/kdump.py:184
+#: ../com_redhat_kdump/tui/spokes/kdump.py:94
+msgid "Kdump may require extra setup for encrypted devices."
+msgstr ""
+
+#: ../com_redhat_kdump/gui/spokes/kdump.py:185
+#: ../com_redhat_kdump/tui/spokes/kdump.py:95
+msgid "Kdump is enabled"
+msgstr "Kdump ಸಕ್ರಿಯಗೊಂಡಿದೆ"
+
+#: ../com_redhat_kdump/tui/spokes/kdump.py:47
+msgid "Kdump"
+msgstr "Kdump"
+
+#: ../com_redhat_kdump/tui/spokes/kdump.py:117
+#, fuzzy
+msgid "Enable kdump"
+msgstr "kdump ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸು (_E)"
+
+#: ../com_redhat_kdump/tui/spokes/kdump.py:125
+#, fuzzy
+msgid "Enable dump mode fadump"
+msgstr "ಡಂಪ್ ಕ್ರಮದ  fadump ಅನ್ನು ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸು (_E)"
+
+#: ../com_redhat_kdump/tui/spokes/kdump.py:130
+#, python-format
+msgid "Reserve amount (%d - %d MB)"
+msgstr ""
 
 #: tmp/kdump.glade.h:1
 msgid "KDUMP"
@@ -55,10 +88,10 @@ msgid ""
 "portion of system memory that will be unavailable for other uses."
 msgstr ""
 "Kdump ಎನ್ನುವುದು ಕರ್ನಲ್ಲಿನ ಕುಸಿತವನ್ನು ಬಿಸುಡುವ ಒಂದು ಯಾಂತ್ರಿಕ ವ್ಯವಸ್ಥೆ. ಗಣಕವು "
-"ಕುಸಿತಕ್ಕೊಳಗಾದ ಸಂದರ್ಭದಲ್ಲಿ, kdump ಕುಸಿತದ ಕಾರಣವನ್ನು ನಿರ್ಧರಿಸುವ ಅಮೂಲ್ಯ "
-"ಮಾಹಿತಿಯನ್ನು ನಿಮ್ಮ ಗಣಕದಿಂದ ಹಿಡಿದಿಟ್ಟುಕೊಳ್ಳುತ್ತದೆ. ಇಲ್ಲಿ ನೆನಪಿನಲ್ಲಿಡಬೇಕಾದ "
-"ಅಂಶವೆಂದರೆ, kdump ಗಾಗಿ ಗಣಕದ ಮೆಮೊರಿಯಲ್ಲಿನ ಒಂದಂಶವನ್ನು ಕಾದಿರಿಸುವುದು "
-"ಅಗತ್ಯವಾಗುತ್ತದೆ ಹಾಗು ಈ ಮೆಮೊರಿಯು ಬೇರಾವುದೇ ಬಳಕೆಗೆ ಬರುವುದಿಲ್ಲ."
+"ಕುಸಿತಕ್ಕೊಳಗಾದ ಸಂದರ್ಭದಲ್ಲಿ, kdump ಕುಸಿತದ ಕಾರಣವನ್ನು ನಿರ್ಧರಿಸುವ ಅಮೂಲ್ಯ ಮಾಹಿತಿಯನ್ನು "
+"ನಿಮ್ಮ ಗಣಕದಿಂದ ಹಿಡಿದಿಟ್ಟುಕೊಳ್ಳುತ್ತದೆ. ಇಲ್ಲಿ ನೆನಪಿನಲ್ಲಿಡಬೇಕಾದ ಅಂಶವೆಂದರೆ, kdump ಗಾಗಿ "
+"ಗಣಕದ ಮೆಮೊರಿಯಲ್ಲಿನ ಒಂದಂಶವನ್ನು ಕಾದಿರಿಸುವುದು ಅಗತ್ಯವಾಗುತ್ತದೆ ಹಾಗು ಈ ಮೆಮೊರಿಯು "
+"ಬೇರಾವುದೇ ಬಳಕೆಗೆ ಬರುವುದಿಲ್ಲ."
 
 #: tmp/kdump.glade.h:3
 msgid "_Enable kdump"
