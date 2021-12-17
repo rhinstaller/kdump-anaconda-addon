@@ -24,7 +24,7 @@ from pyanaconda.modules.common.constants.services import STORAGE, PAYLOADS
 from pyanaconda.modules.common.task import Task
 from pyanaconda.modules.payloads.payload.dnf.utils import get_kernel_version_list
 
-from com_redhat_kdump.constants import FADUMP_CAPABLE_FILE, CRASHKERNEL_DEFAULT_FILE
+from com_redhat_kdump.constants import FADUMP_CAPABLE_FILE
 from com_redhat_kdump.common import getLuksDevices
 
 log = logging.getLogger(__name__)
@@ -35,10 +35,9 @@ __all__ = ["KdumpBootloaderConfigurationTask", "KdumpInstallationTask"]
 class KdumpBootloaderConfigurationTask(Task):
     """The bootloader configuration task for kdump and fadump"""
 
-    def __init__(self, kernels, sysroot, kdump_enabled, fadump_enabled, reserved_memory):
+    def __init__(self, sysroot, kdump_enabled, fadump_enabled, reserved_memory):
         """Create a task."""
         super().__init__()
-        self._kernels = kernels
         self._sysroot = sysroot
         self._kdump_enabled = kdump_enabled
         self._fadump_enabled = fadump_enabled
@@ -47,6 +46,42 @@ class KdumpBootloaderConfigurationTask(Task):
     @property
     def name(self):
         return "Configure kernel parameters for kdump and fadump"
+
+    def get_default_crashkernel(self, fadump_enabled):
+        dump_mode = 'kdump'
+        if fadump_enabled:
+            dump_mode = 'fadump'
+
+        args = {'command': 'kdumpctl',
+                'argv': ['get-default-crashkernel', dump_mode],
+                'root': self._sysroot,
+                'filter_stderr': True}
+
+        ck_val = util.execWithCapture(**args)
+
+        if not ck_val:
+            log.warning("Can't retrieve the default crashkernel value from "
+                        "the installed kexec-tools, try to retrieve it from "
+                        "the installer kexec-tools")
+            del args['root']
+            # If the installer doesn't have kdumpctl, the target system's
+            # kdumpctl i.e. /mnt/sysimage/bin/kdumpctl would be used again. To
+            # prevent this, exeplicty ask for the installer's kdumpctl
+            args['command'] = '/usr/bin/kdumpctl'
+            try:
+                ck_val = util.execWithCapture(**args)
+            except FileNotFoundError:
+                log.warning("Can't retrieve the default crashkernel value "
+                            "from installer kexec-tools either because it's "
+                            "not installed")
+                pass
+
+        if ck_val:
+            # remove the trailing newline otherwise installing bootloader would
+            # fail
+            return ck_val.rstrip()
+
+        return None
 
     def run(self):
         """Run the task."""
@@ -65,35 +100,13 @@ class KdumpBootloaderConfigurationTask(Task):
 
         # Set crashkernel argument
         if self._kdump_enabled:
-            ck_arg = None
-
             if self._reserved_memory == 'auto':
-                # Try to get crashkernel arg from crashkernel.con
-                if len(self._kernels) > 1:
-                    log.warning("crashkernel=auto specified, and multiple kernels installed, "
-                                "will use crashkernel.default value from latest installed kernel.")
-
-                for k in self._kernels:
-                    ck_conf_file = "%s/%s" % (self._sysroot, CRASHKERNEL_DEFAULT_FILE % k)
-                    if os.path.exists(ck_conf_file):
-                        with open(ck_conf_file, 'r') as ck_conf:
-                            ck_arg = ck_conf.read().rstrip()
-                            log.debug("Using default crashkernel cmdline ('%s') from '%s'",
-                                      ck_arg, ck_conf_file)
-                            break
-
-                if ck_arg is None:
-                    log.warning("Can't find a valid crashkernel.default from the installation, "
-                                "falling back to use installer kernel's crashkernel.default")
-                    ck_conf_file = CRASHKERNEL_DEFAULT_FILE % os.uname().release
-                    if os.path.exists(ck_conf_file):
-                        with open(ck_conf_file, 'r') as ck_conf:
-                            ck_arg = ck_conf.read().rstrip()
-                            log.debug("Using default crashkernel cmdline ('%s') from '%s'",
-                                      ck_arg, ck_conf_file)
-
-                if ck_arg is None:
-                    log.error("Can't find a valid crashkernel.default, will set crashkernel=auto.")
+                ck_arg = None
+                ck_val = self.get_default_crashkernel(self._fadump_enabled)
+                if ck_val:
+                    ck_arg = 'crashkernel=%s' % ck_val
+                else:
+                    log.error("Can't retrieve the default crashkernel, will set crashkernel=auto.")
                     ck_arg = 'crashkernel=auto'
 
             else:
