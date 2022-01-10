@@ -45,12 +45,16 @@ class KdumpSpoke(NormalSpoke):
     builderObjects = ["KdumpWindow", "advancedConfigBuffer"]
     mainWidgetName = "KdumpWindow"
     uiFile = "kdump.glade"
-    helpFile = "KdumpSpoke.xml"
     translationDomain = "kdump-anaconda-addon"
 
     icon = "kdump"
     title = N_("_KDUMP")
     category = SystemCategory
+
+    @staticmethod
+    def get_screen_id():
+        """Return a unique id of this UI screen."""
+        return "kdump-configuration"
 
     @classmethod
     def should_run(cls, environment, data):
