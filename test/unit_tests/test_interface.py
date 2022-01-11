@@ -38,17 +38,17 @@ class KdumpInterfaceTestCase(TestCase):
             []
         )
 
-    def kdump_enabled_test(self):
+    def test_kdump_enabled(self):
         self._interface.KdumpEnabled = True
         self._check_properties_changed("KdumpEnabled", True)
         self.assertEqual(self._interface.KdumpEnabled, True)
 
-    def fadump_enabled_test(self):
+    def test_fadump_enabled(self):
         self._interface.FadumpEnabled = True
         self._check_properties_changed("FadumpEnabled", True)
         self.assertEqual(self._interface.FadumpEnabled, True)
 
-    def reserved_memory_test(self):
+    def test_reserved_memory(self):
         self._interface.ReservedMemory = "256"
         self._check_properties_changed("ReservedMemory", "256")
         self.assertEqual(self._interface.ReservedMemory, "256")
