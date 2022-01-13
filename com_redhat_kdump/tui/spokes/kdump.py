@@ -114,7 +114,7 @@ class KdumpSpoke(NormalTUISpoke):
                 message = TextWidget(_(
                     "Automatic kdump memory reservation is in use. "
                     "Kdump will use the default crashkernel value "
-                    "provided by the kernel package. This is a "
+                    "provided by the kexec-tools package. This is a "
                     "best-effort support and might not fit "
                     "your use case. It is recommended to verify "
                     "if the crashkernel value is suitable after "

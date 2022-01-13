@@ -254,7 +254,7 @@
                       <object class="GtkLabel" id="autoReservationWarning">
                         <property name="can-focus">False</property>
                         <property name="no-show-all">True</property>
-                        <property name="label" translatable="yes">Automatic kdump memory reservation is in use. Kdump will use the default crashkernel value provided by the kernel package. This is a best-effort support and might not fit your use case. It is recommended to verify if the crashkernel value is suitable after installation.</property>
+                        <property name="label" translatable="yes">Automatic kdump memory reservation is in use. Kdump will use the default crashkernel value provided by the kexec-tools package. This is a best-effort support and might not fit your use case. It is recommended to verify if the crashkernel value is suitable after installation.</property>
                         <property name="wrap">True</property>
                       </object>
                       <packing>

@@ -138,7 +138,6 @@ class KdumpService(KickstartService):
     def configure_bootloader_with_tasks(self, kernels):
         return [
             KdumpBootloaderConfigurationTask(
-                kernels=kernels,
                 sysroot=conf.target.system_root,
                 kdump_enabled=self.kdump_enabled,
                 fadump_enabled=self.fadump_enabled,
