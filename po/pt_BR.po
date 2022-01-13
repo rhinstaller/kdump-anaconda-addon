@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-14 02:29+0800\n"
+"POT-Creation-Date: 2022-01-13 18:03+0800\n"
 "PO-Revision-Date: 2014-11-04 06:36-0500\n"
 "Last-Translator: gcintra <gcintra@redhat.com>\n"
 "Language-Team: Portuguese <en@li.org>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-Country: BRAZIL\n"
 "X-Generator: Zanata 3.5.1\n"
 
-#: ../com_redhat_kdump/constants.py:43
+#: ../com_redhat_kdump/constants.py:42
 msgid ""
 "Encrypted storage is in use, using an encrypted device as dump target for "
 "kdump might fail. Please verify if kdump is working properly after the "
@@ -37,27 +37,27 @@ msgstr ""
 msgid "Invalid value '%s' for --reserve-mb"
 msgstr "valor inválido %s para --reserve-mb"
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:52
+#: ../com_redhat_kdump/gui/spokes/kdump.py:51
 msgid "_KDUMP"
 msgstr "_KDUMP"
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:180
-#: ../com_redhat_kdump/tui/spokes/kdump.py:88
+#: ../com_redhat_kdump/gui/spokes/kdump.py:184
+#: ../com_redhat_kdump/tui/spokes/kdump.py:93
 msgid "Kdump is disabled"
 msgstr "Kdump está desativado"
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:182
-#: ../com_redhat_kdump/tui/spokes/kdump.py:90
+#: ../com_redhat_kdump/gui/spokes/kdump.py:186
+#: ../com_redhat_kdump/tui/spokes/kdump.py:95
 msgid "Checking storage..."
 msgstr ""
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:184
-#: ../com_redhat_kdump/tui/spokes/kdump.py:92
+#: ../com_redhat_kdump/gui/spokes/kdump.py:188
+#: ../com_redhat_kdump/tui/spokes/kdump.py:97
 msgid "Kdump may require extra setup for encrypted devices."
 msgstr ""
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:185
-#: ../com_redhat_kdump/tui/spokes/kdump.py:93
+#: ../com_redhat_kdump/gui/spokes/kdump.py:189
+#: ../com_redhat_kdump/tui/spokes/kdump.py:98
 msgid "Kdump is enabled"
 msgstr "Kdump está ativado"
 
@@ -65,25 +65,25 @@ msgstr "Kdump está ativado"
 msgid "Kdump"
 msgstr "Kdump"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:110 tmp/kdump.glade.h:11
+#: ../com_redhat_kdump/tui/spokes/kdump.py:115 tmp/kdump.glade.h:11
 msgid ""
 "Automatic kdump memory reservation is in use. Kdump will use the default "
-"crashkernel value provided by the kernel package. This is a best-effort "
+"crashkernel value provided by the kexec-tools package. This is a best-effort "
 "support and might not fit your use case. It is recommended to verify if the "
 "crashkernel value is suitable after installation."
 msgstr ""
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:127
+#: ../com_redhat_kdump/tui/spokes/kdump.py:132
 #, fuzzy
 msgid "Enable kdump"
 msgstr "_Ativar kdump"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:135
+#: ../com_redhat_kdump/tui/spokes/kdump.py:140
 #, fuzzy
 msgid "Enable dump mode fadump"
 msgstr "_Ativar modo dump fadump"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:140
+#: ../com_redhat_kdump/tui/spokes/kdump.py:145
 #, python-format
 msgid "Reserve amount (%d - %d MB)"
 msgstr ""

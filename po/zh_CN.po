@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-14 02:29+0800\n"
+"POT-Creation-Date: 2022-01-13 18:03+0800\n"
 "PO-Revision-Date: 2014-11-03 11:59-0500\n"
 "Last-Translator: Leah Liu <lliu@redhat.com>\n"
 "Language-Team: Wei Liu\n"
@@ -21,40 +21,40 @@ msgstr ""
 "X-Generator: Zanata 3.5.1\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
-#: ../com_redhat_kdump/constants.py:43
+#: ../com_redhat_kdump/constants.py:42
 msgid ""
 "Encrypted storage is in use, using an encrypted device as dump target for "
 "kdump might fail. Please verify if kdump is working properly after the "
 "installation finished. For more details see the \"Notes on encrypted dump "
 "target\" section in /usr/share/doc/kexec-tools/kexec-kdump-howto.txt."
-msgstr ""
+msgstr "使用加密存储，为 kdump 使用加密设备作为转储目标可能会失败。请在安装完成后验证 kdump 是否正常工作。如需了解更多详细信息，请参阅 /usr/share/doc/kexec-tools/kexec-kdump-howto.txt 中的 \"Notes on encrypted dump target\" 部分。"
 
 #: ../com_redhat_kdump/service/kickstart.py:103
 #, python-format
 msgid "Invalid value '%s' for --reserve-mb"
 msgstr "--reserve-mb 的无效的值 '%s'"
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:52
+#: ../com_redhat_kdump/gui/spokes/kdump.py:51
 msgid "_KDUMP"
 msgstr "KDUMP（_K）"
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:180
-#: ../com_redhat_kdump/tui/spokes/kdump.py:88
+#: ../com_redhat_kdump/gui/spokes/kdump.py:184
+#: ../com_redhat_kdump/tui/spokes/kdump.py:93
 msgid "Kdump is disabled"
 msgstr "已禁用 Kdump"
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:182
-#: ../com_redhat_kdump/tui/spokes/kdump.py:90
+#: ../com_redhat_kdump/gui/spokes/kdump.py:186
+#: ../com_redhat_kdump/tui/spokes/kdump.py:95
 msgid "Checking storage..."
 msgstr "正在检查存储......"
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:184
-#: ../com_redhat_kdump/tui/spokes/kdump.py:92
+#: ../com_redhat_kdump/gui/spokes/kdump.py:188
+#: ../com_redhat_kdump/tui/spokes/kdump.py:97
 msgid "Kdump may require extra setup for encrypted devices."
 msgstr "Kdump 可能会需要额外的步骤来处理加密的设备。"
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:185
-#: ../com_redhat_kdump/tui/spokes/kdump.py:93
+#: ../com_redhat_kdump/gui/spokes/kdump.py:189
+#: ../com_redhat_kdump/tui/spokes/kdump.py:98
 msgid "Kdump is enabled"
 msgstr "已启用 Kdump"
 
@@ -62,26 +62,23 @@ msgstr "已启用 Kdump"
 msgid "Kdump"
 msgstr "Kdump"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:110 tmp/kdump.glade.h:11
+#: ../com_redhat_kdump/tui/spokes/kdump.py:115 tmp/kdump.glade.h:11
 msgid ""
 "Automatic kdump memory reservation is in use. Kdump will use the default "
-"crashkernel value provided by the kernel package. This is a best-effort "
+"crashkernel value provided by the kexec-tools package. This is a best-effort "
 "support and might not fit your use case. It is recommended to verify if the "
 "crashkernel value is suitable after installation."
-msgstr ""
-"自动 kdump 内存保留功能在使用。Kdump 将会使用内核软件包提供的默认 "
-"crashkernel 值。这个值可能并不适用于您的具体环境，我们推荐在安装后对 "
-"crashkernel 值进行检查。"
+msgstr "自动 kdump 内存保留在使用。Kdump 将使用 kexec-tools 软件包提供的默认 crashkernel 值。这是最好的支持，可能不适合您的用例。建议在安装后验证 crashkernel 值是否合适。"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:127
+#: ../com_redhat_kdump/tui/spokes/kdump.py:132
 msgid "Enable kdump"
 msgstr "启用 kdump"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:135
+#: ../com_redhat_kdump/tui/spokes/kdump.py:140
 msgid "Enable dump mode fadump"
 msgstr "启用 dump 模式 fadump"
 
-#: ../com_redhat_kdump/tui/spokes/kdump.py:140
+#: ../com_redhat_kdump/tui/spokes/kdump.py:145
 #, python-format
 msgid "Reserve amount (%d - %d MB)"
 msgstr "保留量 (%d - %d MB)"
@@ -96,10 +93,7 @@ msgid ""
 "kdump will capture information from your system that can be invaluable in "
 "determining the cause of the crash. Note that kdump does require reserving a "
 "portion of system memory that will be unavailable for other uses."
-msgstr ""
-"Kdump 是一个内核崩溃转储机制。在系统崩溃的时候，kdump 将捕获系统信息，这对于"
-"诊断崩溃的原因非常有用。注意，kdump 需要预留一部分系统内存，且这部分内存对于"
-"其他用户是不可用的。"
+msgstr "Kdump 是一个内核崩溃转储机制。在系统崩溃的时候，kdump 将捕获系统信息，这对于诊断崩溃的原因非常有用。注意，kdump 需要预留一部分系统内存，且这部分内存对于其他用户是不可用的。"
 
 #: tmp/kdump.glade.h:3
 msgid "_Enable kdump"
