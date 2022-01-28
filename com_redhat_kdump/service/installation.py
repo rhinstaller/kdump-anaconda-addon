@@ -57,12 +57,15 @@ class KdumpBootloaderConfigurationTask(Task):
                 'root': self._sysroot,
                 'filter_stderr': True}
 
-        ck_val = util.execWithCapture(**args)
-
-        if not ck_val:
+        ck_val = None
+        try:
+            ck_val = util.execWithCapture(**args)
+        except FileNotFoundError:
             log.warning("Can't retrieve the default crashkernel value from "
                         "the installed kexec-tools, try to retrieve it from "
                         "the installer kexec-tools")
+
+        if not ck_val:
             del args['root']
             # If the installer doesn't have kdumpctl, the target system's
             # kdumpctl i.e. /mnt/sysimage/bin/kdumpctl would be used again. To
