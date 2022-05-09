@@ -120,7 +120,7 @@ class KdumpBootloaderConfigurationTask(Task):
 
             args.append(ck_arg)
 
-        bootloader_proxy.SetExtraArguments(args)
+        bootloader_proxy.ExtraArguments = args
 
 
 class KdumpInstallationTask(Task):
