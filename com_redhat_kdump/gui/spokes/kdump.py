@@ -171,8 +171,10 @@ class KdumpSpoke(NormalSpoke):
 
     @property
     def mandatory(self):
+        # this function should always return boolean value
         if self.data.addons.com_redhat_kdump.enabled:
             return True
+        return False
 
     @property
     def status(self):
