@@ -23,9 +23,9 @@ class KdumpInstallationTestCase(TestCase):
         )
         task.run()
 
-        bootloader_proxy.SetExtraArguments.assert_called_once_with([
+        assert bootloader_proxy.ExtraArguments == [
             "a=1", "b=2", "c=3"
-        ])
+        ]
         mock_exec.assert_not_called()
 
     @patch("pyanaconda.core.util.execWithCapture")
@@ -44,9 +44,9 @@ class KdumpInstallationTestCase(TestCase):
         )
         task.run()
 
-        bootloader_proxy.SetExtraArguments.assert_called_once_with([
+        assert bootloader_proxy.ExtraArguments == [
             "a=1", "b=2", "c=3", "crashkernel=128M"
-        ])
+        ]
         mock_exec.assert_not_called()
 
     @patch("pyanaconda.core.util.execWithCapture")
@@ -106,9 +106,9 @@ class KdumpInstallationTestCase(TestCase):
         task.run()
 
         mock_os.path.exists.assert_called_once_with(FADUMP_CAPABLE_FILE)
-        bootloader_proxy.SetExtraArguments.assert_called_once_with([
+        assert bootloader_proxy.ExtraArguments == [
             "a=1", "b=2", "c=3", "fadump=on"
-        ])
+        ]
         mock_exec.assert_not_called()
 
     @patch("pyanaconda.core.util.execWithCapture")
@@ -128,9 +128,9 @@ class KdumpInstallationTestCase(TestCase):
         )
         task.run()
 
-        bootloader_proxy.SetExtraArguments.assert_called_once_with([
+        assert bootloader_proxy.ExtraArguments == [
             "a=1", "b=2", "c=3", "crashkernel=3G"
-        ])
+        ]
 
         mock_exec.assert_called_once()
 
@@ -152,9 +152,9 @@ class KdumpInstallationTestCase(TestCase):
         )
         task.run()
 
-        bootloader_proxy.SetExtraArguments.assert_called_once_with([
+        assert bootloader_proxy.ExtraArguments == [
             "a=1", "b=2", "c=3", "crashkernel=333M"
-        ])
+        ]
 
         assert mock_exec.call_count == 2
 
@@ -175,9 +175,9 @@ class KdumpInstallationTestCase(TestCase):
         )
         task.run()
 
-        bootloader_proxy.SetExtraArguments.assert_called_once_with([
+        assert bootloader_proxy.ExtraArguments == [
             "a=1", "b=2", "c=3", "crashkernel=auto"
-        ])
+        ]
         assert mock_exec.call_count == 2
 
     @patch("com_redhat_kdump.service.installation.util")
