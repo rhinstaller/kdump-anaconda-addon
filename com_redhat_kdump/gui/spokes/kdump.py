@@ -144,7 +144,7 @@ class KdumpSpoke(NormalSpoke):
         if self._autoButton.get_active():
             self._proxy.ReservedMemory = "auto"
         else:
-            self._proxy.ReservedMemory = "%dM" % self._toBeReservedSpin.get_value_as_int()
+            self._proxy.ReservedMemory = "%d" % self._toBeReservedSpin.get_value_as_int()
         self._proxy.FadumpEnabled = self._fadumpButton.get_active()
 
         # This hub have been visited, use should now be aware of the crypted devices issue
