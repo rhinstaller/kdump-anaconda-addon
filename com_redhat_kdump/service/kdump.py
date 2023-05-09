@@ -49,6 +49,7 @@ class KdumpService(KickstartService):
 
         self._reserved_memory = "auto"
         self.reserved_memory_changed = Signal()
+        self._lower, self._upper, self._step = getMemoryBounds()
 
     def publish(self):
         """Publish the DBus objects."""
@@ -78,6 +79,14 @@ class KdumpService(KickstartService):
         self.fadump_enabled_changed.emit()
         log.debug("Fadump enabled is set to '%s'.", value)
 
+    def check_reserved_memory(self, value):
+        if value != "auto":
+            if int(value) > self._upper:
+                value = str(int(self._upper))
+            if int(value) < self._lower:
+                value = str(int(self._lower))
+        return value
+
     @property
     def reserved_memory(self):
         """Amount of memory in MB to reserve for kdump."""
@@ -85,7 +94,7 @@ class KdumpService(KickstartService):
 
     @reserved_memory.setter
     def reserved_memory(self, value):
-        self._reserved_memory = value
+        self._reserved_memory = self.check_reserved_memory(value)
         self.reserved_memory_changed.emit()
         log.debug("Reserved memory is set to '%s'.", value)
 
