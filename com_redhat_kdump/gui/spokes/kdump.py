@@ -76,6 +76,7 @@ class KdumpSpoke(NormalSpoke):
         self._manualButton = self.builder.get_object("manualButton")
         self._fadumpButton = self.builder.get_object("fadumpCheck")
         self._toBeReservedSpin = self.builder.get_object("toBeReservedSpin")
+        self._rangeReservedMemMBLabel = self.builder.get_object("rangeReservedMemMBLabel")
         self._totalMemMB = self.builder.get_object("totalMemMB")
         self._usableMemMB = self.builder.get_object("usableMemMB")
         self._autoWarn = self.builder.get_object("autoReservationWarning")
@@ -92,6 +93,7 @@ class KdumpSpoke(NormalSpoke):
         adjustment = Gtk.Adjustment(lower, lower, upper, step, step, 0)
         self._toBeReservedSpin.set_adjustment(adjustment)
         self._toBeReservedSpin.set_value(lower)
+        self._rangeReservedMemMBLabel.set_text("  (%d - %d MB)" % (lower, upper))
 
         # Connect a callback to the PropertiesChanged signal.
         storage = STORAGE.get_proxy()

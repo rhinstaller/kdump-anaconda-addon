@@ -198,6 +198,17 @@
                           </packing>
                         </child>
                         <child>
+                          <object class="GtkLabel" id="rangeReservedMemMBLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">start</property>
+                          </object>
+                          <packing>
+                            <property name="left-attach">2</property>
+                            <property name="top-attach">0</property>
+                          </packing>
+                        </child>
+                        <child>
                           <object class="GtkLabel" id="totalMemLabel">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
