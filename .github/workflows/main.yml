@@ -1,0 +1,18 @@
+name: kdump-anaconda
+
+on: pull_request
+
+jobs:
+  lint-check:
+    runs-on: ubuntu-latest
+    container: ghcr.io/coiby/kdump_anaconda:f38
+    steps:
+      - uses: actions/checkout@v2
+      - run: make runpylint
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    container: ghcr.io/coiby/kdump_anaconda:f38
+    steps:
+      - uses: actions/checkout@v2
+      - run: make unittest
