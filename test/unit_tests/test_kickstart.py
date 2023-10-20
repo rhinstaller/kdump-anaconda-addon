@@ -2,13 +2,13 @@ from textwrap import dedent
 from unittest.case import TestCase
 from unittest.mock import patch
 from com_redhat_kdump import common
-from .mock import MockBuiltinRead
 from com_redhat_kdump.service.kdump import KdumpService
 
 
 class KdumpKickstartTestCase(TestCase):
 
-    def setUp(self):
+    @patch("com_redhat_kdump.service.kdump.getMemoryBounds", return_value=(160, 800, 1))
+    def setUp(self, mocker):
         # Show unlimited diff.
         self.maxDiff = None
 
@@ -70,10 +70,7 @@ class KdumpKickstartTestCase(TestCase):
         %end
         """)
 
-    @patch("com_redhat_kdump.common.getMemoryBounds", return_value=(160, 800, 1))
-    def test_ks_reserve_mb(self, _mock_read):
-        self._service._lower , self._service._upper, self._service._step = common.getMemoryBounds()
-        self.assertEqual((self._service._lower , self._service._upper), (160, 800))
+    def test_ks_reserve_mb(self):
         self._check_ks_input("""
         %addon com_redhat_kdump --enable --reserve-mb=256
         %end

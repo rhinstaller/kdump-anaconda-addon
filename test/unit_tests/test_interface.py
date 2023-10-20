@@ -3,7 +3,6 @@ from unittest.mock import patch
 from unittest.mock import Mock
 
 from com_redhat_kdump import common
-from .mock import MockBuiltinRead
 from com_redhat_kdump.constants import KDUMP
 from com_redhat_kdump.service.kdump import KdumpService
 from com_redhat_kdump.service.kdump_interface import KdumpInterface
@@ -50,15 +49,13 @@ class KdumpInterfaceTestCase(TestCase):
         self._check_properties_changed("FadumpEnabled", True)
         self.assertEqual(self._interface.FadumpEnabled, True)
 
-    @patch("com_redhat_kdump.service.kdump.KdumpService.check_reserved_memory", return_value="256")
-    def test_reserved_memory(self, _mock_read):
+    def test_reserved_memory(self):
         self._interface.ReservedMemory = "256"
         self._check_properties_changed("ReservedMemory", "256")
         self.assertEqual(self._interface.ReservedMemory, "256")
 
-    @patch("com_redhat_kdump.common.getMemoryBounds", return_value=(500, 800, 1))
-    def test_check_reserved_memory(self, _mock_read):
-        self._service._lower , self._service._upper, self._service._step = common.getMemoryBounds()
-        self.assertEqual(self._service.check_reserved_memory("900"), "800")
-        self.assertEqual(self._service.check_reserved_memory("400"), "500")
-        self.assertEqual(self._service.check_reserved_memory("600"), "600")
+    @patch("com_redhat_kdump.service.kdump.getMemoryBounds", return_value = (500, 800, 1))
+    def test_check_reserved_memory(self, mocker):
+        service1 = KdumpService()
+        for memory, reserved in [("900", "800"), ("400", "500"), ("600", "600")]:
+            self.assertEqual(service1.check_reserved_memory(memory), reserved)
