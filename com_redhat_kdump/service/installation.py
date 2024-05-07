@@ -62,8 +62,8 @@ class KdumpBootloaderConfigurationTask(Task):
             ck_val = util.execWithCapture(**args)
         except FileNotFoundError:
             log.warning("Can't retrieve the default crashkernel value from "
-                        "the installed kexec-tools, try to retrieve it from "
-                        "the installer kexec-tools")
+                        "the installed kdump-utils, try to retrieve it from "
+                        "the installer kdump-utils")
 
         if not ck_val:
             del args['root']
@@ -75,7 +75,7 @@ class KdumpBootloaderConfigurationTask(Task):
                 ck_val = util.execWithCapture(**args)
             except FileNotFoundError:
                 log.warning("Can't retrieve the default crashkernel value "
-                            "from installer kexec-tools either because it's "
+                            "from installer kdump-utils either because it's "
                             "not installed")
                 pass
 
