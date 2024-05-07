@@ -39,4 +39,4 @@ KDUMP = DBusServiceIdentifier(
 
 # To mark ENCRYPTION_WARNING as translatable
 _ = lambda x: x
-ENCRYPTION_WARNING = _('Encrypted storage is in use, using an encrypted device as dump target for kdump might fail. Please verify if kdump is working properly after the installation finished. For more details see the "Notes on encrypted dump target" section in /usr/share/doc/kexec-tools/kexec-kdump-howto.txt.')
+ENCRYPTION_WARNING = _('Encrypted storage is in use, using an encrypted device as dump target for kdump might fail. Please verify if kdump is working properly after the installation finished. For more details see the "Notes on encrypted dump target" section in /usr/share/doc/kdump-utils/kexec-kdump-howto.txt.')

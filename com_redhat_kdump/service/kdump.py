@@ -125,7 +125,7 @@ class KdumpService(KickstartService):
         if self.kdump_enabled:
             requirements.append(
                 Requirement.for_package(
-                    package_name="kexec-tools",
+                    package_name="kdump-utils",
                     reason="Required by kdump add-on."
                 )
             )
