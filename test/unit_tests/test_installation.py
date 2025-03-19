@@ -187,7 +187,11 @@ class KdumpInstallationTestCase(TestCase):
             kdump_enabled=False
         )
         task.run()
-        mock_util.execWithRedirect.assert_not_called()
+        mock_util.execWithRedirect.assert_called_once_with(
+            "systemctl",
+            ["disable", "kdump.service"],
+            root="/mnt/sysroot"
+        )
 
     @patch("com_redhat_kdump.service.installation.util")
     def test_installation_kdump_enabled(self, mock_util):
