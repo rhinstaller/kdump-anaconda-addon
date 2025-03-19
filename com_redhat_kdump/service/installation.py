@@ -138,12 +138,13 @@ class KdumpInstallationTask(Task):
 
     def run(self):
         """Run the task."""
+        systemctl_action = "enable"
         if not self._kdump_enabled:
-            log.debug("Kdump is disabled. Skipping.")
-            return
+            log.debug("kdump.serivce will be disabled.")
+            systemctl_action = "disable"
 
         util.execWithRedirect(
             "systemctl",
-            ["enable", "kdump.service"],
+            [systemctl_action, "kdump.service"],
             root=self._sysroot
         )
