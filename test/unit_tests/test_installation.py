@@ -181,7 +181,9 @@ class KdumpInstallationTestCase(TestCase):
         assert mock_exec.call_count == 2
 
     @patch("com_redhat_kdump.service.installation.util")
-    def test_installation_kdump_disabled(self, mock_util):
+    @patch("shutil.which")
+    def test_installation_kdump_disabled(self, mock_shutil, mock_util):
+        mock_shutil.return_value = True
         task = KdumpInstallationTask(
             sysroot="/mnt/sysroot",
             kdump_enabled=False
@@ -194,7 +196,9 @@ class KdumpInstallationTestCase(TestCase):
         )
 
     @patch("com_redhat_kdump.service.installation.util")
-    def test_installation_kdump_enabled(self, mock_util):
+    @patch("shutil.which")
+    def test_installation_kdump_enabled(self, mock_shutil, mock_util):
+        mock_shutil.return_value = True
         task = KdumpInstallationTask(
             sysroot="/mnt/sysroot",
             kdump_enabled=True
@@ -205,3 +209,14 @@ class KdumpInstallationTestCase(TestCase):
             ["enable", "kdump.service"],
             root="/mnt/sysroot"
         )
+
+    @patch("com_redhat_kdump.service.installation.util")
+    @patch("shutil.which")
+    def test_installation_kdump_disable_no_systemctl(self, mock_shutil, mock_util):
+        mock_shutil.return_value = False
+        task = KdumpInstallationTask(
+            sysroot="/mnt/sysroot",
+            kdump_enabled=False
+        )
+        task.run()
+        mock_util.execWithRedirect.assert_not_called()

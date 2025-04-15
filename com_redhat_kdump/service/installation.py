@@ -17,6 +17,7 @@
 #
 import logging
 import os
+import shutil
 
 from pyanaconda.core import util
 from pyanaconda.modules.common.constants.objects import BOOTLOADER
@@ -138,6 +139,14 @@ class KdumpInstallationTask(Task):
 
     def run(self):
         """Run the task."""
+
+        # Anaconda may be used to create minimal container image which doesn't
+        # have systemd installed
+        # https://issues.redhat.com/browse/RHEL-41082?focusedId=26969576&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-26969576
+        if not shutil.which(self._sysroot + "/systemctl"):
+            log.debug("systemd not installed, skip KdumpInstallationTask")
+            return
+
         systemctl_action = "enable"
         if not self._kdump_enabled:
             log.debug("kdump.serivce will be disabled.")
