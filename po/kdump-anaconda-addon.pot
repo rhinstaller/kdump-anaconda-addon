@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-13 18:03+0800\n"
+"POT-Creation-Date: 2024-08-21 13:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,22 +34,22 @@ msgstr ""
 msgid "_KDUMP"
 msgstr ""
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:184
+#: ../com_redhat_kdump/gui/spokes/kdump.py:186
 #: ../com_redhat_kdump/tui/spokes/kdump.py:93
 msgid "Kdump is disabled"
 msgstr ""
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:186
+#: ../com_redhat_kdump/gui/spokes/kdump.py:188
 #: ../com_redhat_kdump/tui/spokes/kdump.py:95
 msgid "Checking storage..."
 msgstr ""
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:188
+#: ../com_redhat_kdump/gui/spokes/kdump.py:190
 #: ../com_redhat_kdump/tui/spokes/kdump.py:97
 msgid "Kdump may require extra setup for encrypted devices."
 msgstr ""
 
-#: ../com_redhat_kdump/gui/spokes/kdump.py:189
+#: ../com_redhat_kdump/gui/spokes/kdump.py:191
 #: ../com_redhat_kdump/tui/spokes/kdump.py:98
 msgid "Kdump is enabled"
 msgstr ""
