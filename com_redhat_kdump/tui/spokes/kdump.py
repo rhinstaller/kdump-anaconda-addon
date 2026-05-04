@@ -29,6 +29,7 @@ from pyanaconda.modules.common.util import is_module_available
 from pyanaconda.ui.categories.system import SystemCategory
 from pyanaconda.ui.tui.spokes import NormalTUISpoke
 from pyanaconda.ui.tui.tuiobject import Dialog
+import blivet.arch
 
 from simpleline.render.widgets import CheckboxWidget, EntryWidget, TextWidget
 from simpleline.render.containers import ListColumnContainer
@@ -121,7 +122,7 @@ class KdumpSpoke(NormalTUISpoke):
                     "installation."))
                 self.window.add(message)
 
-            if self._luks_devs:
+            if self._luks_devs and blivet.arch.get_arch() != "x86_64":
                 self.window.add_separator()
                 message = TextWidget(_(ENCRYPTION_WARNING))
                 self.window.add(message)
