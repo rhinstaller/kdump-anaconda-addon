@@ -145,7 +145,7 @@ class KdumpService(KickstartService):
             )
         ]
 
-        if self.kdump_enabled and blivet.arch.get_arch() == "x86_64":
+        if self.kdump_enabled and blivet.arch.get_arch() in ("x86_64", "aarch64", "ppc64le"):
             tasks.append(
                 KdumpCrypttabSetupTask(
                     sysroot=conf.target.system_root

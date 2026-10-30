@@ -136,7 +136,7 @@ class KdumpSpoke(NormalSpoke):
         self._enableButton.emit("toggled")
 
         self.clear_info()
-        if self._luks_devs and blivet.arch.get_arch() != "x86_64":
+        if self._luks_devs and blivet.arch.get_arch() not in ("x86_64", "aarch64", "ppc64le"):
             self.set_warning(_(ENCRYPTION_WARNING))
 
     def apply(self):
